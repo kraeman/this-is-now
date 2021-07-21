@@ -1,0 +1,2 @@
+class ValueUser < ApplicationRecord
+end

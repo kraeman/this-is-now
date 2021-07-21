@@ -1,0 +1,2 @@
+class ValueActivity < ApplicationRecord
+end
