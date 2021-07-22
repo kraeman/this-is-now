@@ -11,10 +11,27 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        < />
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} /> 
+            <Route exact path="/todos" render={routeProps => <TodosList todos={this.props.todos} {...routeProps}/>}/>  
+            <Route path="/todos/:todoId" render={routeProps => {
+              const todo = this.props.todos.find(todo => todo.id === parseInt(routeProps.match.params.todoId))
+              return <TodoItem {...routeProps} {...todo} />
+            }}/>
+          </Switch>
+        </Router>
       </div>
     );
   }
 };
 
-export default App;
+const mapStateToProps = (currentState) => {
+  return {
+    values: currentState.values,
+    activities: currentState.activities
+  }
+}
+
+export default connect(mapStateToProps)(App);
