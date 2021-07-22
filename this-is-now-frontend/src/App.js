@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { default as PrivateRoute } from './components/PrivateRoute'
 import ActivitiesList from ''
 import Activity from ''
 import ValuesList from ''
@@ -29,6 +30,7 @@ class App extends Component {
 
 const mapStateToProps = (currentState) => {
   return {
+    isLoggedIn: currentState.isLoggedIn,
     values: currentState.values,
     activities: currentState.activities
   }
