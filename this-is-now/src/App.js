@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-// import RestaurantsContainer from './containers/RestaurantsContainer';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import ActivitiesList from ''
+import Activity from ''
+import ValuesList from ''
+import Value from ''
+import Navbar from "./Navbar"
+import {connect} from "react-redux"
 
 class App extends Component {
   render() {
