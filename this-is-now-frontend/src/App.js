@@ -15,12 +15,8 @@ class App extends Component {
         <Router>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={Home} /> 
-            <Route exact path="/todos" render={routeProps => <TodosList todos={this.props.todos} {...routeProps}/>}/>  
-            <Route path="/todos/:todoId" render={routeProps => {
-              const todo = this.props.todos.find(todo => todo.id === parseInt(routeProps.match.params.todoId))
-              return <TodoItem {...routeProps} {...todo} />
-            }}/>
+            <Route exact path="/values" render={<ValuesList values={this.props.values}/>}/>
+            <Route exact path="/activities" render={<ActivitiesList activities={this.props.activities}/>}/>
           </Switch>
         </Router>
       </div>
