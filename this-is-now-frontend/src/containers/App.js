@@ -5,8 +5,10 @@ import ActivitiesList from '../components/activities/ActivitiesList'
 import Activity from '../components/activities/Activity'
 import ValuesList from '../components/values/ValuesList'
 import Value from '../components/values/Value'
-import Home from '../components/Home'
+import SignUp from "./SignUp"
+import Login from "./Login"
 import Navbar from "./Navbar"
+import Home from '../components/Home'
 import {connect} from "react-redux"
 
 class App extends Component {
@@ -14,13 +16,16 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Navbar />
+          <Navbar/>
           <Switch>
-            <Route/>
-            <PrivateRoute exact path="/values" render={routeProps => <ValuesList values={this.props.values} {...routeProps}/>}/>
-            <PrivateRoute exact path="/activities" render={routeProps => <ActivitiesList activities={this.props.activities} {...routeProps}/>}/>
-            <PrivateRoute values={this.props.values} component={ValuesList} path="/values" exact />
-            <PrivateRoute component={Dashboard} path="/dashboard" exact />
+            <Route exact path="/login" component={Login} /> 
+            <Route exact path="/signup" component={SignUp} />
+            <PrivateRoute items={this.props.activities} component={ActivitiesList} path="/activities" exact />
+            <PrivateRoute items={this.props.values} component={ValuesList} path="/values" exact />
+
+            <PrivateRoute items={this.props.values} component={Value} path="/values/:valueId" exact />
+            <PrivateRoute items={this.props.activities} component={Activity} path="/activities/:activityId" exact />
+            
             <PrivateRoute component={Home} path="/" exact />
           </Switch>
         </Router>

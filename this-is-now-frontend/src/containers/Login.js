@@ -1,59 +1,41 @@
 import React from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 
 
-export default function Login() {
 
-  state = {
-      email: "",
-      password: ""
-  }  
+export default function Login(props) {
 
-  validateForm = () => {
-    return email.length > 0 && password.length > 0;
-  }
-
-  setEmail = (event) => {
-    this.setState({
-        email: event.target.value,
-      });
-  }
-
-  setPassword = (event) => {
-    this.setState({
-        password: event.target.value,
-      });
-}
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-  }
 
   return (
     <div className="Login">
-      <Form onSubmit={(e) => this.handleSubmit(e)}>
-        <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={this.state.email}
-            onChange={(e) => this.setEmail(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group size="lg" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={this.state.password}
-            onChange={(e) => this.setPassword(e.target.value)}
-          />
-        </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
-          Login
-        </Button>
-      </Form>
+      <form className="form-horizontal" >
+          <div className="form-group">
+              <label htmlFor="title" className="col-md-4 control-label">Title</label>
+              <div className="col-md-5">
+              <input
+                  className="form-control"
+                  type="text"
+                  name="title"
+                
+                  required
+              />
+              </div>
+          </div>
+          <div className="form-group">
+              <label htmlFor="body" className="col-md-4 control-label">Todo</label>
+              <div className="col-md-5">
+                  <textarea
+                      className="form-control"
+                      name="body"
+                  
+                  />
+              </div>
+          </div>
+          <div className="form-group">
+              <div className="col-md-6 col-md-offset-4">
+              <button type="submit" className="btn btn-default">Add</button>
+              </div>
+          </div>
+      </form>
     </div>
   );
 }
