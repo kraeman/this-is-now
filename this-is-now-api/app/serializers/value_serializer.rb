@@ -1,6 +1,6 @@
 class ValueSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :name
+  attributes :name, :creator_id
   has_many :value_activities
   has_many :activities, through: :value_activities
   has_many :value_users
