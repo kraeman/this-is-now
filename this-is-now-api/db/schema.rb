@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_21_211607) do
+ActiveRecord::Schema.define(version: 2021_07_24_155805) do
 
   create_table "activities", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "creator_id"
   end
 
   create_table "activity_users", force: :cascade do |t|
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_211607) do
     t.integer "activity_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "score"
     t.index ["activity_id"], name: "index_value_activities_on_activity_id"
     t.index ["value_id"], name: "index_value_activities_on_value_id"
   end
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_211607) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "creator_id"
   end
 
   add_foreign_key "activity_users", "activities"
