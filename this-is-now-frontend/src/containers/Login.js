@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import { fetchUser } from '../actions/fetchUser';
+import { fetchToken } from '../actions/fetchToken';
 
 
 class Login extends Component {
@@ -12,7 +12,7 @@ class Login extends Component {
 
 
   handleOnLogin = () => {
-    this.props.fetchUser(this.state.username, this.state.password)
+    this.props.fetchToken(this.state.username, this.state.password)
     this.setState({
         username: '',
         password: ''
@@ -62,7 +62,7 @@ render() {
 
 
 function mapDispatchToProps(dispatch){
-    return { fetchUser: (UN, PW) => dispatch(fetchUser(UN, PW)) }
+    return { fetchToken: (UN, PW) => dispatch(fetchToken(UN, PW)) }
   }
   
 export default connect(null, mapDispatchToProps)(Login);

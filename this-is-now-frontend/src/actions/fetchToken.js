@@ -1,6 +1,6 @@
 import {loginUser, getReadyToLoginUser} from "./index"
 
-export function fetchUser(username, password) {
+export function fetchToken(username, password) {
     return (dispatch) => {
       dispatch(getReadyToLoginUser());
       fetch('http://localhost:3000/login', {
@@ -11,9 +11,9 @@ export function fetchUser(username, password) {
             body: JSON.stringify({username, password})
       })
         .then(response => response.json())
-        .then(user => {
-          debugger
-          dispatch(loginUser(user))
+        .then(jwt => {
+          // debugger
+          // dispatch(loginUser(user))
         });
     };
   }
