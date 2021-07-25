@@ -54,7 +54,7 @@ render() {
         </div>
         <br/>
 
-        <input type="submit" value="Sign in"></input>
+        <input onClick={() => this.handleOnLogin()} type="submit" value="Sign in"></input>
     </div>
   );
 }

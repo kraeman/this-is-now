@@ -10,7 +10,7 @@ export function addUser(user){
 export function loginUser(user){
     return {
         type: LOGIN_USER,
-        payload: {user}
+        payload: user
     }
 }
 

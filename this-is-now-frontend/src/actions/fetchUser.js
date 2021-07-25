@@ -6,7 +6,7 @@ export function fetchUser(username, password) {
     return (dispatch) => {
       dispatch(getReadyToLoginUser());
       fetch('http://localhost:3000/login', {
-        method: 'GET',
+        method: 'POST',
             headers: {
                 "Content-Type": 'application/json'
             },
