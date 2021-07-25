@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+    skip_before_action :authorized, only: [:create, :login]
 
     def login
-        current_user = User.find(user => user.username === user_params[:username])
+        current_user = User.find_by(username: user_params[:username])
         if current_user && current_user.authenticate(user_params[:password])
             render json: { user: UserSerializer.new(current_user) }, status: :accepted
         else

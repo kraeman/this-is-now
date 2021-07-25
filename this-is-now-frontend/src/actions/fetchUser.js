@@ -1,7 +1,5 @@
 import {loginUser, getReadyToLoginUser} from "./index"
 
-
-
 export function fetchUser(username, password) {
     return (dispatch) => {
       dispatch(getReadyToLoginUser());
@@ -13,6 +11,9 @@ export function fetchUser(username, password) {
             body: JSON.stringify({username, password})
       })
         .then(response => response.json())
-        .then(user => dispatch(loginUser(user)));
+        .then(user => {
+          debugger
+          dispatch(loginUser(user))
+        });
     };
   }
