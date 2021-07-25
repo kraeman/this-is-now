@@ -1,35 +1,39 @@
 class UsersController < ApplicationController
-    skip_before_action :authorized, only: [:create, :login]
+    skip_before_action :authorized, only: [:signup]
 
-    def login
-        current_user = User.find_by(username: user_params[:username])
-        if current_user && current_user.authenticate(user_params[:password])
-            token = encode_token(user_id: current_user.id)
-            render json: { user: UserSerializer.new(current_user), jwt: token }, status: :accepted
-        else
-            render json: {error: "Incorrect password or username!"}
-        end
-    end
+    # def login
+    #     current_user = User.find_by(username: user_params[:username])
+    #     if current_user && current_user.authenticate(user_params[:password])
+    #         token = encode_token(user_id: current_user.id)
+    #         render json: { user: UserSerializer.new(current_user), jwt: token }, status: :accepted
+    #     else
+    #         render json: {error: "Incorrect password or username!"}
+    #     end
+    # end
 
     def signup
-        current_user = User.create(user_params)
-        if current_user.valid?
-            token = encode_token(user_id: current_user.id)
-            render json: { user: UserSerializer.new(current_user), jwt: token }, status: :created
+        if user_params[:password] == user_params[:check_password]
+            current_user = User.create(user_params)
+            if current_user.valid?
+                token = encode_token(user_id: current_user.id)
+                render json: { user: UserSerializer.new(current_user), jwt: token }, status: :created
+            else
+                render json: { error: 'failed to create user' }, status: :not_acceptable
+            end
         else
             render json: { error: 'failed to create user' }, status: :not_acceptable
         end
     end
 
-    def create
-        user = User.create(user_params)
-        if user.valid?
-          token = encode_token(user_id: user.id)
-          render json: { user: UserSerializer.new(user), jwt: token }, status: :created
-        else
-          render json: { error: 'failed to create user' }, status: :not_acceptable
-        end
-    end
+    # def create
+    #     user = User.create(user_params)
+    #     if user.valid?
+    #       token = encode_token(user_id: user.id)
+    #       render json: { user: UserSerializer.new(user), jwt: token }, status: :created
+    #     else
+    #       render json: { error: 'failed to create user' }, status: :not_acceptable
+    #     end
+    # end
 
 
     def update
@@ -41,7 +45,7 @@ class UsersController < ApplicationController
     
     private
         def user_params
-            params.require(:user).permit(:username, :password, :id)
+            params.require(:user).permit(:username, :password, :check_password, :id)
         end
 
 end

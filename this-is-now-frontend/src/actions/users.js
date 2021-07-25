@@ -1,4 +1,4 @@
-import {ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER} from "./actionTypes"
+import {ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_ADD_USER} from "./actionTypes"
 
 export function addUser(user){
     return {
@@ -17,5 +17,12 @@ export function loginUser(user){
 export function getReadyToLoginUser(){
     return {
         type: GET_READY_TO_LOGIN_USER
+    }
+}
+
+
+export function getReadyToAddUser(){
+    return {
+        type: GET_READY_TO_ADD_USER
     }
 }

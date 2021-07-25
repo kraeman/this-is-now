@@ -47,7 +47,7 @@ render() {
         </div>
         <br/>
         <div>
-            <label for="pass">Password (8 character minimum): </label>
+            <label for="pass">Password: </label>
             <input value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} type="password" id="pass" name="password"
                 minlength="8" required>
                     </input>
