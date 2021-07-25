@@ -41,14 +41,14 @@ render() {
         <br/>
         <br/>
                 <div>
-            <label for="username">Username: </label>
-            <input value={this.state.username} onChange={(e) => this.handleUsernameChange(e)} type="text" id="username" name="username">
+            <label style={{fontSize: '80px'}} for="username">Username: </label>
+            <input style={{fontSize: '75px'}} value={this.state.username} onChange={(e) => this.handleUsernameChange(e)} type="text" id="username" name="username">
             </input>
         </div>
         <br/>
         <div>
-            <label for="pass">Password: </label>
-            <input value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} type="password" id="pass" name="password"
+            <label style={{fontSize: '80px'}} for="pass">Password: </label>
+            <input style={{fontSize: '75px'}} value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} type="password" id="pass" name="password"
                 minlength="8" required>
                     </input>
         </div>

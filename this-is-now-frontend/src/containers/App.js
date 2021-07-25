@@ -6,11 +6,13 @@ import Activity from '../components/activities/Activity'
 import ValuesList from '../components/values/ValuesList'
 import Value from '../components/values/Value'
 import SignUp from "./SignUp"
+import '../App.css'
 import Login from "./Login"
 import Navbar from "./Navbar"
 import Home from '../components/Home'
 import {connect} from "react-redux"
 import '../App.css'
+
 
 class App extends Component {
   render() {

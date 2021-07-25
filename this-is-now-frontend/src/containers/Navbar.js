@@ -8,7 +8,9 @@ const link = {
   background: 'blue',
   textDecoration: 'none',
   color: 'white',
+  fontSize: '75px',
 }
+
 
 const Navbar = (props) => {
     return (
