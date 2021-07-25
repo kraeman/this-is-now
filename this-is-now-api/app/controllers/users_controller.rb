@@ -4,9 +4,20 @@ class UsersController < ApplicationController
     def login
         current_user = User.find_by(username: user_params[:username])
         if current_user && current_user.authenticate(user_params[:password])
-            render json: { user: UserSerializer.new(current_user) }, status: :accepted
+            token = encode_token(user_id: current_user.id)
+            render json: { user: UserSerializer.new(current_user), jwt: token }, status: :accepted
         else
             render json: {error: "Incorrect password or username!"}
+        end
+    end
+
+    def signup
+        current_user = User.create(user_params)
+        if current_user.valid?
+            token = encode_token(user_id: current_user.id)
+            render json: { user: UserSerializer.new(current_user), jwt: token }, status: :created
+        else
+            render json: { error: 'failed to create user' }, status: :not_acceptable
         end
     end
 
