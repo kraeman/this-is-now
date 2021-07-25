@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { createUser } from '../actions/createUser';
+// import {loginUser} from '../actions/loginUser'
 
 
 
@@ -69,7 +70,7 @@ class SignUp extends Component {
 
             <div>
                 <label for="pass">Confirm Password: </label>
-                <input value={this.state.checkPpassword} onChange={(e) => this.handleCheckPasswordChange(e)} type="password" id="pass" name="password"
+                <input value={this.state.checkPassword} onChange={(e) => this.handleCheckPasswordChange(e)} type="password" id="pass" name="password"
                     minlength="8" required>
                         </input>
             </div>
@@ -82,10 +83,18 @@ class SignUp extends Component {
 }
 }
 
+function mapState(currentState){
+    return { 
+        jwt: currentState.jwt,
+        current_user_data: currentState.current_user_data
+     }
+  }
 
 
 function mapDispatchToProps(dispatch){
-    return { createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW)) }
+    return {
+        createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW))
+    }
   }
   
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapState, mapDispatchToProps)(SignUp);

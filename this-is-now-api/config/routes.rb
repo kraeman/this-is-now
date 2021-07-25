@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users
   resources :activities
   resources :values
-  post '/login', :to => 'auth#create'
+  get '/users/:id', :to => 'users#show'
   post '/signup', :to => 'users#signup'
+  post '/login', :to => 'users#login'
 end

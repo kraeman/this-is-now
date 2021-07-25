@@ -1,8 +1,8 @@
-import {loginUser, getReadyToLoginUser} from "./index"
+import {loginUser, getReadyToStoreToken, storeToken, getReadyToLoginUser} from "./index"
 
 export function fetchToken(username, password) {
     return (dispatch) => {
-      dispatch(getReadyToLoginUser());
+      dispatch(getReadyToStoreToken());
       fetch('http://localhost:3000/login', {
         method: 'POST',
             headers: {
@@ -11,9 +11,23 @@ export function fetchToken(username, password) {
             body: JSON.stringify({username, password})
       })
         .then(response => response.json())
-        .then(jwt => {
+        .then(data => {
           // debugger
-          // dispatch(loginUser(user))
+          dispatch(storeToken(data.user.id, data.jwt))
+          dispatch(getReadyToLoginUser());
+          fetch(`http://localhost:3000/users/${data.user.id}`, {
+          method: 'GET',
+            headers: {
+              Authorization: `Bearer ${data.jwt}`
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            dispatch(loginUser(data))
+          })
         });
     };
+
+
+
   }
