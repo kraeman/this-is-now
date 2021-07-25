@@ -6,7 +6,7 @@ export default function SignUp(props) {
 
 
     return (
-        <div className="Login">
+        <div className="SignUp">
             <br/>
             <br/>
             <br/>

@@ -5,7 +5,7 @@ import {loginUser, getReadyToLoginUser} from "./index"
 export function fetchUser(username, password) {
     return (dispatch) => {
       dispatch(getReadyToLoginUser());
-      fetch('http://localhost:3000/users', {
+      fetch('http://localhost:3000/login', {
         method: 'GET',
             headers: {
                 "Content-Type": 'application/json'
