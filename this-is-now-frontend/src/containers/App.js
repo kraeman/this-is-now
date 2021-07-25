@@ -8,8 +8,10 @@ import Value from '../components/values/Value'
 import SignUp from "./SignUp"
 import Login from "./Login"
 import Navbar from "./Navbar"
+import { fetchUser } from '../actions/fetchUser';
 import Home from '../components/Home'
 import {connect} from "react-redux"
+import '../App.css'
 
 class App extends Component {
   render() {
