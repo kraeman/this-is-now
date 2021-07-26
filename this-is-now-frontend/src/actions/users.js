@@ -35,9 +35,9 @@ export function getReadyToStoreToken(){
 }
 
 
-export function storeToken(userId, jwt){
+export function storeToken(jwt, userData){
     return {
         type: STORE_TOKEN,
-        payload: {userId, jwt}
+        payload: {jwt, userData}
     }
 }

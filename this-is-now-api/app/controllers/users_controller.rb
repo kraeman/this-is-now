@@ -1,31 +1,17 @@
 class UsersController < ApplicationController
-    skip_before_action :authorized, only: [:signup, :login]
+    skip_before_action :authorized, only: [:create]
 
-    def login
-        current_user = User.find_by(username: user_params[:username])
-        if current_user && current_user.authenticate(user_params[:password])
-            token = encode_token(user_id: current_user.id)
-            render json: { user: UserSerializer.new(current_user), jwt: token }, status: :accepted
-        else
-            render json: {error: "Incorrect password or username!"}
-        end
-    end
+    # def profile
+    #     render json: { user: UserSerializer.new(current_user) }, status: :accepted
+    # end
 
-    def show
-        current_user = User.find_by(id: params[:id])
-        if current_user
-            render json: { user: UserSerializer.new(current_user)}, status: :accepted
-        else
-            render json: {error: "Something went wrong!"}
-        end
-    end
-
-    def signup
-        if user_params[:password] == user_params[:check_password]
-            current_user = User.create(user_params)
+    def create
+        if user_params[:password] == user_params[:checkPassword]
+            # byebug
+            current_user = User.create(username: user_params[:username], password: user_params[:password])
             if current_user.valid?
                 token = encode_token(user_id: current_user.id)
-                render json: { userId: current_user.id, jwt: token }, status: :created
+                render json: { user: UserSerializer.new(current_user).serializable_hash.to_json, jwt: token }, status: :created
             else
                 render json: { error: 'failed to create user' }, status: :not_acceptable
             end
@@ -54,7 +40,7 @@ class UsersController < ApplicationController
     
     private
         def user_params
-            params.require(:user).permit(:username, :password, :check_password, :id)
+            params.require(:user).permit(:username, :password, :checkPassword, :jwt)
         end
 
 end

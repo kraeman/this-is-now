@@ -4,14 +4,13 @@ export const usersReducer = (state = {jwt: null, current_user_data: null, reques
     switch(action.type){
         case GET_READY_TO_STORE_TOKEN:
             return {
-                jwt: state.jwt,
-                current_user_data:  state.current_user_data,
+                ...state,
                 requesting: true
             }  
         case STORE_TOKEN:
             return {
                 jwt: action.payload.jwt,
-                current_user_data: {id: action.payload.userId},
+                current_user_data: action.payload.userData,
                 requesting: false
             }
         
