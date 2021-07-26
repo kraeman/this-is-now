@@ -17,20 +17,8 @@ export function createUser(username, password, checkPassword) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          // debugger
           dispatch(storeToken(data.jwt, data.user))
-          return <Redirect to='/activities'  />
-          // dispatch(getReadyToLoginUser());
-          // fetch(`http://localhost:3000/users/profile`, {
-          // method: 'GET',
-          //   headers: {
-          //     Authorization: `Bearer ${data.jwt}`
-          //   }
-          // })
-          // .then(response => response.json())
-          // .then(data => {
-          //   dispatch(loginUser(data))
-          // })
         });
 
     };
