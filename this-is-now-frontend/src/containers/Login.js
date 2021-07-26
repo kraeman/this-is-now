@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { fetchToken } from '../actions/fetchToken';
+import  { Redirect } from 'react-router-dom'
+
 
 
 class Login extends Component {
@@ -36,6 +38,9 @@ class Login extends Component {
 
 
 render() {
+  if (!!this.props.jwt) {
+    return <Redirect push to="/activities"/>
+}
   return (
     <div className="Login">
         <br/>
@@ -65,5 +70,12 @@ render() {
 function mapDispatchToProps(dispatch){
     return { fetchToken: (UN, PW) => dispatch(fetchToken(UN, PW)) }
   }
+
+  function mapState(currentState){
+    return { 
+        jwt: currentState.jwt,
+        current_user_data: currentState.current_user_data
+     }
+  }
   
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapState, mapDispatchToProps)(Login);

@@ -1,7 +1,7 @@
 const ErrorPage = () => {
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <h3>Uh Oh - The page you were looking for doesn't seem to exist</h3>
         </>
     )

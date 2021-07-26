@@ -19,6 +19,7 @@ export function createUser(username, password, checkPassword) {
         .then(data => {
           // debugger
           dispatch(storeToken(data.jwt, data.user))
+          // return callBack
         });
 
     };

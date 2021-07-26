@@ -8,23 +8,12 @@ export function fetchToken(username, password) {
             headers: {
                 "Content-Type": 'application/json'
             },
-            body: JSON.stringify({username, password})
+            body: JSON.stringify({user: {username, password}})
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(storeToken(data.user.id, data.jwt))
-          dispatch(getReadyToLoginUser());
-          fetch(`http://localhost:3000/users/${data.user.id}`, {
-          method: 'GET',
-            headers: {
-              Authorization: `Bearer ${data.jwt}`
-            }
-          })
-          .then(response => response.json())
-          .then(data => {
-            dispatch(loginUser(data))
-          })
+          debugger
+          dispatch(storeToken(data.jwt, data.user))
         });
     };
 

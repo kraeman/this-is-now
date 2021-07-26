@@ -17,9 +17,7 @@ import '../App.css'
 
 class App extends Component {
 
-  redirect = () => {
-    return <Redirect to="/activties"/>
-  }
+  
 
   render() {
     return (
@@ -27,20 +25,25 @@ class App extends Component {
         <Router>
           <Navbar/>
           <Switch>
-            <Route exact path="/login" component={Login} /> 
-            <Route path="/signup">
-                <SignUp redirect={this.redirect}/>
+            <Route exact path="/login">
+                <Login/>
+            </Route>
+            <Route exact path="/signup">
+                <SignUp />
             </Route>
             {/* <Route exact path="/signup" render={(props) => (
               <SignUp {...props}/>
             )} /> */}
-            <PrivateRoute items={this.props.activities} component={ActivitiesList} path="/activities" exact />
-            <PrivateRoute items={this.props.values} component={ValuesList} path="/values" exact />
+            <Route exact path="/activities" >
+                <ActivitiesList items={this.props.activities}/>
+            </Route>
+            {/* <Route items={this.props.activities} component={ActivitiesList} path="/activities" exact /> */}
+            <Route items={this.props.values} component={ValuesList} path="/values" exact />
 
-            <PrivateRoute items={this.props.values} component={Value} path="/values/:valueId" exact />
-            <PrivateRoute items={this.props.activities} component={Activity} path="/activities/:activityId" exact />
+            <Route items={this.props.values} component={Value} path="/values/:valueId" exact />
+            <Route items={this.props.activities} component={Activity} path="/activities/:activityId" exact />
             
-            <PrivateRoute component={Home} path="/" exact />
+            <Route component={Home} path="/" exact />
           </Switch>
         </Router>
       </div>

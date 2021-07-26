@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import  { Redirect } from 'react-router-dom'
+
 import {connect} from "react-redux"
 import { createUser } from '../actions/createUser';
 // import {loginUser} from '../actions/loginUser'
@@ -15,13 +17,14 @@ class SignUp extends Component {
 
 
     handleOnSignup = () => {
+        // debugger
         this.props.createUser(this.state.username, this.state.password, this.state.checkPassword)
         this.setState({
             username: '',
             password: '',
             checkPassword: ''
         })
-        this.props.redirect()
+        
       }  
     
       handleUsernameChange = (e) => {
@@ -50,6 +53,9 @@ class SignUp extends Component {
 
 
     render() {
+        if (!!this.props.jwt) {
+            return <Redirect push to="/activities"/>
+        }
     return (
         <div className="SignUp">
             <br/>

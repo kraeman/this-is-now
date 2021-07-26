@@ -1,10 +1,9 @@
-import Navbar from "../containers/Navbar"
 
 const Home = () => {
     const margin = {margin: "1em"}
     return (
         <div style={margin}>
-            <Navbar />
+            {/* <Navbar /> */}
             Welcome to your values app!
         </div>
     )
