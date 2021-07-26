@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import PrivateRoute from '../components/PrivateRoute'
 import ActivitiesList from '../components/activities/ActivitiesList'
 import Activity from '../components/activities/Activity'
@@ -15,6 +16,11 @@ import '../App.css'
 
 
 class App extends Component {
+
+  redirect = () => {
+    return <Redirect to="/activties"/>
+  }
+
   render() {
     return (
       <div className="App">
@@ -22,7 +28,12 @@ class App extends Component {
           <Navbar/>
           <Switch>
             <Route exact path="/login" component={Login} /> 
-            <Route exact path="/signup" component={SignUp} />
+            <Route path="/signup">
+                <SignUp redirect={this.redirect}/>
+            </Route>
+            {/* <Route exact path="/signup" render={(props) => (
+              <SignUp {...props}/>
+            )} /> */}
             <PrivateRoute items={this.props.activities} component={ActivitiesList} path="/activities" exact />
             <PrivateRoute items={this.props.values} component={ValuesList} path="/values" exact />
 

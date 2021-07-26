@@ -21,6 +21,7 @@ class SignUp extends Component {
             password: '',
             checkPassword: ''
         })
+        this.props.redirect()
       }  
     
       handleUsernameChange = (e) => {
