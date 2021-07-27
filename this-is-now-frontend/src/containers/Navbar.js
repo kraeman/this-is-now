@@ -15,14 +15,14 @@ const link = {
 const Navbar = (props) => {
     return (
         <div  className="mb-3">
-            <NavLink
+            {/* <NavLink
             to="/"
             exact
             style={link}
             activeStyle={{
                 background: 'darkblue'
             }}
-            >Home</NavLink>
+            >Home</NavLink> */}
             <NavLink
             to="/activities"
             exact

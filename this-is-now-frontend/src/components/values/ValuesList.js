@@ -4,9 +4,14 @@ import Value from "./Value"
 const ValuesList = (props) => {
     
 
+    const createValuesFromList = () => {
+        return <Value/>
+    }
+    
+
     return (
         <>
-            {/* <Navbar /> */}
+            {createValuesFromList()}
         </>
     )
 }

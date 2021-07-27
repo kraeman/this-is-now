@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import ValuesList from '../components/values/ValuesList'
 
-import NewValueForm from '../components/values/ValueForm'
+import NewValueForm from '../components/values/NewValueForm'
 import '../App.css'
-import '../App.css'
+
 
 
 

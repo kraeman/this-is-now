@@ -6,7 +6,8 @@ const Value = () => {
     
     return (
         <div>
-            {/* <Navbar /> */}
+            <br/><br/><br/><br/><br/>
+            Individual Value with a star if its been chosen by this user
         </div>
     )
 }

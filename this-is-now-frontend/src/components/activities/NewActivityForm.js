@@ -1,12 +1,20 @@
-const NewActivityForm = () => {
+import React, { Component } from 'react';
+import  { Redirect } from 'react-router-dom'
 
-    const makeOptionForEveryValue = () => {
+import {connect} from "react-redux"
+import { createNewActivity } from '../actions/createNewActivity';
+// import {loginUser} from '../actions/loginUser'
 
-    }
+
+
+class NewActivityForm extends Component {
+
+
+    render() {
     
-    return (
+    return(
         <div className="container">
-            <h3 className="form-title">Create a new todo</h3>
+            <h3 className="form-title">Create a new Activity</h3>
                 <div className="row">
                     <div className="col-md-8 col-md-offset-2">
                         <div className="panel panel-default">
@@ -72,6 +80,22 @@ const NewActivityForm = () => {
                 </div>
             </div>
     )
+    
+    }
 }
 
-export default NewActivityForm;
+function mapState(currentState){
+    return { 
+        jwt: currentState.jwt,
+        current_user_data: currentState.current_user_data
+     }
+  }
+
+
+function mapDispatchToProps(dispatch){
+    return {
+        createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW))
+    }
+  }
+  
+export default connect(mapState, mapDispatchToProps)(NewActivityForm);

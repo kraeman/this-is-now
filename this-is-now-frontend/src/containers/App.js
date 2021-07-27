@@ -45,7 +45,7 @@ class App extends Component {
             <Route items={this.props.values} component={Value} path="/values/:valueId" exact />
             <Route items={this.props.activities} component={Activity} path="/activities/:activityId" exact />
             
-            <Route component={Home} path="/" exact />
+            {/* <Route component={Home} path="/" exact /> */}
           </Switch>
         </Router>
       </div>
