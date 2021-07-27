@@ -9,6 +9,58 @@ import { createNewActivityPost } from "../../actions/createNewActivity";
 
 class NewActivityForm extends Component {
 
+
+    state = {
+        name: '',
+        description: '',
+        valuesObject:{}
+
+    }
+
+    handleOnSubmit = (e) => {
+        e.preventDefault()
+        this.props.createNewActivityPost(this.state.name, this.state.description, this.state.valuesObject, this.props.jwt)
+        this.setState({
+            name: '',
+            description: '',
+            valuesObject:{}
+        })
+    }
+
+    handleOnNameChange = (e) => {
+        this.setState({
+            name: e.target.value,
+            description: this.state.description,
+            valuesObject: this.state.valuesObject
+        })
+    }
+
+
+    handleOnDescriptionChange = (e) => {
+        this.setState({
+            name: this.state.name,
+            description: e.target.value,
+            valuesObject: this.state.valuesObject
+        })
+    }
+
+
+    handleOnValueScoreChange = () => {
+        this.setState({
+            name: this.state.name,
+            description: this.state.description,
+            valuesObject: {}
+        })
+    }
+
+    handleOnValueChange = () => {
+        this.setState({
+            name: this.state.name,
+            description:this.state.description,
+            valuesObject: {}
+        })
+    }
+
     makeOptionForEveryValue = () => {
         return <option>hello</option>
     }
@@ -23,7 +75,7 @@ class NewActivityForm extends Component {
                     <div className="col-md-8 col-md-offset-2">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <form className="form-horizontal" >
+                                <form onSubmit={(e) => this.handleOnSubmit(e)} className="form-horizontal" >
                                     <div className="form-group">
                                         <label htmlFor="title" className="col-md-4 control-label">Activity</label>
                                         <div className="col-md-5">
@@ -31,6 +83,8 @@ class NewActivityForm extends Component {
                                             className="form-control"
                                             type="text"
                                             name="title"
+                                            value={this.state.name}
+                                            onChange={(e) => this.handleOnNameChange(e)}
                                             required
                                         />
                                         </div>
@@ -42,6 +96,7 @@ class NewActivityForm extends Component {
                                             className="form-control"
                                             type="text"
                                             name="title"
+                                            value={this.state.description}
                                             required
                                         />
                                         </div>
@@ -98,7 +153,7 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewActivityPost: (UN, PW, CPW) => dispatch(createNewActivityPost(UN, PW, CPW))
+        createNewActivityPost: (name, description, valuesObject, jwt) => dispatch(createNewActivityPost(name, description, valuesObject, jwt))
     }
   }
   
