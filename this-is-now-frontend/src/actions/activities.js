@@ -1,4 +1,4 @@
-import {ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
+import {ADD_ACTIVITY, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
 
 export function addActivity(activity){
     return {
@@ -18,5 +18,11 @@ export function updateActivity(activityId, name, description){
     return {
         type: UPDATE_ACTIVITY,
         payload: {activityId, name, description}
+    }
+}
+
+export function getReadyToAddActivity(){
+    return {
+        type: GET_READY_TO_ADD_ACTIVITY
     }
 }

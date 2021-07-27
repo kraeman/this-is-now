@@ -2,12 +2,16 @@ import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom'
 
 import {connect} from "react-redux"
-import { createNewActivity } from '../actions/createNewActivity';
+import { createNewActivityPost } from "../../actions/createNewActivity";
 // import {loginUser} from '../actions/loginUser'
 
 
 
 class NewActivityForm extends Component {
+
+    makeOptionForEveryValue = () => {
+        return <option>hello</option>
+    }
 
 
     render() {
@@ -94,7 +98,7 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW))
+        createNewActivityPost: (UN, PW, CPW) => dispatch(createNewActivityPost(UN, PW, CPW))
     }
   }
   

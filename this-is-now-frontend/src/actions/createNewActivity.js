@@ -1,13 +1,13 @@
 // import React, { Component } from 'react';
 import React from 'react'
 import  { Redirect } from 'react-router-dom'
-import {storeToken, getReadyToStoreToken, getReadyToLoginUser} from "./index"
-import { loginUser } from "./users";
+import {addActivity, getReadyToAddActivity} from "./index"
+// import { loginUser } from "./users";
 
 
-export function createNewActivity(name, description, valuesAndScoresObject, jwt) {
+export function createNewActivityPost(name, description, valuesAndScoresObject, jwt) {
     return (dispatch) => {
-      dispatch(getReadyToCreateNewActivity());
+      dispatch(getReadyToAddActivity());
       fetch('http://localhost:3000/activities/new', {
         method: 'POST',
         headers: {
@@ -19,7 +19,7 @@ export function createNewActivity(name, description, valuesAndScoresObject, jwt)
         .then(response => response.json())
         .then(data => {
           // debugger
-          dispatch(storeToken(data.jwt, data.user))
+          dispatch(addActivity(data.jwt, data.user))
           // return callBack
         });
 
