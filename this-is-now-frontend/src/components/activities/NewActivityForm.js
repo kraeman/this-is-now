@@ -51,7 +51,7 @@ class NewActivityForm extends Component {
                                     <label for="values">Add a Value</label>
 
                                     <select name="values" id="values">
-                                        {makeOptionForEveryValue()}
+                                        {this.makeOptionForEveryValue()}
                                     </select>
 
 

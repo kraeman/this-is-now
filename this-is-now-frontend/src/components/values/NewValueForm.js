@@ -67,4 +67,4 @@ function mapDispatchToProps(dispatch){
     }
   }
   
-export default connect(mapState, mapDispatchToProps)(SignUp);
+export default connect(mapState, mapDispatchToProps)(NewValueForm);
