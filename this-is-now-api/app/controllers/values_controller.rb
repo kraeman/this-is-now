@@ -6,6 +6,7 @@ class ValuesController < ApplicationController
     end
 
     def create
+        byebug
         value = Value.new()
         value.name = value_params["name"]
         value.creator_id = value_params["creator_id"]

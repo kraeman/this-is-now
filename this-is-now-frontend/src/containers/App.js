@@ -13,7 +13,7 @@ import Login from "./Login"
 import Navbar from "./Navbar"
 import Home from '../components/Home'
 import {connect} from "react-redux"
-import '../App.css'
+// import '../App.css'
 import ValuesContainer from './ValueContainer';
 
 

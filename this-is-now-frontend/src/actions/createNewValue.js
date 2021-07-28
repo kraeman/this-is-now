@@ -8,7 +8,7 @@ import {addValue, getReadyToAddValue} from "./index"
 export function createNewValuePost(name, jwt) {
     return (dispatch) => {
       dispatch(getReadyToAddValue());
-      fetch('http://localhost:3000/values/new', {
+      fetch('http://localhost:3000/values/create', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${jwt}`,

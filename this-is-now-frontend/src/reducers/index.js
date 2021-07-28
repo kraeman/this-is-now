@@ -2,9 +2,10 @@ import {combineReducers} from "redux"
 import {activitiesReducer} from "./activities"
 import {valuesReducer} from "./values"
 import {usersReducer} from "./users"
+import { combineReducers } from 'redux'
 
-export const rootReducer = combineReducers({
-    activities: activitiesReducer,
-    values: valuesReducer,
-    users: usersReducer
+export deafult combineReducers({
+    // activities: activitiesReducer,
+    values,
+    users
 })
