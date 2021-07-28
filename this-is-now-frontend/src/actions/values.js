@@ -1,9 +1,9 @@
-import {ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE} from "./actionTypes"
+import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE} from "./actionTypes"
 
-export function addValue(value){
+export function addValue(jwt, value){
     return {
         type: ADD_VALUE,
-        payload: value
+        payload: {value, jwt}
     }
 }
 
@@ -18,5 +18,11 @@ export function updateValue(valueId, name){
     return {
         type: UPDATE_VALUE,
         payload: {valueId, name}
+    }
+}
+
+export function getReadyToAddValue(){
+    return {
+        type: GET_READY_TO_ADD_VALUE
     }
 }

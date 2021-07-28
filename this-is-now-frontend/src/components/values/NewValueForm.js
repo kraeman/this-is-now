@@ -2,12 +2,30 @@ import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom'
 
 import {connect} from "react-redux"
-// import { createValue } from '../actions/createNewActivity';
+import { createNewValuePost } from '../../actions/createNewValue';
 // import {loginUser} from '../actions/loginUser'
 
 
 
 class NewValueForm extends Component {
+
+    state = {
+        name: ""
+    }
+
+    handleOnSubmit = (e) => {
+        e.preventDefault()
+        this.props.createNewValuePost(this.state.name, this.props.jwt)
+        this.setState({
+            name: ''
+        })
+    }
+
+    handleOnNameChange = (e) => {
+        this.setState({
+            name: e.target.value
+        })
+    }
 
 
     render() {
@@ -19,7 +37,7 @@ class NewValueForm extends Component {
                     <div className="col-md-8 col-md-offset-2">
                         <div className="panel panel-default">
                             <div className="panel-body">
-                                <form className="form-horizontal" >
+                                <form onSubmit={(e) => this.handleOnSubmit(e)} className="form-horizontal" >
                                     <div className="form-group">
                                         <label htmlFor="title" className="col-md-4 control-label">Value</label>
                                         <div className="col-md-5">
@@ -27,6 +45,8 @@ class NewValueForm extends Component {
                                             className="form-control"
                                             type="text"
                                             name="title"
+                                            onChange={(e) => this.handleOnNameChange(e)}
+                                            value={this.state.name}
                                             required
                                         />
                                         </div>
@@ -63,7 +83,7 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        // createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW))
+        createNewValuePost: (name) => dispatch(createNewValuePost(name))
     }
   }
   
