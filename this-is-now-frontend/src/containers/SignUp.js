@@ -76,8 +76,8 @@ class SignUp extends Component {
             <br/>
 
             <div>
-                <label for="pass">Confirm Password: </label>
-                <input value={this.state.checkPassword} onChange={(e) => this.handleCheckPasswordChange(e)} type="password" id="pass" name="password"
+                <label for="pass-confirm">Confirm Password: </label>
+                <input value={this.state.checkPassword} onChange={(e) => this.handleCheckPasswordChange(e)} type="password" id="pass-confirm" name="password"
                     minlength="8" required>
                         </input>
             </div>

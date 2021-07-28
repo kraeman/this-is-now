@@ -7,10 +7,12 @@ import {addValue, getReadyToAddValue} from "./index"
 
 export function createNewValuePost(name, jwt) {
     return (dispatch) => {
+      // debugger
       dispatch(getReadyToAddValue());
       fetch('http://localhost:3000/values/create', {
         method: 'POST',
         headers: {
+            accept: 'application/json',
             Authorization: `Bearer ${jwt}`,
             "Content-Type": 'application/json'
         },
@@ -25,6 +27,3 @@ export function createNewValuePost(name, jwt) {
 
     };
   }
-
-
- 
