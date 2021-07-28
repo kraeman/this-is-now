@@ -62,7 +62,7 @@ class NewActivityForm extends Component {
     }
 
     makeOptionForEveryValue = () => {
-        return <option>hello</option>
+        return <option>Health</option>
     }
 
 
@@ -97,6 +97,7 @@ class NewActivityForm extends Component {
                                             type="text"
                                             name="title"
                                             value={this.state.description}
+                                            onChange={(e) => this.handleOnDescriptionChange(e)}
                                             required
                                         />
                                         </div>
@@ -146,7 +147,8 @@ class NewActivityForm extends Component {
 function mapState(currentState){
     return { 
         jwt: currentState.jwt,
-        current_user_data: currentState.current_user_data
+        current_user_data: currentState.current_user_data,
+        all_values: currentState.values
      }
   }
 
