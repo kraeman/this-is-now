@@ -1,14 +1,18 @@
 import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE} from "../actions/actionTypes"
 
-export const values = (state = {jwt: null, values: [], requesting: false}, action) => {
+export const values = (state = {values: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_VALUE:
-            return {...state, values: [...state.values, action.payload]}
-        case REMOVE_VALUE:
-            return state.filter(value => value.id !== action.payload)
-        case UPDATE_VALUE:
-            const index = state.findIndex(value => value.id === action.payload.valueId)
-            return 
+            // debugger
+            return {
+                values: [...state.values, {name: action.payload.value, creator_token: action.payload.jwt}],
+                requesting: false
+                }
+        // case REMOVE_VALUE:
+        //     return state.filter(value => value.id !== action.payload)
+        // case UPDATE_VALUE:
+        //     const index = state.findIndex(value => value.id === action.payload.valueId)
+        //     return 
         case GET_READY_TO_ADD_VALUE:
             return {
                 ...state,

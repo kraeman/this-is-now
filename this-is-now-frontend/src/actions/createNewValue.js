@@ -7,7 +7,7 @@ import {addValue, getReadyToAddValue} from "./index"
 
 export function createNewValuePost(name, jwt) {
     return (dispatch) => {
-      // debugger
+      debugger
       dispatch(getReadyToAddValue());
       fetch('http://localhost:3000/values/create', {
         method: 'POST',
@@ -20,8 +20,8 @@ export function createNewValuePost(name, jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(addValue(data.jwt, data.value))
+          debugger
+          dispatch(addValue(data.data.attributes.name, jwt))
           // return callBack
         });
 

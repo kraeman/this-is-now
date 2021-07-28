@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def create
         if user_params[:password] == user_params[:checkPassword]
-            # byebug
+            byebug
             current_user = User.create(username: user_params[:username], password: user_params[:password])
             if current_user.valid?
                 token = encode_token(user_id: current_user.id)

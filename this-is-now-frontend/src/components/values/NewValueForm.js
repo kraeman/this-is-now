@@ -76,15 +76,15 @@ class NewValueForm extends Component {
 
 function mapState(currentState){
     return { 
-        jwt: currentState.jwt,
-        current_user_data: currentState.current_user_data
+        jwt: currentState.users.jwt,
+        current_user_data: currentState.users.current_user_data
      }
   }
 
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewValuePost: (name) => dispatch(createNewValuePost(name))
+        createNewValuePost: (name, jwt) => dispatch(createNewValuePost(name, jwt))
     }
   }
   
