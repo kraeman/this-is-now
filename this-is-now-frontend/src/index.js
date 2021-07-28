@@ -6,10 +6,10 @@ import App from './containers/App';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import {rootReducer} from './reducers/index';
+import reducer from './reducers/index';
 // import {usersReducer} from "./reducers/users"
 
-const store = createStore(rootReducer, compose(
+const store = createStore(reducer, compose(
   applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))

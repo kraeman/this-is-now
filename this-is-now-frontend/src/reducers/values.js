@@ -1,6 +1,6 @@
 import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE} from "../actions/actionTypes"
 
-export const valuesReducer = (state = {jwt: null, values: [], requesting: false}, action) => {
+export const values = (state = {jwt: null, values: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_VALUE:
             return {...state, values: [...state.values, action.payload]}
