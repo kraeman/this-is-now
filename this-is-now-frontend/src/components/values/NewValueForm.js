@@ -15,6 +15,7 @@ class NewValueForm extends Component {
 
     handleOnSubmit = (e) => {
         e.preventDefault()
+        // debugger
         this.props.createNewValuePost(this.state.name, this.props.jwt)
         this.setState({
             name: ''

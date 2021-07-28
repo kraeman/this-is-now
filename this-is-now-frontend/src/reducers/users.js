@@ -8,6 +8,7 @@ export const users = (state = {jwt: null, current_user_data: null, requesting: f
                 requesting: true
             }  
         case STORE_TOKEN:
+            // debugger
             return {
                 jwt: action.payload.jwt,
                 current_user_data: action.payload.userData,
