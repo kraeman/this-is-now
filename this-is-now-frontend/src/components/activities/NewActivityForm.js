@@ -15,16 +15,26 @@ class NewActivityForm extends Component {
     state = {
         name: '',
         description: '',
-        numberOfvaluesAdded: 1
+        numberOfvaluesAdded: 1,
+        associatedValues: []
 
     }
 
+    checkIn = (value, score) => {
+        this.setState({
+            name: this.state.name,
+            description: this.state.description,
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            associatedValues: this.state.associatedValues.push({name: value, score: parseInt(score)})
+        })
+        debugger
+    }
 
     // addAssociatedValue() {
     //     this.setState({...this.state, numberOfvaluesAdded: this.addAnotherValue()})
         
     // }
-
+    
     componentDidMount() {
         this.props.fetchAllValues(this.props.jwt)
     }
@@ -35,7 +45,8 @@ class NewActivityForm extends Component {
         this.setState({
             name: '',
             description: '',
-            numberOfvaluesAdded: 1
+            numberOfvaluesAdded: 1,
+            associatedValues: []
         })
     }
 
@@ -43,7 +54,8 @@ class NewActivityForm extends Component {
         this.setState({
             name: e.target.value,
             description: this.state.description,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            associatedValues: this.state.associatedValues
         })
     }
 
@@ -52,7 +64,8 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description: e.target.value,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            associatedValues: this.state.associatedValues
         })
     }
 
@@ -80,14 +93,16 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description:this.state.description,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded + 1
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded + 1,
+            associatedValues: this.state.associatedValues
         })
     }
+
 
     makeAssociatedValuesBasedOnNumberAssociated = () => {
         const array = []
         for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-            array.push(<AssociatedValue key={i} all_values={this.props.all_values} index={i}/>)
+            array.push(<AssociatedValue key={i} checkIn={this.checkIn}  id={`value ${i}`} all_values={this.props.all_values} index={i}/>)
           }
         return array
     }
@@ -135,7 +150,7 @@ class NewActivityForm extends Component {
                                     
                                     <div className="form-group">
                                         <div className="col-md-6 col-md-offset-4">
-                                        <button type="submit" className="btn btn-default">Add</button>
+                                        <button type="submit" className="btn btn-default">SUBMIT</button>
                                         </div>
                                     </div>
                                 </form>

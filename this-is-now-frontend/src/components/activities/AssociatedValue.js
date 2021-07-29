@@ -10,17 +10,19 @@ import {connect} from "react-redux"
 class AssociatedValue extends Component {
 
     state = {
-        name: '',
+        name: "",
         score: 1
     }
 
   
 
     handleOnNameChange = (e) => {
+        const theValue = this.props.all_values.find(value=> value.id === e.target.value)
         this.setState({
-            name: e.target.value,
+            name: theValue.attributes.name,
             score: this.state.score
         })
+        // debugger
     }
 
 
@@ -43,10 +45,11 @@ class AssociatedValue extends Component {
     render() {
     
     return(
-        <div className="container">
+        <div id={this.props.id} className="container">
             <label for="values">Add a Value</label>
 
             <select onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
+                <option value={null}></option>
                 {this.makeOptionForEveryValue()}
             </select>
 
@@ -67,7 +70,7 @@ class AssociatedValue extends Component {
                 <option value="10">10</option>
             </select>
             
-
+            <button onClick={() => this.props.checkIn(this.state.name, this.state.score)}>Check in this value</button>
         </div>
     )
     
