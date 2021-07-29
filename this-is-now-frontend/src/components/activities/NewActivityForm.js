@@ -15,10 +15,15 @@ class NewActivityForm extends Component {
     state = {
         name: '',
         description: '',
-        valuesObjects:[],
         numberOfvaluesAdded: 1
 
     }
+
+
+    // addAssociatedValue() {
+    //     this.setState({...this.state, numberOfvaluesAdded: this.addAnotherValue()})
+        
+    // }
 
     componentDidMount() {
         this.props.fetchAllValues(this.props.jwt)
@@ -30,7 +35,6 @@ class NewActivityForm extends Component {
         this.setState({
             name: '',
             description: '',
-            valuesObjects:{},
             numberOfvaluesAdded: 1
         })
     }
@@ -39,7 +43,6 @@ class NewActivityForm extends Component {
         this.setState({
             name: e.target.value,
             description: this.state.description,
-            valuesObjects: this.state.valuesObjects,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded
         })
     }
@@ -49,30 +52,27 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description: e.target.value,
-            valuesObjects: this.state.valuesObjects,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded
         })
     }
 
 
-    handleOnValueScoreChange = () => {
-        this.setState({
-            name: this.state.name,
-            description: this.state.description,
-            valuesObjects: {},
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded
-        })
-    }
+    // handleOnValueScoreChange = () => {
+    //     this.setState({
+    //         name: this.state.name,
+    //         description: this.state.description,
+    //         numberOfvaluesAdded: this.state.numberOfvaluesAdded
+    //     })
+    // }
 
-    handleOnValueChange = (e) => {
-        debugger
-        this.setState({
-            name: this.state.name,
-            description:this.state.description,
-            valuesObjects: [...this.state.valuesObjects, {value: e.target.value, score: 1}],
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded
-        })
-    }
+    // handleOnValueChange = (e) => {
+    //     debugger
+    //     this.setState({
+    //         name: this.state.name,
+    //         description:this.state.description,
+    //         numberOfvaluesAdded: this.state.numberOfvaluesAdded
+    //     })
+    // }
 
    
 
@@ -80,16 +80,16 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description:this.state.description,
-            valuesObjects: [...this.state.valuesObjects, {value: e.target.value, score: 1}],
             numberOfvaluesAdded: this.state.numberOfvaluesAdded + 1
         })
     }
 
-    makeValuesBasedOnNumberAssociated = () => {
-        // debugger
+    makeAssociatedValuesBasedOnNumberAssociated = () => {
+        const array = []
         for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-            return <AssociatedValue all_values={this.props.all_values} index={i}/>
+            array.push(<AssociatedValue key={i} all_values={this.props.all_values} index={i}/>)
           }
+        return array
     }
 
 
@@ -129,8 +129,9 @@ class NewActivityForm extends Component {
                                         />
                                         </div>
                                     </div>
+                                    <button onClick={this.addAnotherValue}>ADD ANOTHER VALUE</button>
 
-                                    {this.makeValuesBasedOnNumberAssociated()}
+                                    {this.makeAssociatedValuesBasedOnNumberAssociated()}
                                     
                                     <div className="form-group">
                                         <div className="col-md-6 col-md-offset-4">

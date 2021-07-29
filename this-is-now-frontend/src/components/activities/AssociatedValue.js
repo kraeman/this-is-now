@@ -14,9 +14,7 @@ class AssociatedValue extends Component {
         score: 1
     }
 
-    handleOnAddNewAssociatedValue = (e) => {
-       //calback to add another one DJ KHALID
-    }
+  
 
     handleOnNameChange = (e) => {
         this.setState({
@@ -68,7 +66,7 @@ class AssociatedValue extends Component {
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-            <button  onClick={(e) => this.handleOnAddNewAssociatedValue(e)}>ADD ANOTHER VALUE</button>
+            
 
         </div>
     )
