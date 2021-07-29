@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { createNewActivityPost } from "../../actions/createNewActivity";
 import AssociatedValue from './AssociatedValue';
+import fetchAllValues from '../../actions/fetchAllValues'
 // import {loginUser} from '../actions/loginUser'
 
 
@@ -17,6 +18,10 @@ class NewActivityForm extends Component {
         valuesObjects:[],
         numberOfvaluesAdded: 1
 
+    }
+
+    componentDidMount() {
+        this.props.fetchAllValues(this.props.jwt)
     }
 
     handleOnSubmit = (e) => {
@@ -81,8 +86,9 @@ class NewActivityForm extends Component {
     }
 
     makeValuesBasedOnNumberAssociated = () => {
+        // debugger
         for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-            return <AssociatedValue index={i}/>
+            return <AssociatedValue all_values={this.props.all_values} index={i}/>
           }
     }
 
@@ -153,7 +159,8 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewActivityPost: (name, description, valuesObjects, jwt) => dispatch(createNewActivityPost(name, description, valuesObjects, jwt))
+        createNewActivityPost: (name, description, valuesObjects, jwt) => dispatch(createNewActivityPost(name, description, valuesObjects, jwt)),
+        fetchAllValues: (jwt) => dispatch(fetchAllValues(jwt))
     }
   }
   

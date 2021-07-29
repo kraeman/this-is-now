@@ -33,15 +33,14 @@ class AssociatedValue extends Component {
         })
     }
     makeOptionForEveryValue = () => {
-        // debugger
         //DONT LET CHOSEN VALUES COME UP IN NEXT LIST
-        const nonUniqueList = this.props.all_values.map(value => {
-            return <option id={value.id} value={value.id}>{value.name}</option>
-        })
-        const uniqueList = [...new Set(nonUniqueList)]
-        return uniqueList
+        return this.props.all_values.map(value => {
+                return <option key={value.id} id={value.id} value={value.id}>{value.attributes.name}</option>
+            })
+          
     }
 
+    
 
     render() {
     

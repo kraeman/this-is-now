@@ -17,7 +17,7 @@ class SignUp extends Component {
 
 
     handleOnSignup = () => {
-        debugger
+        // debugger
         this.props.createUser(this.state.username, this.state.password, this.state.checkPassword)
         this.setState({
             username: '',

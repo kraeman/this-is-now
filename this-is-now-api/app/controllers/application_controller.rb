@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   end
 
   def auth_header
-    byebug
+    # byebug
     request.headers['Authorization']
   end
 

@@ -1,7 +1,7 @@
-import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE} from "./actionTypes"
+import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES} from "./actionTypes"
 
 export function addValue(value, id, jwt){
-    debugger
+    // debugger
     return {
         type: ADD_VALUE,
         payload: {value, id, jwt}
@@ -25,5 +25,19 @@ export function updateValue(valueId, name){
 export function getReadyToAddValue(){
     return {
         type: GET_READY_TO_ADD_VALUE
+    }
+}
+
+export function getReadyToStoreValues(){
+    return {
+        type: GET_READY_TO_STORE_VALUES
+    }
+}
+
+export function storeValues(values){
+    // debugger
+    return {
+        type: STORE_VALUES,
+        payload: values
     }
 }

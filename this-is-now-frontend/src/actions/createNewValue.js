@@ -7,9 +7,9 @@ import {addValue, getReadyToAddValue} from "./index"
 
 export function createNewValuePost(name, jwt) {
     return (dispatch) => {
-      debugger
+      // debugger
       dispatch(getReadyToAddValue());
-      fetch('http://localhost:3000/values/create', {
+      fetch('http://localhost:3000/values', {
         method: 'POST',
         headers: {
             accept: 'application/json',
@@ -20,7 +20,7 @@ export function createNewValuePost(name, jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          // debugger
           dispatch(addValue(data.data.attributes.name, data.data.id, jwt))
           // return callBack
         });

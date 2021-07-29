@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   # resources :activities
   # resources :values
   # get '/users/profile', :to => 'users#profile'
-  post '/values/create', :to => 'values#create'
+  post '/values', :to => 'values#create'
   post '/signup', :to => 'users#create'
   post '/login', :to => 'auth#create'
+  get '/values', :to => 'values#index'
 end

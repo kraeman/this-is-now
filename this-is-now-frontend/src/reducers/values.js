@@ -1,4 +1,4 @@
-import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE} from "../actions/actionTypes"
+import {ADD_VALUE, GET_READY_TO_ADD_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES, REMOVE_VALUE, UPDATE_VALUE} from "../actions/actionTypes"
 
 export const values = (state = {values: [], requesting: false}, action) => {
     switch(action.type){
@@ -17,7 +17,19 @@ export const values = (state = {values: [], requesting: false}, action) => {
             return {
                 ...state,
                 requesting: true
-            }      
+            }   
+        case GET_READY_TO_STORE_VALUES:
+            return {
+                ...state,
+                requesting: true
+            }
+        case STORE_VALUES:
+            // debugger
+            
+            return {
+                values: action.payload,
+                requesting: false
+            }
         default:
             return state
     }
