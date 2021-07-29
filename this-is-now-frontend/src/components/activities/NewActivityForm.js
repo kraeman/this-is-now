@@ -71,9 +71,11 @@ class NewActivityForm extends Component {
     makeOptionForEveryValue = () => {
         // debugger
         //DONT LET CHOSEN VALUES COME UP IN NEXT LIST
-        return this.props.all_values.map(value => {
+        const nonUniqueList = this.props.all_values.map(value => {
             return <option id={value.id} value={value.id}>{value.name}</option>
         })
+        const uniqueList = [...new Set(nonUniqueList)]
+        return uniqueList
     }
 
     addAnotherValue = () => {
