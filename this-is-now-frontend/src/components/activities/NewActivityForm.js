@@ -13,17 +13,19 @@ class NewActivityForm extends Component {
     state = {
         name: '',
         description: '',
-        valuesObject:{}
+        valuesObjects:[],
+        numberOfvaluesAdded: 1
 
     }
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        this.props.createNewActivityPost(this.state.name, this.state.description, this.state.valuesObject, this.props.jwt)
+        this.props.createNewActivityPost(this.state.name, this.state.description, this.state.valuesObjects, this.props.jwt)
         this.setState({
             name: '',
             description: '',
-            valuesObject:{}
+            valuesObjects:{},
+            numberOfvaluesAdded: 1
         })
     }
 
@@ -31,7 +33,8 @@ class NewActivityForm extends Component {
         this.setState({
             name: e.target.value,
             description: this.state.description,
-            valuesObject: this.state.valuesObject
+            valuesObjects: this.state.valuesObjects,
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded
         })
     }
 
@@ -40,7 +43,8 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description: e.target.value,
-            valuesObject: this.state.valuesObject
+            valuesObjects: this.state.valuesObjects,
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded
         })
     }
 
@@ -49,20 +53,31 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description: this.state.description,
-            valuesObject: {}
+            valuesObjects: {},
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded
         })
     }
 
-    handleOnValueChange = () => {
+    handleOnValueChange = (e) => {
+        debugger
         this.setState({
             name: this.state.name,
             description:this.state.description,
-            valuesObject: {}
+            valuesObjects: [...this.state.valuesObjects, {value: e.target.value, score: 1}],
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded
         })
     }
 
     makeOptionForEveryValue = () => {
-        return <option>Health</option>
+        // debugger
+        //DONT LET CHOSEN VALUES COME UP IN NEXT LIST
+        return this.props.all_values.map(value => {
+            return <option id={value.id} value={value.id}>{value.name}</option>
+        })
+    }
+
+    addAnotherValue = () => {
+        
     }
 
 
@@ -106,7 +121,7 @@ class NewActivityForm extends Component {
 
                                     <label for="values">Add a Value</label>
 
-                                    <select name="values" id="values">
+                                    <select onChange={(e) => this.handleOnValueChange(e)} name="values" id="values">
                                         {this.makeOptionForEveryValue()}
                                     </select>
 
@@ -126,7 +141,7 @@ class NewActivityForm extends Component {
                                         <option value="9">9</option>
                                         <option value="10">10</option>
                                     </select>
-
+                                    <button id="value_1" onClick={() => this.addAnotherValue()}>ADD ANOTHER VALUE</button>
 
                                     <div className="form-group">
                                         <div className="col-md-6 col-md-offset-4">
@@ -146,16 +161,16 @@ class NewActivityForm extends Component {
 
 function mapState(currentState){
     return { 
-        jwt: currentState.jwt,
-        current_user_data: currentState.current_user_data,
-        all_values: currentState.values
+        jwt: currentState.users.jwt,
+        current_user_data: currentState.users.current_user_data,
+        all_values: currentState.values.values
      }
   }
 
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewActivityPost: (name, description, valuesObject, jwt) => dispatch(createNewActivityPost(name, description, valuesObject, jwt))
+        createNewActivityPost: (name, description, valuesObjects, jwt) => dispatch(createNewActivityPost(name, description, valuesObjects, jwt))
     }
   }
   
