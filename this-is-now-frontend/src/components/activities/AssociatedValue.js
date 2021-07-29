@@ -11,7 +11,8 @@ class AssociatedValue extends Component {
 
     state = {
         name: "",
-        score: 1
+        score: 1,
+        // buttonText: "Add Value"
     }
 
   
@@ -21,6 +22,7 @@ class AssociatedValue extends Component {
         this.setState({
             name: theValue.attributes.name,
             score: this.state.score
+            // buttonText: this.state.buttonText
         })
         // debugger
     }
@@ -29,7 +31,8 @@ class AssociatedValue extends Component {
     handleOnValueScoreChange = (e) => {
         this.setState({
             name: this.state.name,
-            score: e.target.value
+            score: e.target.value,
+            // buttonText: this.state.buttonText
         })
     }
     makeOptionForEveryValue = () => {
@@ -40,8 +43,21 @@ class AssociatedValue extends Component {
           
     }
 
+    onSubmit = (e) => {
+        // debugger
+        if(e.target.textContent === "Add Value"){
+            e.target.textContent = "Remove Value"
+            // e.target.disabled = true
+            // debugger
+            this.props.checkIn(this.props.id, this.state.name, this.state.score)
+        }else if(e.target.textContent === "Remove Value")  {
+            e.target.textContent = "Add Value"
+            // e.target.disabled = true
+            // debugger
+            this.props.checkOut(this.props.id, this.state.name, this.state.score)
+        }  
+    }
     
-
     render() {
     
     return(
@@ -70,7 +86,7 @@ class AssociatedValue extends Component {
                 <option value="10">10</option>
             </select>
             
-            <button onClick={() => this.props.checkIn(this.state.name, this.state.score)}>Check in this value</button>
+            <button onClick={(e) => this.onSubmit(e)}>Add Value</button>
         </div>
     )
     

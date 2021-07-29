@@ -20,14 +20,27 @@ class NewActivityForm extends Component {
 
     }
 
-    checkIn = (value, score) => {
+    checkIn = (id, value, score) => {
+        debugger
         this.setState({
             name: this.state.name,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues.push({name: value, score: parseInt(score)})
+            associatedValues: [...this.state.associatedValues, {id: id, name: value, score: score}]
         })
+        
+    }
+
+    checkOut = (id) => {
         debugger
+        // const index = this.state.associatedValues.findIndex((value) => value.id === id)
+        this.setState({
+            name: this.state.name,
+            description: this.state.description,
+            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            associatedValues: this.state.associatedValues.filter((value) => value.id !== id)
+        })
+        
     }
 
     // addAssociatedValue() {
@@ -102,7 +115,7 @@ class NewActivityForm extends Component {
     makeAssociatedValuesBasedOnNumberAssociated = () => {
         const array = []
         for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-            array.push(<AssociatedValue key={i} checkIn={this.checkIn}  id={`value ${i}`} all_values={this.props.all_values} index={i}/>)
+            array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} index={i}/>)
           }
         return array
     }
