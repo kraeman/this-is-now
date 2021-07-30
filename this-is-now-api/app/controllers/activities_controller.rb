@@ -13,7 +13,13 @@ class ActivitiesController < ApplicationController
         id = JWT.decode(activity_params["jwt"], ENV['JWT_SECRET'], true, algorithm: 'HS256')
         # byebug
         activity.creator_id = id[0]["user_id"]
-        byebug
+        # byebug
+        activity_params["valuesAndScoresArray"].each do |valueObject| 
+            value = Value.find_by(name: valueObject["name"])
+            activity.values.push(value)
+            byebug
+        
+        end
         if activity.save 
           render json: ActivitySerializer.new(activity)
         end
