@@ -6,11 +6,14 @@ class ActivitiesController < ApplicationController
     end
 
     def create
-        byebug
+        # byebug
         activity = Activity.new()
         activity.name = activity_params["name"]
         activity.description = activity_params["description"]
-        activity.creator_id = activity_params["creator_id"]
+        id = JWT.decode(activity_params["jwt"], ENV['JWT_SECRET'], true, algorithm: 'HS256')
+        # byebug
+        activity.creator_id = id[0]["user_id"]
+        byebug
         if activity.save 
           render json: ActivitySerializer.new(activity)
         end
@@ -32,6 +35,6 @@ class ActivitiesController < ApplicationController
     
     private
         def activity_params
-            params.require(:activity).permit(:name, :description, :creator_id, :id)
+            params.require(:activity).permit(:name, :description, :jwt, :id, valuesAndScoresArray: [:id, :name, :score] )
         end
 end

@@ -5,16 +5,16 @@ import {addActivity, getReadyToAddActivity} from "./index"
 // import { loginUser } from "./users";
 
 
-export function createNewActivityPost(name, description, valuesAndScoresObject, jwt) {
+export function createNewActivityPost(name, description, valuesAndScoresArray, jwt) {
     return (dispatch) => {
       dispatch(getReadyToAddActivity());
-      fetch('http://localhost:3000/activities/new', {
+      fetch('http://localhost:3000/activities', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${jwt}`,
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({activity: {name, description, valuesAndScoresObject}})
+        body: JSON.stringify({activity: {name, description, valuesAndScoresArray, jwt}})
       })
         .then(response => response.json())
         .then(data => {
