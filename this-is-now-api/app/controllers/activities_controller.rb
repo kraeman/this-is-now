@@ -6,6 +6,7 @@ class ActivitiesController < ApplicationController
     end
 
     def create
+        byebug
         activity = Activity.new()
         activity.name = activity_params["name"]
         activity.description = activity_params["description"]

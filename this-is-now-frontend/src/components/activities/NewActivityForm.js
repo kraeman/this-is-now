@@ -20,7 +20,8 @@ class NewActivityForm extends Component {
 
     }
 
-    checkIn = (id, value, score) => {
+    checkIn = (e,id, value, score) => {
+        e.preventDefault()
         // debugger
         this.setState({
             name: this.state.name,
@@ -31,7 +32,8 @@ class NewActivityForm extends Component {
         
     }
 
-    checkOut = (id) => {
+    checkOut = (e, id) => {
+e.preventDefault()
         // debugger
         // const index = this.state.associatedValues.findIndex((value) => value.id === id)
         this.setState({
@@ -68,7 +70,8 @@ class NewActivityForm extends Component {
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        this.props.createNewActivityPost(this.state.name, this.state.description, this.state.valuesObjects, this.props.jwt)
+        // debugger
+        this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
         this.setState({
             name: '',
             description: '',
@@ -117,6 +120,8 @@ class NewActivityForm extends Component {
    
 
     addAnotherValue = (e) => {
+        e.preventDefault()
+        // debugger
         this.setState({
             name: this.state.name,
             description:this.state.description,
@@ -164,7 +169,7 @@ class NewActivityForm extends Component {
                                         />
                                         </div>
                                     </div>
-                                    <button onClick={this.addAnotherValue}>ADD ANOTHER VALUE</button>
+                                    <button onClick={(e) => this.addAnotherValue(e)}>ADD ANOTHER VALUE</button>
 
                                     {this.makeAssociatedValuesBasedOnNumberAssociated()}
                                     

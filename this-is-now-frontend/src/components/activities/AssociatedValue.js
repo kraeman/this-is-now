@@ -50,12 +50,12 @@ class AssociatedValue extends Component {
             e.target.textContent = "Remove Value"
             // e.target.disabled = true
             // debugger
-            this.props.checkIn(this.props.id, this.state.name, this.state.score)
+            this.props.checkIn(e, this.props.id, this.state.name, this.state.score)
         }else if(e.target.textContent === "Remove Value")  {
             e.target.textContent = "Add Value"
             // e.target.disabled = true
             // debugger
-            this.props.checkOut(this.props.id, this.state.name, this.state.score)
+            this.props.checkOut(e, this.props.id, this.state.name, this.state.score)
         }  
     }
     
