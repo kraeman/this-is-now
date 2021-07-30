@@ -37,8 +37,8 @@ class AssociatedValue extends Component {
     }
     makeOptionForEveryValue = () => {
         //DONT LET CHOSEN VALUES COME UP IN NEXT LIST
+        // debugger
         return this.props.all_values.map(value => {
-            debugger
                 return <option key={value.id} id={value.id} value={value.id}>{value.attributes.name}</option>
             })
           

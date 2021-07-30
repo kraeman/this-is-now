@@ -44,13 +44,27 @@ class NewActivityForm extends Component {
     }
 
     // addAssociatedValue() {
-    //     this.setState({...this.state, numberOfvaluesAdded: this.addAnotherValue()})
+        //     this.setState({...this.state, numberOfvaluesAdded: this.addAnotherValue()})
         
-    // }
-    
-    componentDidMount() {
-        this.props.fetchAllValues(this.props.jwt)
-    }
+        // }
+        
+        componentWillMount() {
+            this.props.fetchAllValues(this.props.jwt)
+        }
+
+        
+        makeAssociatedValuesBasedOnNumberAssociated = () => {
+            if(!this.props.requesting){
+                const array = []
+                for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
+                    array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} index={i}/>)
+                }
+                return array
+            }else{
+                return null
+            }
+        }
+
 
     handleOnSubmit = (e) => {
         e.preventDefault()
@@ -112,13 +126,6 @@ class NewActivityForm extends Component {
     }
 
 
-    makeAssociatedValuesBasedOnNumberAssociated = () => {
-        const array = []
-        for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-            array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} index={i}/>)
-          }
-        return array
-    }
 
 
     render() {
@@ -182,7 +189,8 @@ function mapState(currentState){
     return { 
         jwt: currentState.users.jwt,
         current_user_data: currentState.users.current_user_data,
-        all_values: currentState.values.values
+        all_values: currentState.values.values,
+        requesting: currentState.requesting
      }
   }
 
