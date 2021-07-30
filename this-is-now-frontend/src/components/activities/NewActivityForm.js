@@ -21,7 +21,7 @@ class NewActivityForm extends Component {
     }
 
     checkIn = (id, value, score) => {
-        debugger
+        // debugger
         this.setState({
             name: this.state.name,
             description: this.state.description,
@@ -32,7 +32,7 @@ class NewActivityForm extends Component {
     }
 
     checkOut = (id) => {
-        debugger
+        // debugger
         // const index = this.state.associatedValues.findIndex((value) => value.id === id)
         this.setState({
             name: this.state.name,
@@ -178,6 +178,7 @@ class NewActivityForm extends Component {
 }
 
 function mapState(currentState){
+    // debugger
     return { 
         jwt: currentState.users.jwt,
         current_user_data: currentState.users.current_user_data,
