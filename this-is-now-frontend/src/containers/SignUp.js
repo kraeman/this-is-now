@@ -70,7 +70,7 @@ class SignUp extends Component {
             <div>
                 <label for="pass">Password (8 character minimum): </label>
                 <input value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} type="password" id="pass" name="password"
-                    minlength="8" required>
+                    minLength="8" required>
                         </input>
             </div>
             <br/>
@@ -78,7 +78,7 @@ class SignUp extends Component {
             <div>
                 <label for="pass-confirm">Confirm Password: </label>
                 <input value={this.state.checkPassword} onChange={(e) => this.handleCheckPasswordChange(e)} type="password" id="pass-confirm" name="password"
-                    minlength="8" required>
+                    minLength="8" required>
                         </input>
             </div>
 

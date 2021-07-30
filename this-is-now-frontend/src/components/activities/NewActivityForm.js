@@ -50,7 +50,7 @@ e.preventDefault()
         
         // }
         
-        componentWillMount() {
+        componentDidMount() {
             this.props.fetchAllValues(this.props.jwt)
         }
 
