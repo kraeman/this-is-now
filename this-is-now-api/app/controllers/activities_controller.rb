@@ -19,7 +19,7 @@ class ActivitiesController < ApplicationController
                 value = Value.find_by(name: valueObject["name"])
                 va = ValueActivity.new(value_id: value.id, activity_id: activity.id, score: activity_params["valuesAndScoresArray"][0]["score"])
                 va.save
-                byebug
+                # byebug
             end
             render json: ActivitySerializer.new(activity)
         end
