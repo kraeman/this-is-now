@@ -11,7 +11,7 @@ export const users = (state = {jwt: null, current_user_data: null, requesting: f
             // debugger
             return {
                 jwt: action.payload.jwt,
-                current_user_data: action.payload.userData,
+                current_user_data: {username: action.payload.userData, relationshipData: action.payload.relationshipData},
                 requesting: false
             }
         
