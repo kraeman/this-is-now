@@ -21,7 +21,8 @@ class ActivitiesController < ApplicationController
                 va.save
                 # byebug
             end
-            render json: ActivitySerializer.new(activity)
+            # render json: ActivitySerializer.new(activity)
+            render json: { user: ActivitySerializer.new(activity).serializable_hash }, status: :created
         end
     end
 

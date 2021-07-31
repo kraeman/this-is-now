@@ -6,11 +6,13 @@ import {addActivity, getReadyToAddActivity} from "./index"
 
 
 export function createNewActivityPost(name, description, valuesAndScoresArray, jwt) {
+  // debugger
     return (dispatch) => {
       dispatch(getReadyToAddActivity());
       fetch('http://localhost:3000/activities', {
         method: 'POST',
         headers: {
+            accept: 'application/json',
             Authorization: `Bearer ${jwt}`,
             "Content-Type": 'application/json'
         },
@@ -18,8 +20,8 @@ export function createNewActivityPost(name, description, valuesAndScoresArray, j
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(addActivity(data.jwt, data.user))
+          debugger
+          dispatch(addActivity(jwt, data.user.data))
           // return callBack
         });
 

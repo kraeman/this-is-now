@@ -1,11 +1,11 @@
 import {combineReducers} from "redux"
-import {activitiesReducer} from "./activities"
+import {activities} from "./activities"
 import {values} from "./values"
 import {users} from "./users"
 // import { combineReducers } from 'redux'
 
 export default combineReducers({
-    // activities: activitiesReducer,
+    activities,
     values,
     users
 })

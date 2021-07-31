@@ -1,9 +1,10 @@
 import {ADD_ACTIVITY, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
 
-export function addActivity(activity){
+export function addActivity(jwt, activity){
+    // debugger
     return {
         type: ADD_ACTIVITY,
-        payload: activity
+        payload: {jwt, activity}
     }
 }
 

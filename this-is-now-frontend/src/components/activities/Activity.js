@@ -7,7 +7,7 @@ const Activity = () => {
     return (
         <div>
             <br/><br/><br/><br/><br/>
-            Individual Activity with a star if its recomended
+            Individual Activity with a ranking if reccomended
         </div>
     )
 }
