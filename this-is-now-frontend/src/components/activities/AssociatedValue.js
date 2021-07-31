@@ -12,6 +12,7 @@ class AssociatedValue extends Component {
     state = {
         name: "",
         score: 1,
+        checkedIn: false
         // buttonText: "Add Value"
     }
 
@@ -21,7 +22,8 @@ class AssociatedValue extends Component {
         const theValue = this.props.all_values.find(value=> value.id === e.target.value)
         this.setState({
             name: theValue.attributes.name,
-            score: this.state.score
+            score: this.state.score,
+            checkedIn: this.state.checkedIn
             // buttonText: this.state.buttonText
         })
         // debugger
@@ -32,6 +34,7 @@ class AssociatedValue extends Component {
         this.setState({
             name: this.state.name,
             score: e.target.value,
+            checkedIn: this.state.checkedIn
             // buttonText: this.state.buttonText
         })
     }
@@ -51,14 +54,26 @@ class AssociatedValue extends Component {
     onSubmit = (e) => {
         // debugger
         if(e.target.textContent === "Add Value"){
+            this.setState({
+                name: this.state.name,
+                score: this.state.score,
+                checkedIn: true
+            })
             e.target.textContent = "Remove Value"
             // e.target.disabled = true
             // debugger
             this.props.checkIn(e, this.props.id, this.state.name, this.state.score)
+            //should i reset state herw???
         }else if(e.target.textContent === "Remove Value")  {
+            this.setState({
+                name: this.state.name,
+                score: this.state.score,
+                checkedIn: false
+            })
             e.target.textContent = "Add Value"
             // e.target.disabled = true
             // debugger
+            //SShould i reset state here?
             this.props.checkOut(e, this.props.id, this.state.name, this.state.score)
         }  
     }
@@ -69,7 +84,7 @@ class AssociatedValue extends Component {
         <div id={this.props.id} className="container">
             <label for="values">Add a Value</label>
 
-            <select onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
+            <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
                 <option value={null}></option>
                 {this.makeOptionForEveryValue()}
             </select>
@@ -77,7 +92,7 @@ class AssociatedValue extends Component {
 
             <label for="scores">Assign a score </label>
 
-            <select onChange={(e) => this.handleOnValueScoreChange(e)} name="scores" id="scores">
+            <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnValueScoreChange(e)} name="scores" id="scores">
                 {/* <option value="null">1-10</option> */}
                 <option value="1">1</option>
                 <option value="2">2</option>
