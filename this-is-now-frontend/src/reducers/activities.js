@@ -1,4 +1,4 @@
-import {ADD_ACTIVITY, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "../actions/actionTypes"
+import {ADD_ACTIVITY, STORE_ACTIVITIES, GET_READY_TO_STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "../actions/actionTypes"
 
 
 export const activities = (state = {activities: [], requesting: false}, action) => {
@@ -14,6 +14,16 @@ export const activities = (state = {activities: [], requesting: false}, action) 
                 ...state,
                 requesting: true
             }   
+            case GET_READY_TO_STORE_ACTIVITIES:
+            return {
+                ...state,
+                requesting: true
+            } 
+            case STORE_ACTIVITIES:
+                return {
+                    activities: action.payload,
+                    requesting: false
+                } 
         case REMOVE_ACTIVITY:
             return state.filter(activity => activity.id !== action.payload)
         case UPDATE_ACTIVITY:

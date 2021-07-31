@@ -1,4 +1,4 @@
-import {ADD_ACTIVITY, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
+import {ADD_ACTIVITY, GET_READY_TO_STORE_ACTIVITIES, STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
 
 export function addActivity(jwt, activity){
     // debugger
@@ -25,5 +25,20 @@ export function updateActivity(activityId, name, description){
 export function getReadyToAddActivity(){
     return {
         type: GET_READY_TO_ADD_ACTIVITY
+    }
+}
+
+export function getReadyToStoreActivities(){
+    // debugger
+    return {
+        type: GET_READY_TO_STORE_ACTIVITIES
+    }
+}
+
+export function storeActivities(activities){
+    // debugger
+    return {
+        type: STORE_ACTIVITIES,
+        payload: activities
     }
 }

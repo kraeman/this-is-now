@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import { createNewActivityPost } from "../../actions/createNewActivity";
 import AssociatedValue from './AssociatedValue';
 import fetchAllValues from '../../actions/fetchAllValues'
+import fetchAllActivities from '../../actions/fetchAllActivities'
 // import {loginUser} from '../actions/loginUser'
 
 
@@ -52,6 +53,7 @@ e.preventDefault()
         
         componentDidMount() {
             this.props.fetchAllValues(this.props.jwt)
+            this.props.fetchAllActivities(this.props.jwt)
         }
 
         
@@ -203,7 +205,8 @@ function mapState(currentState){
 function mapDispatchToProps(dispatch){
     return {
         createNewActivityPost: (name, description, valuesObjects, jwt) => dispatch(createNewActivityPost(name, description, valuesObjects, jwt)),
-        fetchAllValues: (jwt) => dispatch(fetchAllValues(jwt))
+        fetchAllValues: (jwt) => dispatch(fetchAllValues(jwt)),
+        fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
     }
   }
   

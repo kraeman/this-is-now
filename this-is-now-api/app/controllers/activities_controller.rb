@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
 
     def index
         activities = Activity.all
-        render json: ActivitySerializer.new(activities)
+        render json: { user: ActivitySerializer.new(activities).serializable_hash }
     end
 
     def create

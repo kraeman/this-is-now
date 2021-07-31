@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post '/login', :to => 'auth#create'
   get '/values', :to => 'values#index'
   post '/activities', :to => 'activities#create'
+  get '/activities', :to => 'activities#index'
 end
