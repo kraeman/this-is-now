@@ -7,6 +7,7 @@ import {connect} from "react-redux"
 import fetchAllValues from '../actions/fetchAllValues';
 
 import NewValueForm from '../components/values/NewValueForm'
+import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersValues'
 import '../App.css'
 
 
@@ -18,12 +19,14 @@ class ValuesContainer extends Component {
     this.props.fetchAllValues(this.props.jwt)
   }
 
+  
+
   render() {
     return (
         <div className='rowC'>
           <NewValueForm/>
           <br/>
-          <ValuesList/>
+          <ValuesList JWT={this.props.jwt} callback={this.props.addValueToCurrentUsersValues} values={this.props.values}/>
         </div>
     );
   }
@@ -32,14 +35,16 @@ class ValuesContainer extends Component {
 
 function mapDispatchToProps(dispatch){
   return {
-      fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT))
+      fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT)),
+      addValueToCurrentUsersValues: (cuid, value, JWT) => dispatch(addValueToCurrentUsersValues(cuid, value, JWT))
   }
 }
 
 function mapState(currentState){
   return { 
       jwt: currentState.users.jwt,
-      values: currentState.values.values
+      values: currentState.values.values,
+      cuid: currentState
    }
 }
 

@@ -1,4 +1,4 @@
-import {ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_ADD_USER, STORE_TOKEN, GET_READY_TO_STORE_TOKEN} from "./actionTypes"
+import {ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_ADD_USER, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER, ADD_VALUE_TO_CURRENT_USER} from "./actionTypes"
 
 export function addUser(user){
     return {
@@ -39,5 +39,18 @@ export function storeToken(jwt, userData, relationshipData){
     return {
         type: STORE_TOKEN,
         payload: {jwt, userData, relationshipData}
+    }
+}
+
+export function addValueToCurrentUser(value){
+    return {
+        type: ADD_VALUE_TO_CURRENT_USER,
+        payload: value
+    }
+}
+
+export function getReadyToAddValueToCurrentUser(){
+    return {
+        type: GET_READY_TO_ADD_VALUE_TO_CURRENT_USER
     }
 }

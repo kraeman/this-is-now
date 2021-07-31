@@ -12,7 +12,7 @@ export function fetchToken(username, password) {
       })
         .then(response => response.json())
         .then(data => {
-          dispatch(storeToken(data.jwt, data.user.data.attributes))
+          dispatch(storeToken(data.jwt, data.user.data))
         });
     };
 

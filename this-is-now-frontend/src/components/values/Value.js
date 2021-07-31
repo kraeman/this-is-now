@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 // import Navbar from "../../containers/Navbar"
-const Value = () => {
+const Value = (props) => {
 
     
-    
+    // debugger
     return (
         <div>
             <br/><br/><br/><br/><br/>
-            Individual Value with a star if its been chosen by this user
+            {props.valueData.attributes.name}
+            <button onClick={() => props.callback(props.valueData, props.cuid, props.jwt)}>Add this value to you values</button>
         </div>
     )
 }

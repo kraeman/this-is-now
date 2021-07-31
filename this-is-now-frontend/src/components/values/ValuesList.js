@@ -5,8 +5,14 @@ const ValuesList = (props) => {
     
 
     const createValuesFromList = () => {
-        return <Value/>
-    }
+        return props.values.map(value => {
+            
+            return <>
+                 <br/>
+                <Value jwt={props.JWT} callback={props.callback} cuid={props.cuid} valueData={value}/>
+            </>
+        })
+        }
     
 
     return (
