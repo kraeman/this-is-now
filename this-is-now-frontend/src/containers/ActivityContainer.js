@@ -10,8 +10,8 @@ import '../App.css'
 class ActivitiesContainer extends Component {
 
   calculateRankedActivities = () => {
-    debugger
-    return this.props.current_user
+    // debugger
+    // return this.props.current_user
   }
 
   render() {

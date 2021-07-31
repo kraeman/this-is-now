@@ -18,7 +18,7 @@ export function createUser(username, password, checkPassword) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          // debugger
           return dispatch(storeToken(data.jwt, data.user.data.attributes, data.user.data.relationships))
           // return callBack
         });
