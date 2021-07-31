@@ -20,7 +20,7 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
+          debugger
           dispatch(addValueToCurrentUser(data.user.data))
           // return callBack
         });
