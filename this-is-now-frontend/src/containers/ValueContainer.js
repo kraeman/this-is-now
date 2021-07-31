@@ -39,6 +39,7 @@ function mapDispatchToProps(dispatch){
 function mapState(currentState){
   return { 
       jwt: currentState.users.jwt,
+      values: currentState.values.values
    }
 }
 
