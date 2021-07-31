@@ -26,7 +26,7 @@ class ValuesContainer extends Component {
         <div className='rowC'>
           <NewValueForm/>
           <br/>
-          <ValuesList JWT={this.props.jwt} callback={this.props.addValueToCurrentUsersValues} values={this.props.values}/>
+          <ValuesList JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} values={this.props.values}/>
         </div>
     );
   }
@@ -36,7 +36,7 @@ class ValuesContainer extends Component {
 function mapDispatchToProps(dispatch){
   return {
       fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT)),
-      addValueToCurrentUsersValues: (cuid, value, JWT) => dispatch(addValueToCurrentUsersValues(cuid, value, JWT))
+      addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT))
   }
 }
 
@@ -44,7 +44,7 @@ function mapState(currentState){
   return { 
       jwt: currentState.users.jwt,
       values: currentState.values.values,
-      cuid: currentState
+      cuid: currentState.users.current_user_data.username.id
    }
 }
 

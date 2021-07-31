@@ -3,7 +3,7 @@ import Value from "./Value"
 
 const ValuesList = (props) => {
     
-
+debugger
     const createValuesFromList = () => {
         return props.values.map(value => {
             
