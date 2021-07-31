@@ -6,10 +6,10 @@ import {addValueToCurrentUser, getReadyToAddValueToCurrentUser} from "./index"
 
 
 export function addValueToCurrentUsersValues(value, CUID, jwt) {
-  debugger
+  // debugger
     return (dispatch) => {
       dispatch(getReadyToAddValueToCurrentUser());
-      fetch(`http://localhost:3000/users/:${parseInt(CUID)}`, {
+      fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
         method: 'POST',
         headers: {
             accept: 'application/json',
@@ -20,8 +20,8 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
-          dispatch(addValueToCurrentUser()(jwt, data.user.data))
+          // debugger
+          dispatch(addValueToCurrentUser(data.user.data))
           // return callBack
         });
 

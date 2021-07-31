@@ -32,9 +32,10 @@ export const users = (state = {jwt: null, current_user_data: null, requesting: f
                     requesting: true
                 }  
             case ADD_VALUE_TO_CURRENT_USER:
+                // debugger
             return {
                 ...state,
-                current_user_data: {...state.current_user_data},
+                current_user_data: {username: action.payload},
                 requesting: false
             }
         default:

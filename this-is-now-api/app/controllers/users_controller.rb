@@ -34,12 +34,12 @@ class UsersController < ApplicationController
 
 
     def update
-        byebug
-        user = User.find(params[:id])
-        value = Value.find()
-        ValueUser.new(value_id: value.id, user_id: user.id)
-        ValueUser.save()
-        render json UserSerializer.new(user)
+        user = User.find(params[:id].to_i)
+        value = Value.find(params["value"]['value']['id'].to_i)
+        # byebug
+        vu = ValueUser.new(value_id: value.id, user_id: user.id)
+        vu.save
+        render json: { user: UserSerializer.new(user).serializable_hash}
     end
 
     
