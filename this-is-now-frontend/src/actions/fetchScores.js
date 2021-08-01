@@ -1,9 +1,9 @@
-import {getReadyTostoreScores, fetchScores} from "./index"
+import {getReadyTostoreScores, storeScores} from "./index"
 
 export default function fetchScores(jwt) {
     return (dispatch) => {
       dispatch(getReadyTostoreScores()) ;
-      fetch('http://localhost:3000/values', {
+      fetch(`http://localhost:3000/scores`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${jwt}`
@@ -12,7 +12,7 @@ export default function fetchScores(jwt) {
         .then(response => response.json())
         .then(data => {
           // debugger
-          dispatch(fetchScores(data.data))
+          dispatch(storeScores(data.data))
         });
     };
 
