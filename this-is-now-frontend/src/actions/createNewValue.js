@@ -21,7 +21,7 @@ export function createNewValuePost(name, jwt) {
         .then(response => response.json())
         .then(data => {
           // debugger
-          dispatch(addValue(data.data.attributes.name, data.data.id, jwt))
+          dispatch(addValue(data, jwt))
           // return callBack
         });
 

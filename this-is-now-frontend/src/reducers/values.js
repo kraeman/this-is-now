@@ -5,7 +5,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
         case ADD_VALUE:
             // debugger
             return {
-                values: [...state.values, {attributes: {name: action.payload.value, id: action.payload.id, creator_token: action.payload.jwt}}],
+                values: [...state.values, {id: action.payload.value.data.id, type: action.payload.value.data.type, attributes: {name: action.payload.value.data.attributes.name, creator_id: action.payload.jwt}, relationships: action.payload.value.data.relationships}],
                 requesting: false
                 }
         // case REMOVE_VALUE:

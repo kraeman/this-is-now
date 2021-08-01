@@ -6,7 +6,7 @@ import {addValueToCurrentUser, getReadyToAddValueToCurrentUser} from "./index"
 
 
 export function addValueToCurrentUsersValues(value, CUID, jwt) {
-  // debugger
+  debugger
     return (dispatch) => {
       dispatch(getReadyToAddValueToCurrentUser());
       fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
