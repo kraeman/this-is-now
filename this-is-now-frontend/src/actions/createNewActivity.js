@@ -20,7 +20,7 @@ export function createNewActivityPost(name, description, valuesAndScoresArray, j
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          // debugger
           dispatch(addActivity(jwt, data.user.data))
           // return callBack
         });

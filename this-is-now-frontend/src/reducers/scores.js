@@ -10,6 +10,7 @@ export const scores = (state = {scores: [], requesting: false}, action) => {
                 requesting: true
             }
         case STORE_SCORES:
+            // debugger
             return {
                 scores: action.payload,
                 requesting: false

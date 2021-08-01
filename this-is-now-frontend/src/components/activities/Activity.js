@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 // import Navbar from "../../containers/Navbar"
-const Activity = () => {
+const Activity = (props) => {
 
     
     
     return (
         <div>
             <br/><br/><br/><br/><br/>
-            Individual Activity with a ranking if reccomended
+            Activity: {props.activityWithScore.name}......Score: {props.activityWithScore.score}
         </div>
     )
 }

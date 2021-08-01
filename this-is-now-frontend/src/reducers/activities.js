@@ -4,7 +4,7 @@ import {ADD_ACTIVITY, STORE_ACTIVITIES, GET_READY_TO_STORE_ACTIVITIES, GET_READY
 export const activities = (state = {activities: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_ACTIVITY:
-            debugger
+            // debugger
             return {
                 activities: [...state.activities, {attributes: {activity_data: action.payload.activity, creator_token: action.payload.jwt}}],
                 requesting: false
