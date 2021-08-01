@@ -53,6 +53,7 @@ e.preventDefault()
         
         componentDidMount() {
             this.props.fetchAllValues(this.props.jwt)
+            //fetching activities shopulkd be done in container!!!!!!!!!
             this.props.fetchAllActivities(this.props.jwt)
         }
 

@@ -10,6 +10,7 @@ import '../App.css'
 class ActivitiesContainer extends Component {
 
 
+  
   calculateRanking = (props) => {
     const usersValuesObjectWithIdAndType = props.current_user.current_user_data.username.relationships.values.data
     const usersValuesIds = []
