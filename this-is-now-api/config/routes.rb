@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   post '/activities', :to => 'activities#create'
   get '/activities', :to => 'activities#index'
   post '/users/:id', :to => 'users#update'
+  get '/scores', :to => 'activities#scores'
 end

@@ -5,6 +5,11 @@ class ActivitiesController < ApplicationController
         render json: { user: ActivitySerializer.new(activities).serializable_hash }
     end
 
+    def scores
+        scores = ValueActivity.all
+        render json: {scores: ValueActivitiesSerializer.new(scores).serializable_hash }
+    end
+
     def create
         # byebug
         activity = Activity.new()

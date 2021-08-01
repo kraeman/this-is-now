@@ -1,4 +1,4 @@
-import {ADD_ACTIVITY, GET_READY_TO_STORE_ACTIVITIES, STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
+import {ADD_ACTIVITY, GET_READY_TO_STORE_ACTIVITIES, GET_READY_TO_STORE_SCORES, STORE_SCORES, STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "./actionTypes"
 
 export function addActivity(jwt, activity){
     // debugger
@@ -40,5 +40,20 @@ export function storeActivities(activities){
     return {
         type: STORE_ACTIVITIES,
         payload: activities
+    }
+}
+
+export function storeScores(scores){
+    // debugger
+    return {
+        type: STORE_SCORES,
+        payload: scores
+    }
+}
+
+export function getReadyToStoreScores(){
+    // debugger
+    return {
+        type: GET_READY_TO_STORE_SCORES
     }
 }

@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import ActivitiesList from '../components/activities/ActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
 import '../App.css'
+import fetchScores from '../actions/fetchScores';
 
 
 
@@ -10,6 +11,10 @@ import '../App.css'
 class ActivitiesContainer extends Component {
 
 
+
+  componentDidMount() {
+    this.props.fetchScores(this.props.current_user.jwt)
+  }
   
   calculateRanking = (props) => {
     const usersValuesObjectWithIdAndType = props.current_user.current_user_data.username.relationships.values.data
@@ -25,53 +30,53 @@ class ActivitiesContainer extends Component {
         }
       })
     })
-    const usersActivities = []
+    let usersActivitiesWithScores = []
     usersValuesIds.forEach(id => {
-      // debugger
-      if(props.activities.activities !== []){
-        props.activities.activities.forEach(activityObject => {
-          activityObject.relationships.values.data.forEach(valueAssociatedWithThisActivity => {
-            if(valueAssociatedWithThisActivity.id === id){
-              usersActivities.push(activityObject)
-            }
-          })
-        })
-      }
-    })
-    usersActivities.forEach(activity => {
-      activity.relationships.values.data.forEach(valueObjectFromUsersActivities => {
-        debugger
-        usersValues.forEach(value => {
-          if(value.id === valueObjectFromUsersActivities.id){
-            
+      this.props.scores.forEach(score => {
+        if (score.attributes.value_id == parseInt(id)) {
+          if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
+            // debugger
+            usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
+          }else{
+            usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score})
           }
-        })
-
+        }
       })
     })
-  }  
+  return usersActivitiesWithScores
+  }
+  
+
 
 
 
 
   render() {
-    this.calculateRanking(this.props)
+    
     return (
         <div className='rowC'>
           <NewActivityForm/>
           <br/>
-          <ActivitiesList/>
+          <ActivitiesList scores={this.calculateRanking(this.props)}/>
         </div>
     );
   }
-};
 
-const mapStateToProps = (currentState) => {
+}
+
+function mapStateToProps(currentState){
   return {
     values: currentState.values,
     activities: currentState.activities,
-    current_user: currentState.users
+    current_user: currentState.users,
+    scores: currentState.scores.scores
   }
 }
 
-export default connect(mapStateToProps)(ActivitiesContainer);
+function mapDispatchToProps(dispatch){
+  return {
+      fetchScores: (jwt) => dispatch(fetchScores(jwt))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);

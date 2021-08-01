@@ -3,14 +3,12 @@ import Activity from "./Activity"
 
 const ActivitiesList = (props) => {
 
-    const createActivitiesFromList = () => {
-        return <Activity/>
-    }
+    debugger
     
 
     return (
         <>
-            {createActivitiesFromList()}
+            {/* {createActivitiesFromList()} */}
         </>
     )
 }
