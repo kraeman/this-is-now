@@ -47,7 +47,7 @@ export const users = (state = {jwt: null, current_user_data: null, requesting: f
                 }  
 
             case SCU:
-                debugger
+                // debugger
             return {
                 ...state,
                 current_user_data: {username: action.payload},

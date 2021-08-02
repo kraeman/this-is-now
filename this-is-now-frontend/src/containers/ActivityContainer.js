@@ -72,6 +72,7 @@ class ActivitiesContainer extends Component {
 
 
 componentDidUpdate() {
+  // debugger
   if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting){
 
 
@@ -115,10 +116,11 @@ componentDidUpdate() {
 }
 
 doSomething = () => {
-  debugger
+  // debugger
     Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
 }
 componentDidMount() {
+  // debugger
 this.doSomething()
       }
 
@@ -128,7 +130,7 @@ this.doSomething()
 
 
   render() {
-    debugger
+    // debugger
       return (
           <div className='rowC'>
             <NewActivityForm requesting={this.state.requesting} callBack={this.callBack} />
@@ -146,6 +148,9 @@ function mapStateToProps(currentState){
     activities: currentState.activities,
     current_user: currentState.users,
     scores: currentState.scores.scores,
+    requestingCU: currentState.users.requesting,
+    requestingA: currentState.activities.requesting,
+    requestingS: currentState.scores.requesting
     // requestingActivity: currentState.activities.requesting,
     // requestingScore: currentState.scores.requesting,
     // calculatedScores: currentState.scores.calculatedScores

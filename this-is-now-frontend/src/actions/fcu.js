@@ -18,7 +18,7 @@ export function fcu(jwt, CUID) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          // debugger
           dispatch(scu(data.user.data))
           // return callBack
         });
