@@ -5,7 +5,7 @@ import {grtscu, scu} from "./index"
 // import { loginUser } from "./users";
 
 
-export function fcu(CUID, jwt) {
+export function fcu(jwt, CUID) {
   // debugger
     return (dispatch) => {
       dispatch(grtscu());

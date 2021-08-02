@@ -68,52 +68,55 @@ class ActivitiesContainer extends Component {
 
 
 
-  calculateScore = () => {
-        
-    const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
-        const usersValuesIds = []
-        const usersValues = []
-        usersValuesObjectWithIdAndType.forEach(object => {
-          usersValuesIds.push(object.id)
-        });
-        this.props.values.values.forEach(value => {
-          usersValuesIds.forEach(valueId => {
-            if (value.id === valueId){
-              usersValues.push(value)
-            }
-          })
-        })
-        let usersActivitiesWithScores = []
-        usersValuesIds.forEach(id => {
-          this.props.scores.forEach(score => {
-            if (score.attributes.value_id == parseInt(id)) {
-              // debugger
-              if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
-                // debugger
-                usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
-              }else{
-                usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
-              }
-            }
-          })
-        })
-        // debugger
-        this.setState({
-          requesting: false,
-          calculatedScores: usersActivitiesWithScores
-        })
-    }
+  
 
 
 componentDidUpdate() {
   if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting){
-      this.calculateScore()
+
+
+
+
+
+    // debugger
+    const calculateScore = () => {
+          const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
+          const usersValuesIds = []
+          usersValuesObjectWithIdAndType.forEach(object => {
+            usersValuesIds.push(object.id)
+          });
+          let usersActivitiesWithScores = []
+          usersValuesIds.forEach(id => {
+            this.props.scores.forEach(score => {
+              if (score.attributes.value_id == parseInt(id)) {
+                // debugger
+                if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
+                  // debugger
+                  usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
+                }else{
+                  usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
+                }
+              }
+            })
+          })
+          // debugger
+          this.setState({
+            requesting: false,
+            calculatedScores: usersActivitiesWithScores
+          })
+      }
+
+
+
+
+
+      calculateScore()
   }
 }
 
 doSomething = () => {
   debugger
-    Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.id)])
+    Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
 }
 componentDidMount() {
 this.doSomething()
@@ -125,6 +128,7 @@ this.doSomething()
 
 
   render() {
+    debugger
       return (
           <div className='rowC'>
             <NewActivityForm requesting={this.state.requesting} callBack={this.callBack} />

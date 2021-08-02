@@ -4,7 +4,7 @@ import Activity from "./Activity"
 const ActivitiesList = (props) => {
 
     const createActivitiesFromList = () => {
-        if(!this.props.requesting){
+        if(!props.requesting){
         return props.rankedActivities.map(activity => {
             return <>
                  <br/>
