@@ -6,7 +6,7 @@ export const activities = (state = {activities: [], requesting: false}, action) 
         case ADD_ACTIVITY:
             // debugger
             return {
-                activities: [...state.activities, {attributes: {activity_data: action.payload.activity, creator_token: action.payload.jwt}}],
+                activities: [...state.activities, {id: action.payload.activity.activity.data.id, type: action.payload.activity.activity.data.type, attributes: {name: action.payload.activity.activity.data.attributes.name, description: action.payload.activity.activity.data.attributes.description, creator_id: action.payload.jwt}, relationships: action.payload.activity.activity.data.relationships}],
                 requesting: false
             }
         case GET_READY_TO_ADD_ACTIVITY:
@@ -20,6 +20,7 @@ export const activities = (state = {activities: [], requesting: false}, action) 
                 requesting: true
             } 
             case STORE_ACTIVITIES:
+                // debugger
                 return {
                     activities: action.payload,
                     requesting: false

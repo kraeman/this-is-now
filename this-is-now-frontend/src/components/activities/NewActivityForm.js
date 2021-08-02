@@ -74,16 +74,21 @@ e.preventDefault()
     handleOnSubmit = (e) => {
         e.preventDefault()
         // debugger
-        this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
+        this.props.callBack(this.state.name, this.state.description, this.state.associatedValues)
+        // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
         this.setState({
             name: '',
             description: '',
             numberOfvaluesAdded: 1,
             associatedValues: []
         })
-        if(this.props.requesting === false){
-            this.props.fetchScores(this.props.jwt)
-        }
+        // this.props.callBack()
+       
+            // this.props.callBack()
+    
+        // if(this.props.requesting === false){
+        //     this.props.fetchScores(this.props.jwt)
+        // }
     }
 
     handleOnNameChange = (e) => {

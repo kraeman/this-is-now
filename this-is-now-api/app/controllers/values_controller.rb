@@ -1,6 +1,7 @@
 class ValuesController < ApplicationController
 
     def index
+        # byebug
         values = Value.all
         render json: ValueSerializer.new(values)
     end

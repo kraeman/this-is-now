@@ -26,8 +26,9 @@ class ActivitiesController < ApplicationController
                 va.save
                 # byebug
             end
+            scores = ValueActivity.all
             # render json: ActivitySerializer.new(activity)
-            render json: { user: ActivitySerializer.new(activity).serializable_hash }, status: :created
+            render json: { activity: ActivitySerializer.new(activity).serializable_hash, scores: ValueActivitiesSerializer.new(scores).serializable_hash  }, status: :created
         end
     end
 
