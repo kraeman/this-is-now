@@ -148,14 +148,14 @@ e.preventDefault()
     
     return(
         <div className="container">
-            <h3 className="form-title">Create a new Activity</h3>
+            <h3 className="form-title">Create a new Activity or Goal</h3>
                 <div className="row">
                     <div className="col-md-8 col-md-offset-2">
                         <div className="panel panel-default">
                             <div className="panel-body">
                                 <form onSubmit={(e) => this.handleOnSubmit(e)} className="form-horizontal" >
                                     <div className="form-group">
-                                        <label htmlFor="title" className="col-md-4 control-label">Activity</label>
+                                        <label htmlFor="title" className="col-md-4 control-label">Activity/Goal</label>
                                         <div className="col-md-5">
                                         <input
                                             className="form-control"

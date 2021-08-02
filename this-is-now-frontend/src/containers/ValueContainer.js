@@ -23,7 +23,7 @@ class ValuesContainer extends Component {
 
   render() {
     return (
-        <div className='rowC'>
+        <div className='rowC' id='value_container'>
           <NewValueForm/>
           <br/>
           <ValuesList JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} values={this.props.values}/>

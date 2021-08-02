@@ -41,9 +41,9 @@ class ActivitiesContainer extends Component {
     // usersValuesIds.forEach(id => {
     //   this.props.scores.forEach(score => {
     //     if (score.attributes.value_id == parseInt(id)) {
-    //       // debugger
+          // debugger
     //       if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
-    //         // debugger
+            // debugger
     //         usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
     //       }else{
     //         usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
@@ -64,7 +64,7 @@ class ActivitiesContainer extends Component {
     // debugger
     if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting && !this.state.submit){
       
-      debugger
+      // debugger
       const calculateScore = () => {
         const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
         const usersValuesIds = []
@@ -95,17 +95,17 @@ class ActivitiesContainer extends Component {
       
       calculateScore()
     }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && !this.state.submit){
-      debugger
+      // debugger
       this.setState({
         requesting: false,
         calculatedScores: this.state.calculatedScores,
         submit: true
       })
     }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && this.state.submit){
-      debugger  
+      // debugger  
       this.doSomething()
     }else if(this.props.requestingCU && this.props.requestingS && !this.state.requesting && this.state.submit) {
-      debugger
+      // debugger
       this.setState({
         requesting: true,
         calculatedScores: this.state.calculatedScores,
@@ -128,13 +128,13 @@ class ActivitiesContainer extends Component {
   
   
   callBack = (name, description, associatedValues) => {
-    debugger
+    // debugger
     this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
     
   }
 
   render() {
-    debugger
+    // debugger
       return (
           <div className='rowC'>
             <NewActivityForm requesting={this.state.requesting} callBack={this.callBack} />
