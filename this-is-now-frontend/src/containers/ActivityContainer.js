@@ -17,7 +17,8 @@ class ActivitiesContainer extends Component {
 
   state = {
     requesting: true,
-    calculatedScores: []
+    calculatedScores: [],
+    submit: false
   }
 
 
@@ -61,13 +62,9 @@ class ActivitiesContainer extends Component {
   
   componentDidUpdate() {
     // debugger
-    if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting){
+    if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting && !this.state.submit){
       
-      
-      
-      
-      
-      // debugger
+      debugger
       const calculateScore = () => {
         const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
         const usersValuesIds = []
@@ -91,15 +88,29 @@ class ActivitiesContainer extends Component {
         // debugger
         this.setState({
           requesting: false,
-          calculatedScores: usersActivitiesWithScores
+          calculatedScores: usersActivitiesWithScores,
+          submit: false
         })
       }
       
-      
-      
-      
-      
       calculateScore()
+    }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && !this.state.submit){
+      debugger
+      this.setState({
+        requesting: false,
+        calculatedScores: this.state.calculatedScores,
+        submit: true
+      })
+    }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && this.state.submit){
+      debugger  
+      this.doSomething()
+    }else if(this.props.requestingCU && this.props.requestingS && !this.state.requesting && this.state.submit) {
+      debugger
+      this.setState({
+        requesting: true,
+        calculatedScores: this.state.calculatedScores,
+        submit: false
+      })
     }
   }
   
@@ -117,12 +128,13 @@ class ActivitiesContainer extends Component {
   
   
   callBack = (name, description, associatedValues) => {
-    this.props.createNewActivityPost(name, description, associatedValues, this.current_user.jwt)
+    debugger
+    this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
     
   }
 
   render() {
-    // debugger
+    debugger
       return (
           <div className='rowC'>
             <NewActivityForm requesting={this.state.requesting} callBack={this.callBack} />
