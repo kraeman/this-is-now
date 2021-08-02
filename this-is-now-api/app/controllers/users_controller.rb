@@ -5,6 +5,11 @@ class UsersController < ApplicationController
     #     render json: { user: UserSerializer.new(current_user) }, status: :accepted
     # end
 
+    def show
+        user = User.find(params[:id].to_i)
+        render json: { user: UserSerializer.new(user).serializable_hash}
+    end
+
     def create
         if user_params[:password] == user_params[:checkPassword]
             # byebug

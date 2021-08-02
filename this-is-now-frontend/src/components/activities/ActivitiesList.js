@@ -4,13 +4,16 @@ import Activity from "./Activity"
 const ActivitiesList = (props) => {
 
     const createActivitiesFromList = () => {
-        debugger
+        if(!this.props.requesting){
         return props.rankedActivities.map(activity => {
             return <>
                  <br/>
                 <Activity activityData={activity}/>
             </>
         })
+    }else {
+        return "Loading"
+    }
         }
     
 

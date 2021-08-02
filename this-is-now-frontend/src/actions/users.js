@@ -1,4 +1,4 @@
-import {ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_ADD_USER, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER, ADD_VALUE_TO_CURRENT_USER} from "./actionTypes"
+import {SCU, GRTSCU, ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_ADD_USER, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER, ADD_VALUE_TO_CURRENT_USER} from "./actionTypes"
 
 export function addUser(user){
     return {
@@ -52,5 +52,18 @@ export function addValueToCurrentUser(value){
 export function getReadyToAddValueToCurrentUser(){
     return {
         type: GET_READY_TO_ADD_VALUE_TO_CURRENT_USER
+    }
+}
+
+export function grtscu(){
+    return {
+        type: GRTSCU
+    }
+}
+
+export function scu(userData){
+    return {
+        type: SCU,
+        payload: userData
     }
 }
