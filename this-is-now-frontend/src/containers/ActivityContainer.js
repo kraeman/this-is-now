@@ -53,81 +53,73 @@ class ActivitiesContainer extends Component {
     // return usersActivitiesWithScores
   // }
   
-  // callBack = (name, description, associatedValues) => {
-  //   // debugger
-  //   this.setState({
-  //     loading: false,
-  //     submit: true,
-  //     name: name,
-  //     description: description,
-  //     associatedValues: associatedValues,
-  //     ah: false
-  //   })
-    
-  // }
-
-
-
   
-
-
-componentDidUpdate() {
-  // debugger
-  if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting){
-
-
-
-
-
+  
+  
+  
+  
+  
+  componentDidUpdate() {
     // debugger
-    const calculateScore = () => {
-          const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
-          const usersValuesIds = []
-          usersValuesObjectWithIdAndType.forEach(object => {
-            usersValuesIds.push(object.id)
-          });
-          let usersActivitiesWithScores = []
-          usersValuesIds.forEach(id => {
-            this.props.scores.forEach(score => {
-              if (score.attributes.value_id == parseInt(id)) {
+    if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting){
+      
+      
+      
+      
+      
+      // debugger
+      const calculateScore = () => {
+        const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
+        const usersValuesIds = []
+        usersValuesObjectWithIdAndType.forEach(object => {
+          usersValuesIds.push(object.id)
+        });
+        let usersActivitiesWithScores = []
+        usersValuesIds.forEach(id => {
+          this.props.scores.forEach(score => {
+            if (score.attributes.value_id == parseInt(id)) {
+              // debugger
+              if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
                 // debugger
-                if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
-                  // debugger
-                  usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
-                }else{
-                  usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
-                }
+                usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
+              }else{
+                usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
               }
-            })
+            }
           })
-          // debugger
-          this.setState({
-            requesting: false,
-            calculatedScores: usersActivitiesWithScores
-          })
+        })
+        // debugger
+        this.setState({
+          requesting: false,
+          calculatedScores: usersActivitiesWithScores
+        })
       }
-
-
-
-
-
+      
+      
+      
+      
+      
       calculateScore()
+    }
   }
-}
-
-doSomething = () => {
-  // debugger
+  
+  doSomething = () => {
+    // debugger
     Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
-}
-componentDidMount() {
-  // debugger
-this.doSomething()
-      }
-
-
-
-
-
+  }
+  componentDidMount() {
+    // debugger
+    this.doSomething()
+  }
+  
+  
+  
+  
+  
+  callBack = (name, description, associatedValues) => {
+    this.props.createNewActivityPost(name, description, associatedValues, this.current_user.jwt)
+    
+  }
 
   render() {
     // debugger
