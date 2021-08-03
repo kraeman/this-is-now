@@ -19,7 +19,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
                 requesting: true
             }   
         case GET_READY_TO_STORE_VALUES:
-            debugger
+            // debugger
             return {
                 ...state,
                 requesting: true
@@ -28,7 +28,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
             debugger
             
             return {
-                values: action.payload,
+                values: action.payload.data,
                 requesting: false
             }
         default:

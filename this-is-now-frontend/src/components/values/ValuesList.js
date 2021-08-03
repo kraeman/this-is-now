@@ -5,6 +5,7 @@ const ValuesList = (props) => {
     
 debugger
     const createValuesFromList = () => {
+        debugger
         return props.values.map(value => {
             
             return <>

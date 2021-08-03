@@ -2,11 +2,12 @@ class ValuesController < ApplicationController
 
     # byebug
     def index
-        render json: Value.all, only: [:name, :id, :creator_id]
+        # render json: Value.all, only: [:name, :id, :creator_id]
+        render json: ValueSerializer.new(Value.all).serializable_hash
     end
 
     def create
-        byebug
+        # byebug
         value = Value.new()
         value.name = value_params["name"]
         value.creator_id = value_params["creator_id"]

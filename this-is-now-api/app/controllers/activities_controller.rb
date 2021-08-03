@@ -2,18 +2,19 @@ class ActivitiesController < ApplicationController
     # require 'json'
 
     def index
-        activities = Activity.all.to_json
-        values = Value.all.to_json
-        scores = ValueActivity.all.to_json
+        activities = Activity.all
+        values = Value.all
+        scores = ValueActivity.all
         # byebug
-        render {scores: scores, values: values, activities: activities}.to_
+        render json: [ValueActivitiesSerializer.new(scores).serializable_hash, ValueSerializer.new(values).serializable_hash, ActivitySerializer.new(activities).serializable_hash]
+        # render {scores: scores, values: values, activities: activities}.to_
         # render json: value, only: [:name, :id, :creator_id]
         # render json: {{activities: activities, only: [:name, :description, :id, :creator_id]}, {values: values, only: [:name, :id, :creator_id]}, {scores: scores, only: [:score, :value_id, :activity_id]}}
     end
 
     def scores
         scores = ValueActivity.all
-        render json: {scores: ValueActivitiesSerializer.new(scores).serializable_hash }
+        render json: ValueActivitiesSerializer.new(scores).serializable_hash
     end
 
     def create

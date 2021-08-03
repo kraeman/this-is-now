@@ -3,7 +3,7 @@ import {loginUser, getReadyToStoreActivities, storeActivities, getReadyToLoginUs
 // import { storeValues } from "./values";
 
 export default function fetchAllActivities(jwt) {
-  debugger
+  // debugger
     return (dispatch) => {
       dispatch(getReadyToStoreActivities()) ;
       dispatch(getReadyToStoreScores())
@@ -14,14 +14,12 @@ export default function fetchAllActivities(jwt) {
           Authorization: `Bearer ${jwt}`
         }
       })
-        .then(response => {
-          // debugger
-          response.json()})
+        .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(storeActivities(data.activities))
-          dispatch(storeScores(data.scores))
-          dispatch(storeValues(data.values))
+          debugger
+          dispatch(storeActivities(data[2].data))
+          dispatch(storeScores(data[0].data))
+          dispatch(storeValues(data[1].data))
         });
     };
 
