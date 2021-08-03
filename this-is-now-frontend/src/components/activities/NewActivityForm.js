@@ -28,7 +28,7 @@ class NewActivityForm extends Component {
             name: this.state.name,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: [...this.state.associatedValues, {id: id, name: value, score: score}]
+            associatedValues: [...this.state.associatedValues, {id: id, score: score}]
         })
         
     }
@@ -51,10 +51,10 @@ e.preventDefault()
         
         // }
         
-        componentDidMount() {
-            this.props.fetchAllValues(this.props.jwt)
-            //fetching activities shopulkd be done in container!!!!!!!!!
-        }
+        // componentDidMount() {
+        //     this.props.fetchAllValues(this.props.jwt)
+        //     //fetching activities shopulkd be done in container!!!!!!!!!
+        // }
 
         
         makeAssociatedValuesBasedOnNumberAssociated = () => {
@@ -73,7 +73,7 @@ e.preventDefault()
     handleOnSubmit = (e) => {
         e.preventDefault()
         // debugger
-        this.props.callBack(this.state.name, this.state.description, this.state.associatedValues)
+        this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
         // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
         this.setState({
             name: '',
@@ -202,9 +202,9 @@ e.preventDefault()
 function mapState(currentState){
     // debugger
     return { 
-        jwt: currentState.users.jwt,
-        current_user_data: currentState.users.current_user_data,
-        all_values: currentState.values.values,
+        jwt: currentState.user.jwt,
+        current_user_data: currentState.user.current_user_data,
+        all_values: currentState.values.values.data,
         requesting: currentState.requesting
      }
   }

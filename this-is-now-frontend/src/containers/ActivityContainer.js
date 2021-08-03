@@ -121,19 +121,19 @@ class ActivitiesContainer extends Component {
   
   
   
-  // callBack = (name, description, associatedValues) => {
-  //   // debugger
-  //   this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
+  callBack = (name, description, associatedValues) => {
+    // debugger
+    this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
     
-  // }
+  }
 
   render() {
     // debugger
       return (
           <div className='rowC'>
-            {/* <NewActivityForm /> */}
+            <NewActivityForm callBack={this.callBack} />
             <br/>
-            <ActivitiesList />
+            <ActivitiesList  />
           </div>
       );
   }
@@ -159,8 +159,8 @@ function mapStateToProps(currentState){
 function mapDispatchToProps(dispatch){
   return {
       // fetchScores: (jwt) => dispatch(fetchScores(jwt)),
-      fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
-      // createNewActivityPost: (n, d, av, jwt) => dispatch(createNewActivityPost(n, d, av, jwt)),
+      fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt)),
+      createNewActivityPost: (n, d, av, jwt) => dispatch(createNewActivityPost(n, d, av, jwt)),
       // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }
 }

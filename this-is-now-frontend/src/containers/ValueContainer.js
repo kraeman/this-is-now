@@ -15,9 +15,9 @@ import '../App.css'
 
 class ValuesContainer extends Component {
 
-  componentDidMount() {
-    this.props.fetchAllValues(this.props.jwt)
-  }
+  // componentDidMount() {
+  //   this.props.fetchAllValues(this.props.jwt)
+  // }
 
   
 
