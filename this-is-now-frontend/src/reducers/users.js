@@ -8,13 +8,13 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 requesting: true
             }  
             case ADD_VALUE_TO_CURRENT_USER:
-                debugger
+                // debugger
             return {
                 ...state,
                 value_ids: [...state.value_ids, action.payload.value_id]
             }
         case STORE_TOKEN:
-            debugger
+            // debugger
             return {
                 jwt: action.payload.jwt,
                 username: action.payload.username,
@@ -23,7 +23,7 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 requesting: false
             }
             case STORE_TOKEN2:
-            debugger
+            // debugger
             return {
                 jwt: action.payload.jwt,
                 username: action.payload.username,

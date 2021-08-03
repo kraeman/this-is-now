@@ -35,11 +35,11 @@ export function getReadyToStoreActivities(){
     }
 }
 
-export function storeActivities(activities){
+export function storeActivities(activitiesValuesScores){
     // debugger
     return {
         type: STORE_ACTIVITIES,
-        payload: activities
+        payload: activitiesValuesScores
     }
 }
 

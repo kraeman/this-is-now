@@ -112,8 +112,8 @@ class ActivitiesContainer extends Component {
   //   Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
   // }
   componentDidMount() {
-    debugger
-    fetchAllActivities(this.props.jwt)
+    // debugger
+    this.props.fetchAllActivities(this.props.jwt)
     // fetch activity names and descriptions and ids, value names and ids, scores
   }
   
@@ -131,7 +131,7 @@ class ActivitiesContainer extends Component {
     // debugger
       return (
           <div className='rowC'>
-            <NewActivityForm />
+            {/* <NewActivityForm /> */}
             <br/>
             <ActivitiesList />
           </div>
@@ -141,6 +141,7 @@ class ActivitiesContainer extends Component {
 }
 
 function mapStateToProps(currentState){
+  // debugger
   return {
     // values: currentState.values,
     // activities: currentState.activities,

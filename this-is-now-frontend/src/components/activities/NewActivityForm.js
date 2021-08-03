@@ -202,10 +202,10 @@ e.preventDefault()
 function mapState(currentState){
     // debugger
     return { 
-        // jwt: currentState.users.jwt,
-        // current_user_data: currentState.users.current_user_data,
-        // all_values: currentState.values.values,
-        // requesting: currentState.requesting
+        jwt: currentState.users.jwt,
+        current_user_data: currentState.users.current_user_data,
+        all_values: currentState.values.values,
+        requesting: currentState.requesting
      }
   }
 

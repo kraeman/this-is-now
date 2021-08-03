@@ -15,12 +15,13 @@ export const activities = (state = {activities: [], requesting: false}, action) 
                 requesting: true
             }   
             case GET_READY_TO_STORE_ACTIVITIES:
+                debugger
             return {
                 ...state,
                 requesting: true
             } 
             case STORE_ACTIVITIES:
-                // debugger
+                debugger
                 return {
                     activities: action.payload,
                     requesting: false
