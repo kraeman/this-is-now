@@ -18,7 +18,7 @@ class UsersController < ApplicationController
                 token = encode_token(user_id: current_user.id)
                 # byebug
                 #EXCLUDE ID FROM SERIALIZER......ASK MATTEO!!!!!
-                render json: { user: UserSerializer.new(current_user).serializable_hash, jwt: token }, status: :created
+                render json: { username: current_user.username, user_id: current_user.id, jwt: token }, status: :created
             else
                 render json: { error: 'failed to create user' }, status: :not_acceptable
             end
@@ -44,7 +44,8 @@ class UsersController < ApplicationController
         # byebug
         vu = ValueUser.new(value_id: value.id, user_id: user.id)
         vu.save
-        render json: { user: UserSerializer.new(user).serializable_hash}
+        render json: vu, only: [:value_id]
+        # render json: { user: UserSerializer.new(user).serializable_hash}
     end
 
     

@@ -3,9 +3,9 @@ import {ADD_VALUE, GET_READY_TO_ADD_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALU
 export const values = (state = {values: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_VALUE:
-            // debugger
+            debugger
             return {
-                values: [...state.values, {id: action.payload.value.data.id, type: action.payload.value.data.type, attributes: {name: action.payload.value.data.attributes.name, creator_id: action.payload.jwt}, relationships: action.payload.value.data.relationships}],
+                values: [...state.values, action.payload],
                 requesting: false
                 }
         // case REMOVE_VALUE:
@@ -24,7 +24,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
                 requesting: true
             }
         case STORE_VALUES:
-            // debugger
+            debugger
             
             return {
                 values: action.payload,

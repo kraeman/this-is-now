@@ -15,13 +15,6 @@ import '../App.css'
 class ActivitiesContainer extends Component {
 
 
-  state = {
-    requesting: true,
-    calculatedScores: [],
-    submit: false
-  }
-
-
   // componentDidUpdate() {
     
     // const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
@@ -60,86 +53,87 @@ class ActivitiesContainer extends Component {
   
   
   
-  componentDidUpdate() {
-    // debugger
-    if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting && !this.state.submit){
+  // componentDidUpdate() {
+  //   // debugger
+  //   if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting && !this.state.submit){
       
-      // debugger
-      const calculateScore = () => {
-        const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
-        const usersValuesIds = []
-        usersValuesObjectWithIdAndType.forEach(object => {
-          usersValuesIds.push(object.id)
-        });
-        let usersActivitiesWithScores = []
-        usersValuesIds.forEach(id => {
-          this.props.scores.forEach(score => {
-            if (score.attributes.value_id == parseInt(id)) {
-              // debugger
-              if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
-                // debugger
-                usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
-              }else{
-                usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
-              }
-            }
-          })
-        })
-        // debugger
-        this.setState({
-          requesting: false,
-          calculatedScores: usersActivitiesWithScores,
-          submit: false
-        })
-      }
+  //     // debugger
+  //     const calculateScore = () => {
+  //       const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
+  //       const usersValuesIds = []
+  //       usersValuesObjectWithIdAndType.forEach(object => {
+  //         usersValuesIds.push(object.id)
+  //       });
+  //       let usersActivitiesWithScores = []
+  //       usersValuesIds.forEach(id => {
+  //         this.props.scores.forEach(score => {
+  //           if (score.attributes.value_id == parseInt(id)) {
+  //             // debugger
+  //             if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
+  //               // debugger
+  //               usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
+  //             }else{
+  //               usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
+  //             }
+  //           }
+  //         })
+  //       })
+  //       // debugger
+  //       this.setState({
+  //         requesting: false,
+  //         calculatedScores: usersActivitiesWithScores,
+  //         submit: false
+  //       })
+  //     }
       
-      calculateScore()
-    }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && !this.state.submit){
-      // debugger
-      this.setState({
-        requesting: false,
-        calculatedScores: this.state.calculatedScores,
-        submit: true
-      })
-    }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && this.state.submit){
-      // debugger  
-      this.doSomething()
-    }else if(this.props.requestingCU && this.props.requestingS && !this.state.requesting && this.state.submit) {
-      // debugger
-      this.setState({
-        requesting: true,
-        calculatedScores: this.state.calculatedScores,
-        submit: false
-      })
-    }
-  }
+  //     calculateScore()
+  //   }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && !this.state.submit){
+  //     // debugger
+  //     this.setState({
+  //       requesting: false,
+  //       calculatedScores: this.state.calculatedScores,
+  //       submit: true
+  //     })
+  //   }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && this.state.submit){
+  //     // debugger  
+  //     this.doSomething()
+  //   }else if(this.props.requestingCU && this.props.requestingS && !this.state.requesting && this.state.submit) {
+  //     // debugger
+  //     this.setState({
+  //       requesting: true,
+  //       calculatedScores: this.state.calculatedScores,
+  //       submit: false
+  //     })
+  //   }
+  // }
   
-  doSomething = () => {
-    // debugger
-    Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
-  }
+  // doSomething = () => {
+  //   // debugger
+  //   Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
+  // }
   componentDidMount() {
-    // debugger
-    this.doSomething()
+    debugger
+    fetchAllActivities(this.props.jwt)
+    // fetch activity names and descriptions and ids, value names and ids, scores
   }
   
   
   
   
   
-  callBack = (name, description, associatedValues) => {
-    // debugger
-    this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
+  // callBack = (name, description, associatedValues) => {
+  //   // debugger
+  //   this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
     
-  }
+  // }
 
   render() {
     // debugger
       return (
           <div className='rowC'>
-            <NewActivityForm requesting={this.state.requesting} callBack={this.callBack} />
+            <NewActivityForm />
             <br/>
-            <ActivitiesList requesting={this.state.requesting} activities={this.props.activities} rankedActivities={this.state.calculatedScores}/>
+            <ActivitiesList />
           </div>
       );
   }
@@ -149,12 +143,12 @@ class ActivitiesContainer extends Component {
 function mapStateToProps(currentState){
   return {
     // values: currentState.values,
-    activities: currentState.activities,
-    current_user: currentState.users,
-    scores: currentState.scores.scores,
-    requestingCU: currentState.users.requesting,
-    requestingA: currentState.activities.requesting,
-    requestingS: currentState.scores.requesting
+    // activities: currentState.activities,
+    jwt: currentState.user.jwt,
+    // scores: currentState.scores.scores,
+    // requestingCU: currentState.users.requesting,
+    // requestingA: currentState.activities.requesting,
+    // requestingS: currentState.scores.requesting
     // requestingActivity: currentState.activities.requesting,
     // requestingScore: currentState.scores.requesting,
     // calculatedScores: currentState.scores.calculatedScores
@@ -163,10 +157,10 @@ function mapStateToProps(currentState){
 
 function mapDispatchToProps(dispatch){
   return {
-      fetchScores: (jwt) => dispatch(fetchScores(jwt)),
-      fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt)),
-      createNewActivityPost: (n, d, av, jwt) => dispatch(createNewActivityPost(n, d, av, jwt)),
-      fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
+      // fetchScores: (jwt) => dispatch(fetchScores(jwt)),
+      fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
+      // createNewActivityPost: (n, d, av, jwt) => dispatch(createNewActivityPost(n, d, av, jwt)),
+      // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }
 }
 

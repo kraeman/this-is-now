@@ -20,8 +20,9 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(addValueToCurrentUser(data.user.data))
+          debugger
+          // get back nothing but if succesful add value to user
+          dispatch(addValueToCurrentUser(data))
           // return callBack
         });
 

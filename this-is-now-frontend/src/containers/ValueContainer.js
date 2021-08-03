@@ -41,10 +41,11 @@ function mapDispatchToProps(dispatch){
 }
 
 function mapState(currentState){
+  debugger
   return { 
-      jwt: currentState.users.jwt,
+      jwt: currentState.user.jwt,
       values: currentState.values.values,
-      cuid: currentState.users.current_user_data.username.id
+      cuid: currentState.user.id
    }
 }
 

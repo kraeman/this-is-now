@@ -1,8 +1,11 @@
 class ActivitiesController < ApplicationController
 
     def index
+        byebug
         activities = Activity.all
-        render json: { user: ActivitySerializer.new(activities).serializable_hash }
+        values = Value.all
+        scores = ValueActivity.all
+        render json: values, only: [:name, :id, :creator_id]
     end
 
     def scores

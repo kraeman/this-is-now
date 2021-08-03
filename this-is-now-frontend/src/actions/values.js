@@ -1,10 +1,10 @@
 import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES} from "./actionTypes"
 
-export function addValue(value, jwt){
+export function addValue(value){
     // debugger
     return {
         type: ADD_VALUE,
-        payload: {value, jwt}
+        payload: value
     }
 }
 

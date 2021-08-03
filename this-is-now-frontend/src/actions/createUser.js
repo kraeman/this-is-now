@@ -1,7 +1,7 @@
 // import React, { Component } from 'react';
 import React from 'react'
 import  { Redirect } from 'react-router-dom'
-import {storeToken, getReadyToStoreToken, getReadyToLoginUser} from "./index"
+import {storeToken2, getReadyToStoreToken, getReadyToLoginUser} from "./index"
 import { loginUser } from "./users";
 
 
@@ -18,8 +18,9 @@ export function createUser(username, password, checkPassword) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          return dispatch(storeToken(data.jwt, data.user.data, data.user.data.relationships))
+          debugger
+          //jwt, username, id
+          return dispatch(storeToken2(data))
           // return callBack
         });
 

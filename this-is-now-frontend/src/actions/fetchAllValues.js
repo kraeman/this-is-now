@@ -1,4 +1,4 @@
-import {loginUser, getReadyToStoreValues, storeValues, getReadyToLoginUser} from "./index"
+import {getReadyToStoreValues, storeValues} from "./index"
 
 export default function fetchAllValues(jwt) {
     return (dispatch) => {
@@ -11,8 +11,9 @@ export default function fetchAllValues(jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(storeValues(data.data))
+          debugger
+          // all value names and ids creator id
+          dispatch(storeValues(data))
         });
     };
 

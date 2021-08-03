@@ -15,8 +15,8 @@ class NewValueForm extends Component {
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        // debugger
-        this.props.createNewValuePost(this.state.name, this.props.jwt)
+        debugger
+        this.props.createNewValuePost(this.state.name, this.props.cid, this.props.jwt)
         this.setState({
             name: ''
         })
@@ -75,17 +75,19 @@ class NewValueForm extends Component {
 }
 
 function mapState(currentState){
+    debugger
     return { 
-        jwt: currentState.users.jwt,
-        current_user_data: currentState.users.current_user_data
+        jwt: currentState.user.jwt,
+        cid: currentState.user.id
+        // current_user_data: currentState.user.current_user_data
      }
   }
 
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewValuePost: (name, jwt) => dispatch(createNewValuePost(name, jwt))
+        createNewValuePost: (name, cid, jwt) => dispatch(createNewValuePost(name, cid, jwt))
     }
   }
   
-export default connect(mapState, mapDispatchToProps)(NewValueForm);
+  export default connect(mapState, mapDispatchToProps)(NewValueForm);

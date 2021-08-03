@@ -5,9 +5,9 @@ import {addValue, getReadyToAddValue} from "./index"
 // import { loginUser } from "./users";
 
 
-export function createNewValuePost(name, jwt) {
+export function createNewValuePost(name, creator_id, jwt) {
     return (dispatch) => {
-      // debugger
+      debugger
       dispatch(getReadyToAddValue());
       fetch('http://localhost:3000/values', {
         method: 'POST',
@@ -16,12 +16,13 @@ export function createNewValuePost(name, jwt) {
             Authorization: `Bearer ${jwt}`,
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({value: {name}})
+        body: JSON.stringify({value: {name, creator_id}})
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
-          dispatch(addValue(data, jwt))
+          debugger
+          //the single new value and its id
+          dispatch(addValue(data))
           // return callBack
         });
 

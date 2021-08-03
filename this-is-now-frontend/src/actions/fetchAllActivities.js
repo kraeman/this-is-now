@@ -1,6 +1,7 @@
 import {loginUser, getReadyToStoreActivities, storeActivities, getReadyToLoginUser} from "./index"
 
 export default function fetchAllActivities(jwt) {
+  debugger
     return (dispatch) => {
       dispatch(getReadyToStoreActivities()) ;
       fetch('http://localhost:3000/activities', {
