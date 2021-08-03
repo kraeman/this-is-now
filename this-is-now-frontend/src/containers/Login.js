@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { fetchToken } from '../actions/fetchToken';
 import  { Redirect } from 'react-router-dom'
+import fetchAllActivities from '../actions/fetchAllActivities';
 
 
 
@@ -39,8 +40,9 @@ class Login extends Component {
 
 render() {
   if (!!this.props.jwt) {
+    this.props.fetchAllActivities(this.props.jwt)
     return <Redirect push to="/activities"/>
-}
+}else{
   return (
     <div className="Login">
         <br/>
@@ -65,15 +67,18 @@ render() {
   );
 }
 }
+}
 
 
 function mapDispatchToProps(dispatch){
-    return { fetchToken: (UN, PW) => dispatch(fetchToken(UN, PW)) }
+    return { fetchToken: (UN, PW) => dispatch(fetchToken(UN, PW)),
+              fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
+    }
   }
 
   function mapState(currentState){
     return { 
-        jwt: currentState.jwt,
+        jwt: currentState.user.jwt,
         current_user_data: currentState.current_user_data
      }
   }

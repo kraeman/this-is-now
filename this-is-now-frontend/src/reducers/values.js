@@ -28,7 +28,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
             debugger
             
             return {
-                values: action.payload.data,
+                values: action.payload,
                 requesting: false
             }
         default:
