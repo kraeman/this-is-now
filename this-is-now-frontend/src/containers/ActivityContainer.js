@@ -118,7 +118,22 @@ class ActivitiesContainer extends Component {
   // }
   
   
-  
+  state = {
+    calculatedScores: []
+  }
+
+  calculateScores = () => {
+      const rankedActivities = []
+      this.props.scores.forEach(score => {
+        if (this.props.current_user.value_ids.includes(score.value_id)){
+          if (rankedActivities.find(activity => activity.id == score.activity_id)){
+            rankedActivities.find(activity => activity.id == score.activity_id).score += score.score
+          }else {
+            rankedActivities.push({id: score.activity_id, score: score.score})
+          }
+        }
+      })
+  }
   
   
   callBack = (name, description, associatedValues) => {
@@ -143,10 +158,11 @@ class ActivitiesContainer extends Component {
 function mapStateToProps(currentState){
   // debugger
   return {
-    // values: currentState.values,
-    // activities: currentState.activities,
+    values: currentState.values.values,
+    activities: currentState.activities.activities,
     jwt: currentState.user.jwt,
-    // scores: currentState.scores.scores,
+    scores: currentState.scores.scores,
+    current_user: currentState.user
     // requestingCU: currentState.users.requesting,
     // requestingA: currentState.activities.requesting,
     // requestingS: currentState.scores.requesting

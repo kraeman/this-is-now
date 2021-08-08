@@ -28,8 +28,9 @@ class ActivitiesController < ApplicationController
         activity.creator_id = id[0]["user_id"]
         if activity.save 
             activity_params["valuesAndScoresArray"].each do |valueObject| 
-                value = Value.find_by(name: valueObject["name"])
-                va = ValueActivity.new(value_id: value.id, activity_id: activity.id, score: activity_params["valuesAndScoresArray"][0]["score"])
+                # byebug
+                # value = Value.find_by(id: valueObject["id"])
+                va = ValueActivity.new(value_id: valueObject["id"], activity_id: activity.id, score: activity_params["valuesAndScoresArray"][0]["score"])
                 va.save
                 # byebug
             end

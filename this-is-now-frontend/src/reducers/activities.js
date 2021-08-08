@@ -4,9 +4,9 @@ import {ADD_ACTIVITY, STORE_ACTIVITIES, GET_READY_TO_STORE_ACTIVITIES, GET_READY
 export const activities = (state = {activities: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_ACTIVITY:
-            // debugger
+            debugger
             return {
-                activities: [...state.activities, {id: action.payload.activity.activity.data.id, type: action.payload.activity.activity.data.type, attributes: {name: action.payload.activity.activity.data.attributes.name, description: action.payload.activity.activity.data.attributes.description, creator_id: action.payload.jwt}, relationships: action.payload.activity.activity.data.relationships}],
+                activities: [...state.activities, {id: action.payload.activity.activity.data.id, type: action.payload.activity.activity.data.type, attributes: {name: action.payload.activity.activity.data.attributes.name, description: action.payload.activity.activity.data.attributes.description, creator_id: action.payload.jwt}}],
                 requesting: false
             }
         case GET_READY_TO_ADD_ACTIVITY:

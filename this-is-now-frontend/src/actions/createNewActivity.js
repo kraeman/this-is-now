@@ -1,7 +1,7 @@
 // import React, { Component } from 'react';
 import React from 'react'
 import  { Redirect } from 'react-router-dom'
-import {addActivity, getReadyToAddActivity} from "./index"
+import {addActivity, getReadyToAddActivity, storeScores} from "./index"
 // import { loginUser } from "./users";
 
 
@@ -21,7 +21,9 @@ export function createNewActivityPost(name, description, valuesAndScoresArray, j
         .then(response => response.json())
         .then(data => {
           // get back single activity and single score
+          debugger
           dispatch(addActivity(jwt, data))
+          dispatch(storeScores(data.scores))
           // return callBack
         });
 

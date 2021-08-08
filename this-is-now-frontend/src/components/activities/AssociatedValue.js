@@ -19,9 +19,10 @@ class AssociatedValue extends Component {
   
 
     handleOnNameChange = (e) => {
-        const theValue = this.props.all_values.find(value=> value.id === e.target.value)
+        const theValue = this.props.all_values.find(value => value.id == e.target.value)
+        debugger
         this.setState({
-            name: theValue.attributes.name,
+            name: theValue.name,
             score: this.state.score,
             checkedIn: this.state.checkedIn
             // buttonText: this.state.buttonText
