@@ -45,7 +45,7 @@ class AssociatedValue extends Component {
             return null
         }else{
             return this.props.all_values.map(value => {
-                return <option key={value.id} id={value.id} value={value.id}>{value.attributes.name}</option>
+                return <option key={value.id} id={value.id} value={value.id}>{value.name}</option>
             })
         }
           

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Value = (props) => {
 
     
-    // debugger
+    debugger
     return (
         <div className='individual_value'>
             <br/><br/><br/><br/><br/>
