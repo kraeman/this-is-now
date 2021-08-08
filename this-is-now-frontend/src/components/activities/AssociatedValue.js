@@ -12,7 +12,8 @@ class AssociatedValue extends Component {
     state = {
         name: "",
         score: 1,
-        checkedIn: false
+        checkedIn: false,
+        id: null
         // buttonText: "Add Value"
     }
 
@@ -24,7 +25,8 @@ class AssociatedValue extends Component {
         this.setState({
             name: theValue.name,
             score: this.state.score,
-            checkedIn: this.state.checkedIn
+            checkedIn: this.state.checkedIn,
+            id: theValue.id
             // buttonText: this.state.buttonText
         })
         // debugger
@@ -35,7 +37,8 @@ class AssociatedValue extends Component {
         this.setState({
             name: this.state.name,
             score: e.target.value,
-            checkedIn: this.state.checkedIn
+            checkedIn: this.state.checkedIn,
+            id: this.state.id
             // buttonText: this.state.buttonText
         })
     }
@@ -58,31 +61,33 @@ class AssociatedValue extends Component {
             this.setState({
                 name: this.state.name,
                 score: this.state.score,
-                checkedIn: true
+                checkedIn: true,
+                id: this.state.id
             })
             e.target.textContent = "Remove Value"
             // e.target.disabled = true
             // debugger
-            this.props.checkIn(e, this.props.id, this.state.name, this.state.score)
+            this.props.checkIn(e, this.state.id, this.state.name, this.state.score)
             //should i reset state herw???
         }else if(e.target.textContent === "Remove Value")  {
             this.setState({
                 name: this.state.name,
                 score: this.state.score,
-                checkedIn: false
+                checkedIn: false,
+                id: this.state.id
             })
             e.target.textContent = "Add Value"
             // e.target.disabled = true
             // debugger
             //SShould i reset state here?
-            this.props.checkOut(e, this.props.id, this.state.name, this.state.score)
+            this.props.checkOut(e, this.state.id, this.state.name, this.state.score)
         }  
     }
     
     render() {
     
     return(
-        <div id={this.props.id} className="container">
+        <div id={this.state.id} className="container">
             <label for="values">Add a Value</label>
 
             <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">

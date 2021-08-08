@@ -118,21 +118,19 @@ class ActivitiesContainer extends Component {
   // }
   
   
-  state = {
-    calculatedScores: []
-  }
 
   calculateScores = () => {
       const rankedActivities = []
       this.props.scores.forEach(score => {
-        if (this.props.current_user.value_ids.includes(score.value_id)){
-          if (rankedActivities.find(activity => activity.id == score.activity_id)){
-            rankedActivities.find(activity => activity.id == score.activity_id).score += score.score
+        if (this.props.current_user.value_ids.includes(score.attributes.value_id)){
+          if (rankedActivities.find(activity => activity.id == score.attributes.activity_id)){
+            rankedActivities.find(activity => activity.id == score.attributes.activity_id).score += score.attributes.score
           }else {
-            rankedActivities.push({id: score.activity_id, score: score.score})
+            rankedActivities.push({id: score.attributes.activity_id, score: score.attributes.score})
           }
         }
       })
+      return rankedActivities
   }
   
   
@@ -148,7 +146,7 @@ class ActivitiesContainer extends Component {
           <div className='rowC'>
             <NewActivityForm callBack={this.callBack} />
             <br/>
-            <ActivitiesList  />
+            <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>
           </div>
       );
   }

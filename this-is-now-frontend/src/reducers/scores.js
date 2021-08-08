@@ -12,7 +12,7 @@ export const scores = (state = {scores: [], requesting: false}, action) => {
         case STORE_SCORES:
             debugger
             return {...state,
-                scores: action.payload.data,
+                scores: action.payload,
                 requesting: false
             }   
         default:

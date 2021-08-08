@@ -2,27 +2,17 @@ import Activity from "./Activity"
 // import Navbar from "../../containers/Navbar"
 
 const ActivitiesList = (props) => {
-
-    // const createActivitiesFromList = () => {
-    //     if(!props.requesting){
-    //     return props.rankedActivities.map(activity => {
-    //         // debugger
-    //         let theOne = props.activities.activities.find(act => parseInt(act.id) == activity.id)
-    //         if(theOne){
-    //         return <>
-    //              <br/>
-    //             <Activity activityData={{score: activity.score, data: theOne}}/>
-    //         </>
-    //     }})
-    // }else {
-    //     return "Loading"
-    // }
-    //     }
+    debugger
+    const createActivitiesFromList = () => {
+        return props.rankedActivities.map(activity => {
+            return <Activity score={activity.score} name={props.activities.find(activity2 => parseInt(activity2.id) == activity.id).attributes.name}/>
+        })
+    }
     
 
     return (
         <>
-            hello
+            {createActivitiesFromList()}
         </>
     )
 }

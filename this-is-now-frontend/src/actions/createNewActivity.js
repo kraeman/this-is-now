@@ -23,7 +23,7 @@ export function createNewActivityPost(name, description, valuesAndScoresArray, j
           // get back single activity and single score
           debugger
           dispatch(addActivity(jwt, data))
-          dispatch(storeScores(data.scores))
+          dispatch(storeScores(data.scores.data))
           // return callBack
         });
 

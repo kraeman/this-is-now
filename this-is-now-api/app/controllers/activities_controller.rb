@@ -28,10 +28,10 @@ class ActivitiesController < ApplicationController
         activity.creator_id = id[0]["user_id"]
         if activity.save 
             activity_params["valuesAndScoresArray"].each do |valueObject| 
-                # byebug
                 # value = Value.find_by(id: valueObject["id"])
-                va = ValueActivity.new(value_id: valueObject["id"], activity_id: activity.id, score: activity_params["valuesAndScoresArray"][0]["score"])
+                va = ValueActivity.new(value_id: valueObject["id"], activity_id: activity.id, score: valueObject["score"])
                 va.save
+                # byebug
                 # byebug
             end
             scores = ValueActivity.all
@@ -41,18 +41,18 @@ class ActivitiesController < ApplicationController
     end
 
 
-      def update
-        #Check to see if user is owner of activity here?
-            activity = Activity.find(activity_params[:id])
-            activity.update(activity_params)
-            render json ActivitySerializer.new(activity)
-      end
+    #   def update
+    #     #Check to see if user is owner of activity here?
+    #         activity = Activity.find(activity_params[:id])
+    #         activity.update(activity_params)
+    #         render json ActivitySerializer.new(activity)
+    #   end
 
-    def destroy
-        #Cascade to other tables where this activity exists!
-        activity = Activity.find(activity_params[:id])
-        activity.destroy
-    end
+    # def destroy
+    #     #Cascade to other tables where this activity exists!
+    #     activity = Activity.find(activity_params[:id])
+    #     activity.destroy
+    # end
     
     private
         def activity_params

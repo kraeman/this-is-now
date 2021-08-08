@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 const Activity = (props) => {
 
     
-    // debugger
+    debugger
     return (
         <div>
             <br/><br/><br/><br/><br/>
-            Activity: {props.activityData.data.attributes.name}......Score: {props.activityData.score}
+            Activity: {props.name}......Score: {props.score}
         </div>
     )
 }
