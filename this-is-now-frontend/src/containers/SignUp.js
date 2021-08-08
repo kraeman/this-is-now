@@ -92,7 +92,7 @@ class SignUp extends Component {
 
 function mapState(currentState){
     return { 
-        jwt: currentState.jwt,
+        jwt: currentState.user.jwt,
         current_user_data: currentState.current_user_data
      }
   }

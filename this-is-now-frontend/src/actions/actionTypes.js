@@ -14,6 +14,8 @@ const STORE_VALUES = "STORE_VALUES"
 const GRTSCU = "GRTSCU"
 const SCU = "SCU"
 
+const LOGOUT = "LOGOUT"
+
 const STORE_TOKEN2 = "STORE_TOKEN2"
 
 const ADD_USER = "ADD_USER"
@@ -54,5 +56,6 @@ export {
     STORE_SCORES,
     GRTSCU,
     SCU,
-    STORE_TOKEN2
+    STORE_TOKEN2,
+    LOGOUT
 }

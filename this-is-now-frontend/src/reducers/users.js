@@ -1,4 +1,4 @@
-import {LOGIN_USER, GRTSCU, STORE_TOKEN2, SCU, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER} from "../actions/actionTypes"
+import {LOGIN_USER, LOGOUT, GRTSCU, STORE_TOKEN2, SCU, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER} from "../actions/actionTypes"
 
 export const user = (state = {jwt: null, username: null, value_ids: [], requesting: false}, action) => {
     switch(action.type){
@@ -37,6 +37,14 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 ...state,
                 requesting: true
             }  
+
+        case LOGOUT:
+            return {
+                jwt: null,
+                username: null,
+                value_ids: [],
+                requesting: false
+            }     
         case LOGIN_USER:
             return {
                 ...state,

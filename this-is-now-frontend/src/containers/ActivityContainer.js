@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
+import { Redirect } from 'react-router-dom'
 import fetchScores from '../actions/fetchScores';
 import fetchAllActivities from '../actions/fetchAllActivities'
 import { createNewActivityPost } from "../actions/createNewActivity";
+import { logout } from '../actions/index';
 
 import {fcu} from "../actions/fcu"
 import ActivitiesList from '../components/activities/ActivitiesList'
@@ -142,8 +144,12 @@ class ActivitiesContainer extends Component {
 
   render() {
     // debugger
+    if (!this.props.jwt) {
+      return <Redirect push to="/login"/>
+  }
       return (
           <div className='rowC'>
+            <button onClick={() => this.props.logout()}>Log Out</button>
             <NewActivityForm callBack={this.callBack} />
             <br/>
             <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>
@@ -175,6 +181,7 @@ function mapDispatchToProps(dispatch){
       // fetchScores: (jwt) => dispatch(fetchScores(jwt)),
       fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt)),
       createNewActivityPost: (n, d, av, jwt) => dispatch(createNewActivityPost(n, d, av, jwt)),
+      logout: () => dispatch(logout())
       // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }
 }

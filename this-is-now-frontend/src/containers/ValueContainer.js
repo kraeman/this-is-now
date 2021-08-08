@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import ValuesList from '../components/values/ValuesList'
 import {connect} from "react-redux"
+import { logout } from '../actions/index';
 
 import fetchAllValues from '../actions/fetchAllValues';
 
@@ -22,8 +23,12 @@ class ValuesContainer extends Component {
   
 
   render() {
+    if (!this.props.jwt) {
+      return <Redirect push to="/login"/>
+  }
     return (
         <div className='rowC' id='value_container'>
+          <button onClick={() => this.props.logout()}>Log Out</button>
           <NewValueForm/>
           <br/>
           <ValuesList JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} values={this.props.values}/>
@@ -36,7 +41,8 @@ class ValuesContainer extends Component {
 function mapDispatchToProps(dispatch){
   return {
       fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT)),
-      addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT))
+      addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT)),
+      logout: () => dispatch(logout())
   }
 }
 
