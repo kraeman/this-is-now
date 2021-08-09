@@ -1,4 +1,4 @@
 export {addActivity,getReadyToAddActivity, getReadyToStoreActivities, storeActivities, removeActivity, updateActivity, getReadyToStoreScores, storeScores} from "./activities"
 export {addValue, getReadyToDeleteValue, deleteValue, removeValue, updateValue, getReadyToAddValue, getReadyToStoreValues, storeValues} from "./values"
-export {deleteValueFromScores} from "./scores"
-export {logout, deleteValueFromUser, storeToken, storeToken2, getReadyToAddValueToCurrentUser, addValueToCurrentUser, getReadyToStoreToken, addUser, loginUser, getReadyToLoginUser, grtscu, scu, removeValueFromCurrentUser, getReadyToRemoveValueFromCurrentUsersValues} from "./users"
+export {deleteValueFromScores, getReadyToDeleteValueFromScores} from "./scores"
+export {logout, deleteValueFromUser, getReadyToDeleteValueFromUser, storeToken, storeToken2, getReadyToAddValueToCurrentUser, addValueToCurrentUser, getReadyToStoreToken, addUser, loginUser, getReadyToLoginUser, grtscu, scu, removeValueFromCurrentUser, getReadyToRemoveValueFromCurrentUsersValues} from "./users"

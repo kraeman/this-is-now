@@ -1,4 +1,4 @@
-import {GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, LOGIN_USER, LOGOUT, GRTSCU, STORE_TOKEN2, SCU, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER} from "../actions/actionTypes"
+import {GET_READY_TO_DELETE_VALUE_FROM_USER, DELETE_VALUE_FROM_USER, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, LOGIN_USER, LOGOUT, GRTSCU, STORE_TOKEN2, SCU, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER} from "../actions/actionTypes"
 
 export const user = (state = {jwt: null, username: null, value_ids: [], requesting: false}, action) => {
     switch(action.type){
@@ -49,7 +49,22 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 return {
                     ...state,
                     value_ids: [...state.value_ids.filter(value => value !== action.payload)]
-                }        
+                }   
+                
+                
+                case   GET_READY_TO_DELETE_VALUE_FROM_USER:
+            return {
+                ...state,
+                requesting: true
+            }
+
+            case DELETE_VALUE_FROM_USER:
+
+                debugger
+                return {
+                    ...state,
+                    value_ids: [...state.value_ids.filter(value => value !== action.payload)]
+                }
 
         case LOGOUT:
             return {
