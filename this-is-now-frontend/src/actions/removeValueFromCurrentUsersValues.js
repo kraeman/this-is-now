@@ -1,16 +1,16 @@
 // import React, { Component } from 'react';
 // import React from 'react'
 // import  { Redirect } from 'react-router-dom'
-import {addValueToCurrentUser, getReadyToAddValueToCurrentUser} from "./index"
+import {removeValueFromCurrentUser, getReadyToRemoveValueFromCurrentUsersValues} from "./index"
 // import { loginUser } from "./users";
 
 
-export function addValueToCurrentUsersValues(value, CUID, jwt) {
+export function removeValueFromCurrentUsersValues(value, CUID, jwt) {
   debugger
     return (dispatch) => {
-      dispatch(getReadyToAddValueToCurrentUser());
-      fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
-        method: 'POST',
+      dispatch(getReadyToRemoveValueFromCurrentUsersValues());
+      fetch(`http://localhost:3000/users/${CUID}`, {
+        method: 'PATCH',
         headers: {
             accept: 'application/json',
             Authorization: `Bearer ${jwt}`,
@@ -22,7 +22,7 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
         .then(data => {
           debugger
           // get back nothing but if succesful add value to user
-          dispatch(addValueToCurrentUser(data))
+          dispatch(removeValueFromCurrentUser(data))
           // return callBack
         });
 

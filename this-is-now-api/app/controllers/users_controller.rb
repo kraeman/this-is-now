@@ -39,12 +39,27 @@ class UsersController < ApplicationController
 
 
     def update
-        user = User.find(params[:id].to_i)
-        value = Value.find(params["value"]['value']['id'].to_i)
+        # user = User.find(params[:id].to_i)
         # byebug
-        vu = ValueUser.new(value_id: value.id, user_id: user.id)
+        # value = Value.find(params["value"]['value'])
+        # byebug
+        vu = ValueUser.new(value_id: params["value"]['value'], user_id: params[:id].to_i)
         vu.save
         render json: vu, only: [:value_id]
+        # render json: { user: UserSerializer.new(user).serializable_hash}
+    end
+
+    def remove_value
+        # byebug
+        # user = User.find(params[:id].to_i)
+        # byebug
+        # value = Value.find(params["value"]['value'])
+        # byebug
+        vu = ValueUser.find_by(value_id: params["value"]['value'], user_id: params[:id].to_i)
+        if vu.destroy
+        
+            render json: params["value"]['value']
+        end
         # render json: { user: UserSerializer.new(user).serializable_hash}
     end
 

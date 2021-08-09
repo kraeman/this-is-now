@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   post '/users/:id', :to => 'users#update'
   get '/users/:id', :to => 'users#show'
   get '/scores', :to => 'activities#scores'
+  patch '/users/:id', :to => 'users#remove_value'
 end
