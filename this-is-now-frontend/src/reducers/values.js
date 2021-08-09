@@ -35,7 +35,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
             case DELETE_VALUE:
                 debugger
                 return {
-                    values: [[...state.values].filter(value => value.id !== action.patload)],
+                    values: [...state.values].filter(value => value.id !== action.payload),
                     requesting: false
 
                 }
