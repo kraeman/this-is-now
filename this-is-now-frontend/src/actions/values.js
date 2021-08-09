@@ -1,4 +1,4 @@
-import {ADD_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES} from "./actionTypes"
+import {ADD_VALUE, GET_READY_TO_DELETE_VALUE, DELETE_VALUE, GET_READY_TO_ADD_VALUE, REMOVE_VALUE, UPDATE_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES} from "./actionTypes"
 
 export function addValue(value){
     // debugger
@@ -12,6 +12,19 @@ export function removeValue(valueId){
     return {
         type: REMOVE_VALUE,
         payload: valueId
+    }
+}
+
+export function deleteValue(valueId){
+    return {
+        type: DELETE_VALUE,
+        payload: valueId
+    }
+}
+
+export function getReadyToDeleteValue(){
+    return {
+        type: GET_READY_TO_DELETE_VALUE
     }
 }
 

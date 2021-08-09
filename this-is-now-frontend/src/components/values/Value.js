@@ -14,6 +14,13 @@ const Value = (props) => {
         }  
     }
 
+    const conditionallyShowDeleteButton = () => {
+        debugger
+        if(props.valueData.creator_id == props.cuid){
+            return <button onClick={() => props.callBack2(props.valueData.id)}>Delete this value</button>
+        }
+    }
+
 
 
     return (
@@ -21,6 +28,7 @@ const Value = (props) => {
             <br/><br/><br/><br/><br/>
             {props.valueData.name}
             <button onClick={(e) => onAddValue(e) }>Add to your values</button>
+            {conditionallyShowDeleteButton()}
         </div>
     )
 }

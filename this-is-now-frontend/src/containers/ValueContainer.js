@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import ValuesList from '../components/values/ValuesList'
 import {connect} from "react-redux"
 import { addValueToCurrentUser, logout } from '../actions/index';
+import {deleteValueFetch} from '../actions/deleteValue'
 
 import fetchAllValues from '../actions/fetchAllValues';
 
@@ -29,6 +30,10 @@ class ValuesContainer extends Component {
     this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, this.props.jwt)
   }
 
+  callBack2 = (vId) => {
+    this.props.deleteValueFetch(vId, this.props.jwt)
+  }
+
   
 
   render() {
@@ -40,7 +45,7 @@ class ValuesContainer extends Component {
           <button onClick={() => this.props.logout()}>Log Out</button>
           <NewValueForm/>
           <br/>
-          <ValuesList checkIn={this.checkIn} checkOut={this.checkOut} JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} values={this.props.values}/>
+          <ValuesList checkIn={this.checkIn} checkOut={this.checkOut} JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
         </div>
     );
   }
@@ -52,7 +57,8 @@ function mapDispatchToProps(dispatch){
       fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT)),
       addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT)),
       logout: () => dispatch(logout()),
-      removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt))
+      deleteValueFetch: (vid, jwt) => dispatch (deleteValueFetch(vid, jwt)),
+      removeValueFromCurrentUsersValues: (id, jwt) => dispatch(removeValueFromCurrentUsersValues(id, jwt))
   }
 }
 

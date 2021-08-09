@@ -21,13 +21,15 @@ class ValuesController < ApplicationController
     #Check to see if user is owner of value here?
         value = Value.find(value_params[:id])
         value.update(value_params)
-        render json ValueSerializer.new(value)
+        render json: ValueSerializer.new(value)
     end
 
     def destroy
+        # byebug
         #Cascade to other tables where this value exists!
-        value = Value.find(value_params[:id])
+        value = Value.find(params[:id].to_i)
         value.destroy
+        render json: params[:id].to_i
     end
     
     private

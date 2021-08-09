@@ -1,4 +1,4 @@
-import {ADD_VALUE, GET_READY_TO_ADD_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES, REMOVE_VALUE, UPDATE_VALUE} from "../actions/actionTypes"
+import {ADD_VALUE, GET_READY_TO_ADD_VALUE, GET_READY_TO_DELETE_VALUE, GET_READY_TO_STORE_VALUES, STORE_VALUES, REMOVE_VALUE, UPDATE_VALUE, DELETE_VALUE} from "../actions/actionTypes"
 
 export const values = (state = {values: [], requesting: false}, action) => {
     switch(action.type){
@@ -31,6 +31,21 @@ export const values = (state = {values: [], requesting: false}, action) => {
                 values: action.payload.map(value => value.attributes),
                 requesting: false
             }
+
+            case DELETE_VALUE:
+                debugger
+                return {
+                    values: [[...state.values].filter(value => value.id !== action.patload)],
+                    requesting: false
+
+                }
+
+
+                case GET_READY_TO_DELETE_VALUE:
+                    return {
+                        ...state,
+                        requesting: true
+                    }    
         default:
             return state
     }
