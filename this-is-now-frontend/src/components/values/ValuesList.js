@@ -10,7 +10,7 @@ debugger
             
             return <>
                  <br/>
-                <Value jwt={props.JWT} id={value.id} checkIn={props.checkIn} checkOut={props.checkOut} cuid={props.cuid} callBack2={props.callBack2} valueData={value}/>
+                <Value jwt={props.JWT} cuv={props.cuv} id={value.id} checkIn={props.checkIn} checkOut={props.checkOut} cuid={props.cuid} callBack2={props.callBack2} valueData={value}/>
                 <br/>
             </>
         })

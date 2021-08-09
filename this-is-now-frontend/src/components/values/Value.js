@@ -5,10 +5,11 @@ const Value = (props) => {
     
     
     const onAddValue = (e) => {
-        if(e.target.textContent === "Add to your values"){
+        debugger
+        if(!props.cuv.includes(props.id)){
             e.target.textContent = "Remove Value"
             props.checkIn(props.id)
-        }else if(e.target.textContent === "Remove Value")  {
+        }else  {
             e.target.textContent = "Add to your values"
             props.checkOut(props.id)
         }  
@@ -22,12 +23,20 @@ const Value = (props) => {
     }
 
 
+    const conditionalInitialMessage = () => {
+        if(props.cuv.includes(props.id)){
+            return "Remove Value"
+        }else  {
+            return "Add to your values"
+        }
+    }
+
 
     return (
         <div className='individual_value'>
             <br/><br/><br/><br/><br/>
             {props.valueData.name}
-            <button onClick={(e) => onAddValue(e) }>Add to your values</button>
+            <button onClick={(e) => onAddValue(e) }>{conditionalInitialMessage()}</button>
             {conditionallyShowDeleteButton()}
         </div>
     )

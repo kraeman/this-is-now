@@ -1,7 +1,7 @@
 // import React, { Component } from 'react';
 // import React from 'react'
 // import  { Redirect } from 'react-router-dom'
-import {getReadyToDeleteValue, deleteValue} from "./index"
+import {getReadyToDeleteValue, deleteValue, deleteValueFromScores, deleteValueFromUser} from "./index"
 // import { loginUser } from "./users";
 
 
@@ -22,6 +22,8 @@ export function deleteValueFetch(value, jwt) {
           debugger
           // get back nothing but if succesful add value to user
           dispatch(deleteValue(data))
+          dispatch(deleteValueFromScores(data))
+          dispatch(deleteValueFromUser(data))
           // return callBack
         });
 

@@ -27,6 +27,7 @@ class ValuesContainer extends Component {
   }
 
   checkOut = (id) => {
+    debugger
     this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, this.props.jwt)
   }
 
@@ -45,7 +46,7 @@ class ValuesContainer extends Component {
           <button onClick={() => this.props.logout()}>Log Out</button>
           <NewValueForm/>
           <br/>
-          <ValuesList checkIn={this.checkIn} checkOut={this.checkOut} JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+          <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
         </div>
     );
   }
@@ -58,7 +59,7 @@ function mapDispatchToProps(dispatch){
       addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT)),
       logout: () => dispatch(logout()),
       deleteValueFetch: (vid, jwt) => dispatch (deleteValueFetch(vid, jwt)),
-      removeValueFromCurrentUsersValues: (id, jwt) => dispatch(removeValueFromCurrentUsersValues(id, jwt))
+      removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt))
   }
 }
 
@@ -67,7 +68,8 @@ function mapState(currentState){
   return { 
       jwt: currentState.user.jwt,
       values: currentState.values.values,
-      cuid: currentState.user.id
+      cuid: currentState.user.id,
+      cuv: currentState.user.value_ids
    }
 }
 
