@@ -17,7 +17,7 @@ class NewActivityForm extends Component {
     state = {
         name: '',
         description: '',
-        numberOfvaluesAdded: 1,
+        numberOfvaluesAdded: 0,
         associatedValues: []
     }
 
@@ -73,14 +73,16 @@ e.preventDefault()
     handleOnSubmit = (e) => {
         e.preventDefault()
         // debugger
-        this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
-        // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
-        this.setState({
-            name: '',
-            description: '',
-            numberOfvaluesAdded: 1,
-            associatedValues: []
-        })
+        if(this.state.associatedValues.length > 0){
+            this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
+            // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
+            this.setState({
+                name: '',
+                description: '',
+                numberOfvaluesAdded: 0,
+                associatedValues: []
+            })
+        }
         // this.props.callBack()
        
             // this.props.callBack()
@@ -168,6 +170,7 @@ e.preventDefault()
 
 
                                         <label className="col-md-4 control-label">Description</label>
+                                        MUST HAVE AT LEAST ONE VALUE
                                         <div className="col-md-5">
                                         <input
                                             className="form-control"
