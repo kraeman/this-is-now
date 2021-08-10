@@ -6,7 +6,7 @@ const ValuesList = (props) => {
 debugger
     const createValuesFromList = () => {
         debugger
-        return props.values.map(value => {
+        return props.values.sort((a, b) => (a.name > b.name) ? 1 : -1).map(value => {
             
             return <>
                  <br/>
