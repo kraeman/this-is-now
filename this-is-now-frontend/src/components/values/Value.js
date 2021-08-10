@@ -35,8 +35,7 @@ const Value = (props) => {
     return (
         <div className='individual_value'>
             
-            {props.valueData.name}
-            <button onClick={(e) => onAddValue(e) }>{conditionalInitialMessage()}</button>
+            {props.valueData.name}   <button onClick={(e) => onAddValue(e) }>{conditionalInitialMessage()}</button>
             {conditionallyShowDeleteButton()}
         </div>
     )

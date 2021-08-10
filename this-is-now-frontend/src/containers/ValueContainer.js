@@ -43,7 +43,8 @@ class ValuesContainer extends Component {
   }
     return (
         <div className='rowC' id='value_container'>
-          <button onClick={() => this.props.logout()}>Log Out</button>
+          
+          <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <NewValueForm/>
           <br/>
           <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>

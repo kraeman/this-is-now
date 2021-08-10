@@ -17,13 +17,13 @@ debugger
     
 
     return (
-        <>
+        <div >
         <Stack>
             <br/><br/><br/><br/>
-        <Stack gridGap={3} minColumnWidth={100}>
+        <Stack gridGap={3} numColumns={[1, 2, 3, 4]}>
             {createValuesFromList()}
             </Stack></Stack>
-        </>
+        </div>
     )
 }
 
