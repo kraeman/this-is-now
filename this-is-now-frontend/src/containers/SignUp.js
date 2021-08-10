@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom'
-
+import fetchAllActivities from '../actions/fetchAllActivities';
 import {connect} from "react-redux"
 import { createUser } from '../actions/createUser';
 // import {loginUser} from '../actions/loginUser'
@@ -54,6 +54,7 @@ class SignUp extends Component {
 
     render() {
         if (!!this.props.jwt) {
+            this.props.fetchAllActivities(this.props.jwt)
             return <Redirect push to="/activities"/>
         }
     return (
@@ -100,7 +101,8 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW))
+        createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW)),
+        fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
     }
   }
   

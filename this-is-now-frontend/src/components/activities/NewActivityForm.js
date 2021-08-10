@@ -170,7 +170,7 @@ e.preventDefault()
 
 
                                         <label className="col-md-4 control-label">Description</label>
-                                        MUST HAVE AT LEAST ONE VALUE
+                                        
                                         <div className="col-md-5">
                                         <input
                                             className="form-control"
@@ -182,6 +182,8 @@ e.preventDefault()
                                         />
                                         </div>
                                     </div>
+
+                                    MUST HAVE AT LEAST ONE VALUE Associated <br></br>
                                     <button onClick={(e) => this.addAnotherValue(e)}>ADD ANOTHER VALUE</button>
 
                                     {this.makeAssociatedValuesBasedOnNumberAssociated()}

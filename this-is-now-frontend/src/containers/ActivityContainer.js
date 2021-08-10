@@ -132,7 +132,8 @@ class ActivitiesContainer extends Component {
           }
         }
       })
-      return rankedActivities
+      debugger
+      return rankedActivities.sort((a, b) => (a.score > b.score) ? 1 : -1)
   }
   
   
