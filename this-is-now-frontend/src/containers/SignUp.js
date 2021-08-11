@@ -67,7 +67,7 @@ class SignUp extends Component {
 
 
 
-            <Form style={{
+            <Form  style={{
         backgroundColor: 'white',
         // maxWidth: 250,
         borderWidth: '5px',
