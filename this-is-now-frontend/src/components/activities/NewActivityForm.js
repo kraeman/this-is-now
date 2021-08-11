@@ -183,7 +183,7 @@ e.preventDefault()
                                         </div>
                                     </div>
 
-                                    MUST HAVE AT LEAST ONE VALUE Associated <br></br>
+                                    <mark>MUST HAVE AT LEAST ONE VALUE Associated</mark> <br></br>
                                     <button onClick={(e) => this.addAnotherValue(e)}>ADD ANOTHER VALUE</button>
 
                                     {this.makeAssociatedValuesBasedOnNumberAssociated()}

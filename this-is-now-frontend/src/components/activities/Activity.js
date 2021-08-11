@@ -4,10 +4,12 @@ const Activity = (props) => {
 
     
     debugger
+    const id = parseInt(props.id)
     return (
         <div>
-            <br/><br/><br/><br/><br/>
-            Activity: {props.name}......Score: {props.score}
+            <br/>
+            {props.name}......Score: {props.score}
+                  <Link to={`/activities/${id}`}>Check it out!</Link>
         </div>
     )
 }
