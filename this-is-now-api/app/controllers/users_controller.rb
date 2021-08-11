@@ -15,6 +15,7 @@ class UsersController < ApplicationController
             # byebug
             current_user = User.create(username: user_params[:username], password: user_params[:password])
             if current_user.valid?
+                # byebug
                 token = encode_token(user_id: current_user.id)
                 # byebug
                 #EXCLUDE ID FROM SERIALIZER......ASK MATTEO!!!!!

@@ -1,12 +1,13 @@
 // import React, { Component } from 'react';
-import React from 'react'
-import  { Redirect } from 'react-router-dom'
+// import React from 'react'
+// import  { Redirect } from 'react-router-dom'
 import {storeToken2, getReadyToStoreToken, getReadyToLoginUser} from "./index"
-import { loginUser } from "./users";
+// import { loginUser } from "./users";
 
 
 export function createUser(username, password, checkPassword) {
     return (dispatch) => {
+      debugger
       dispatch(getReadyToStoreToken());
       fetch('http://localhost:3000/signup', {
         method: 'POST',
@@ -18,7 +19,7 @@ export function createUser(username, password, checkPassword) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
+          debugger
           //jwt, username, id
           return dispatch(storeToken2(data))
           // return callBack
