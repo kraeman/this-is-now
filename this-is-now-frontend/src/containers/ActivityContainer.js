@@ -149,8 +149,16 @@ class ActivitiesContainer extends Component {
       return <Redirect push to="/login"/>
   }
       return (
-          <div className='rowC'>
-            <button onClick={() => this.props.logout()}>Log Out</button>
+          <div className='rowC' style={{
+            backgroundColor: 'white',
+            // maxWidth: 250,
+            borderWidth: '5px',
+            borderColor:'#aaaaaa', 
+            borderStyle:'solid',
+            
+            
+          }}>
+            <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
             <NewActivityForm callBack={this.callBack} />
             <br/>
             <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>

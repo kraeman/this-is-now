@@ -42,7 +42,15 @@ class ValuesContainer extends Component {
       return <Redirect push to="/login"/>
   }
     return (
-        <div className='rowC' id='value_container'>
+        <div className='rowC' id='value_container' style={{
+          backgroundColor: 'white',
+          // maxWidth: 250,
+          borderWidth: '5px',
+          borderColor:'#aaaaaa', 
+          borderStyle:'solid',
+          
+          
+        }}>
           
           <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <NewValueForm/>
