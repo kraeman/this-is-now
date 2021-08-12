@@ -19,26 +19,26 @@ import '../App.css'
 class ValuesContainer extends Component {
 
   // componentDidMount() {
-  //   this.props.fetchAllValues(this.props.jwt)
+  //   this.props.fetchAllValues(localStorage.getItem('token'))
   // }
   checkIn = (id) => {
     // debugger
-    this.props.addValueToCurrentUsersValues(id, this.props.cuid, this.props.jwt)
+    this.props.addValueToCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
   }
 
   checkOut = (id) => {
     debugger
-    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, this.props.jwt)
+    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
   }
 
   callBack2 = (vId) => {
-    this.props.deleteValueFetch(vId, this.props.jwt)
+    this.props.deleteValueFetch(vId, localStorage.getItem('token'))
   }
 
   
 
   render() {
-    if (!this.props.jwt) {
+    if (!localStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
     return (
@@ -55,7 +55,7 @@ class ValuesContainer extends Component {
           <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <NewValueForm/>
           <br/>
-          <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={this.props.jwt} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+          <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={localStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
         </div>
     );
   }

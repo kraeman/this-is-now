@@ -4,6 +4,12 @@ import { Redirect } from 'react-router-dom'
 import fetchScores from '../actions/fetchScores';
 import fetchAllActivities from '../actions/fetchAllActivities'
 import { createNewActivityPost } from "../actions/createNewActivity";
+import ValuesList from '../components/values/ValuesList'
+import {deleteValueFetch} from '../actions/deleteValue'
+import fetchAllValues from '../actions/fetchAllValues';
+import NewValueForm from '../components/values/NewValueForm'
+import {removeValueFromCurrentUsersValues} from "../actions/removeValueFromCurrentUsersValues"
+import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersValues'
 import { logout } from '../actions/index';
 
 import {fcu} from "../actions/fcu"
@@ -15,110 +21,6 @@ import '../App.css'
 
 
 class ActivitiesContainer extends Component {
-
-
-  // componentDidUpdate() {
-    
-    // const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
-    // const usersValuesIds = []
-    // const usersValues = []
-    // usersValuesObjectWithIdAndType.forEach(object => {
-    //   usersValuesIds.push(object.id)
-    // });
-    // this.props.values.values.forEach(value => {
-    //   usersValuesIds.forEach(valueId => {
-    //     if (value.id === valueId){
-    //       usersValues.push(value)
-    //     }
-    //   })
-    // })
-    // let usersActivitiesWithScores = []
-    // usersValuesIds.forEach(id => {
-    //   this.props.scores.forEach(score => {
-    //     if (score.attributes.value_id == parseInt(id)) {
-          // debugger
-    //       if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
-            // debugger
-    //         usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
-    //       }else{
-    //         usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
-    //       }
-    //     }
-    //   })
-    // })
-    // return usersActivitiesWithScores
-  // }
-  
-  
-  
-  
-  
-  
-  
-  // componentDidUpdate() {
-  //   // debugger
-  //   if(!this.props.requestingCU && !this.props.requestingA && !this.props.requestingS && this.state.requesting && !this.state.submit){
-      
-  //     // debugger
-  //     const calculateScore = () => {
-  //       const usersValuesObjectWithIdAndType = this.props.current_user.current_user_data.username.relationships.values.data
-  //       const usersValuesIds = []
-  //       usersValuesObjectWithIdAndType.forEach(object => {
-  //         usersValuesIds.push(object.id)
-  //       });
-  //       let usersActivitiesWithScores = []
-  //       usersValuesIds.forEach(id => {
-  //         this.props.scores.forEach(score => {
-  //           if (score.attributes.value_id == parseInt(id)) {
-  //             // debugger
-  //             if(usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id )){
-  //               // debugger
-  //               usersActivitiesWithScores.find(activity => activity.id === score.attributes.activity_id ).score += score.attributes.score
-  //             }else{
-  //               usersActivitiesWithScores.push({id: score.attributes.activity_id, score: score.attributes.score, relationships: score.relationships})
-  //             }
-  //           }
-  //         })
-  //       })
-  //       // debugger
-  //       this.setState({
-  //         requesting: false,
-  //         calculatedScores: usersActivitiesWithScores,
-  //         submit: false
-  //       })
-  //     }
-      
-  //     calculateScore()
-  //   }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && !this.state.submit){
-  //     // debugger
-  //     this.setState({
-  //       requesting: false,
-  //       calculatedScores: this.state.calculatedScores,
-  //       submit: true
-  //     })
-  //   }else if(this.props.requestingA && !this.props.requestingCU && !this.props.requestingS && !this.state.requesting && this.state.submit){
-  //     // debugger  
-  //     this.doSomething()
-  //   }else if(this.props.requestingCU && this.props.requestingS && !this.state.requesting && this.state.submit) {
-  //     // debugger
-  //     this.setState({
-  //       requesting: true,
-  //       calculatedScores: this.state.calculatedScores,
-  //       submit: false
-  //     })
-  //   }
-  // }
-  
-  // doSomething = () => {
-  //   // debugger
-  //   Promise.all([this.props.fetchAllActivities(this.props.current_user.jwt), this.props.fetchScores(this.props.current_user.jwt), this.props.fcu(this.props.current_user.jwt, this.props.current_user.current_user_data.username.id)])
-  // }
-  // componentDidMount() {
-  //   // debugger
-  //   this.props.fetchAllActivities(this.props.jwt)
-  //   // fetch activity names and descriptions and ids, value names and ids, scores
-  // }
-  
   
 
   calculateScores = () => {
@@ -139,16 +41,31 @@ class ActivitiesContainer extends Component {
   
   callBack = (name, description, associatedValues) => {
     // debugger
-    this.props.createNewActivityPost(name, description, associatedValues, this.props.current_user.jwt)
+    this.props.createNewActivityPost(name, description, associatedValues, localStorage.getItem('token'))
     
+  }
+
+  checkIn = (id) => {
+    // debugger
+    this.props.addValueToCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
+  }
+
+  checkOut = (id) => {
+    debugger
+    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
+  }
+
+  callBack2 = (vId) => {
+    this.props.deleteValueFetch(vId, localStorage.getItem('token'))
   }
 
   render() {
     // debugger
-    if (!this.props.jwt) {
+    if (!localStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
       return (
+        <>
           <div className='rowC' style={{
             backgroundColor: 'white',
             // maxWidth: 250,
@@ -163,6 +80,23 @@ class ActivitiesContainer extends Component {
             <br/>
             <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>
           </div>
+          <br></br>
+
+<div className='rowC' id='value_container' style={{
+  backgroundColor: 'white',
+  // maxWidth: 250,
+  borderWidth: '5px',
+  borderColor:'#aaaaaa', 
+  borderStyle:'solid',
+  
+  
+}}>
+  
+  <NewValueForm/>
+  <br/>
+  <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={localStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+</div>
+</>
       );
   }
  
@@ -175,13 +109,10 @@ function mapStateToProps(currentState){
     activities: currentState.activities.activities,
     jwt: currentState.user.jwt,
     scores: currentState.scores.scores,
-    current_user: currentState.user
-    // requestingCU: currentState.users.requesting,
-    // requestingA: currentState.activities.requesting,
-    // requestingS: currentState.scores.requesting
-    // requestingActivity: currentState.activities.requesting,
-    // requestingScore: currentState.scores.requesting,
-    // calculatedScores: currentState.scores.calculatedScores
+    current_user: currentState.user,
+    cuid: currentState.user.id,
+    cuv: currentState.user.value_ids
+   
   }
 }
 
@@ -190,7 +121,11 @@ function mapDispatchToProps(dispatch){
       // fetchScores: (jwt) => dispatch(fetchScores(jwt)),
       fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt)),
       createNewActivityPost: (n, d, av, jwt) => dispatch(createNewActivityPost(n, d, av, jwt)),
-      logout: () => dispatch(logout())
+      logout: () => dispatch(logout()),
+      fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT)),
+      addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT)),
+      deleteValueFetch: (vid, jwt) => dispatch (deleteValueFetch(vid, jwt)),
+      removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt))
       // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }
 }

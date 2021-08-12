@@ -74,7 +74,7 @@ e.preventDefault()
         e.preventDefault()
         // debugger
         if(this.state.associatedValues.length > 0){
-            this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
+            this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, localStorage.getItem('token'))
             // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
             this.setState({
                 name: '',

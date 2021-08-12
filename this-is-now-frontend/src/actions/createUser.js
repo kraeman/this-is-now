@@ -21,6 +21,8 @@ export function createUser(username, password, checkPassword) {
         .then(data => {
           debugger
           //jwt, username, id
+          localStorage.setItem('token', data.jwt)
+
           return dispatch(storeToken2(data))
           // return callBack
         });

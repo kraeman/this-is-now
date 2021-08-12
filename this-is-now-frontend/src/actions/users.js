@@ -76,6 +76,7 @@ export function scu(userData){
 }
 
 export function logout(){
+    localStorage.removeItem('token');
     return{
         type: LOGOUT
     }

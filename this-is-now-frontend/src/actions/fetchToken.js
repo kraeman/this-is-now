@@ -12,12 +12,10 @@ export function fetchToken(username, password) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
+          debugger
           //jwt, username, id, value relationship
+          localStorage.setItem('token', data.jwt)
           dispatch(storeToken(data))
         });
     };
-
-
-
   }

@@ -17,10 +17,12 @@ import {connect} from "react-redux"
 import ValuesContainer from './ValueContainer';
 
 
+window.onbeforeunload = () => {
+  localStorage.clear();
+}
 class App extends Component {
 
   
-
 
   
   render() {
@@ -29,6 +31,7 @@ class App extends Component {
         <Router>
           <Navbar/>
           <Switch>
+            <Redirect exact from="/" to="/signup" />
             <Route exact path="/login">
                 <Login/>
             </Route>
