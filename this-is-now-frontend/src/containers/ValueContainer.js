@@ -23,22 +23,22 @@ class ValuesContainer extends Component {
   // }
   checkIn = (id) => {
     // debugger
-    this.props.addValueToCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
+    this.props.addValueToCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
   }
 
   checkOut = (id) => {
     debugger
-    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
+    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
   }
 
   callBack2 = (vId) => {
-    this.props.deleteValueFetch(vId, localStorage.getItem('token'))
+    this.props.deleteValueFetch(vId, sessionStorage.getItem('token'))
   }
 
   
 
   render() {
-    if (!localStorage.getItem('token')) {
+    if (!sessionStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
     return (
@@ -55,7 +55,7 @@ class ValuesContainer extends Component {
           <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <NewValueForm/>
           <br/>
-          <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={localStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+          <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
         </div>
     );
   }

@@ -14,7 +14,7 @@ export function fetchToken(username, password) {
         .then(data => {
           debugger
           //jwt, username, id, value relationship
-          localStorage.setItem('token', data.jwt)
+          sessionStorage.setItem('token', data.jwt)
           dispatch(storeToken(data))
         });
     };

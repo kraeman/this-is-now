@@ -17,9 +17,7 @@ import {connect} from "react-redux"
 import ValuesContainer from './ValueContainer';
 
 
-window.onbeforeunload = () => {
-  localStorage.clear();
-}
+
 class App extends Component {
 
   

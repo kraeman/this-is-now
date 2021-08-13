@@ -57,8 +57,8 @@ class SignUp extends Component {
 
 
     render() {
-        if (!!localStorage.getItem('token')) {
-            this.props.fetchAllActivities(localStorage.getItem('token'))
+        if (!!sessionStorage.getItem('token')) {
+            this.props.fetchAllActivities(sessionStorage.getItem('token'))
             return <Redirect push to="/activities"/>
         }
     return (

@@ -41,27 +41,27 @@ class ActivitiesContainer extends Component {
   
   callBack = (name, description, associatedValues) => {
     // debugger
-    this.props.createNewActivityPost(name, description, associatedValues, localStorage.getItem('token'))
+    this.props.createNewActivityPost(name, description, associatedValues, sessionStorage.getItem('token'))
     
   }
 
   checkIn = (id) => {
     // debugger
-    this.props.addValueToCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
+    this.props.addValueToCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
   }
 
   checkOut = (id) => {
     debugger
-    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, localStorage.getItem('token'))
+    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
   }
 
   callBack2 = (vId) => {
-    this.props.deleteValueFetch(vId, localStorage.getItem('token'))
+    this.props.deleteValueFetch(vId, sessionStorage.getItem('token'))
   }
 
   render() {
     // debugger
-    if (!localStorage.getItem('token')) {
+    if (!sessionStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
       return (
@@ -95,7 +95,7 @@ class ActivitiesContainer extends Component {
   
   <NewValueForm/>
   <br/>
-  <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={localStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+  <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
 </div>
 </>
       );
