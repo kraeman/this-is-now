@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import { createUser } from '../actions/createUser';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import Navbar from "./Navbar"
 // import {loginUser} from '../actions/loginUser'
 
 
@@ -64,8 +65,7 @@ class SignUp extends Component {
 
 <>
 
-
-
+    <Navbar location={"signup"}/>
 
             <Form  style={{
         backgroundColor: 'white',

@@ -5,7 +5,7 @@ import ValuesList from '../components/values/ValuesList'
 import {connect} from "react-redux"
 import { addValueToCurrentUser, logout } from '../actions/index';
 import {deleteValueFetch} from '../actions/deleteValue'
-
+import Navbar from "./Navbar"
 import fetchAllValues from '../actions/fetchAllValues';
 
 import NewValueForm from '../components/values/NewValueForm'

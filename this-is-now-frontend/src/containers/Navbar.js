@@ -13,8 +13,28 @@ const link = {
 
 
 const Navbar = (props) => {
-    return (
-        <div  className="mb-3">
+    if(props.location === "signup" || props.location === "login"){
+        return (
+            <div  className="mb-3">
+                <NavLink
+                to="/login"
+                exact
+                style={link}
+                activeStyle={{
+                    background: 'darkblue'
+                }}
+                >Login Page</NavLink>
+                <NavLink
+                to="/signup"
+                exact
+                style={link}
+                activeStyle={{
+                    background: 'darkblue'
+                }}
+                >Signup Page</NavLink>
+            </div>
+    )}else{
+        return(<div  className="mb-3">
             <NavLink
             to="/activities"
             exact
@@ -24,23 +44,15 @@ const Navbar = (props) => {
             }}
             >Activities</NavLink>
             <NavLink
-            to="/login"
-            exact
-            style={link}
-            activeStyle={{
-                background: 'darkblue'
-            }}
-            >Login Page</NavLink>
-            <NavLink
             to="/signup"
             exact
             style={link}
             activeStyle={{
                 background: 'darkblue'
             }}
-            >Signup Page</NavLink>
-        </div>
-    )
+            >Logout</NavLink>
+        </div>)
+    }
 }
 
 export default Navbar;

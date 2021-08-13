@@ -11,7 +11,7 @@ import NewValueForm from '../components/values/NewValueForm'
 import {removeValueFromCurrentUsersValues} from "../actions/removeValueFromCurrentUsersValues"
 import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersValues'
 import { logout } from '../actions/index';
-
+import Navbar from "./Navbar"
 import {fcu} from "../actions/fcu"
 import ActivitiesList from '../components/activities/ActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
@@ -66,6 +66,7 @@ class ActivitiesContainer extends Component {
   }
       return (
         <>
+        <Navbar location={"activities"}/>
           <div className='rowC' style={{
             backgroundColor: 'white',
             // maxWidth: 250,

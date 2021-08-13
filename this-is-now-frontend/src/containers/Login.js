@@ -4,6 +4,7 @@ import { fetchToken } from '../actions/fetchToken';
 import  { Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Navbar from "./Navbar"
 
 import fetchAllActivities from '../actions/fetchAllActivities';
 
@@ -49,7 +50,8 @@ render() {
 }
   return (
 
-
+<>
+<Navbar location={"login"}/>
 <Form  style={{
         backgroundColor: 'white',
         // maxWidth: 250,
@@ -79,7 +81,7 @@ render() {
 
 
 
-
+</>
 
     // <div className="Login">
     //     <br/>

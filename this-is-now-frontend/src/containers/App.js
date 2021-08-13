@@ -29,7 +29,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Navbar/>
+          {/* <Navbar/> */}
           <Switch>
             <Redirect exact from="/" to="/signup" />
             <Route exact path="/login">
