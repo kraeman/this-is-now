@@ -19,6 +19,9 @@ export function createUser(username, password, checkPassword) {
       })
         .then(response => response.json())
         .then(data => {
+          if(!data.jwt){
+            dispatch({type: "ERROR_B", payload: "data.message"})
+          }else{
           debugger
           //jwt, username, id
           sessionStorage.setItem('token', data.jwt)
@@ -29,7 +32,9 @@ export function createUser(username, password, checkPassword) {
 debugger
           return dispatch(storeToken2(data))
           // return callBack
-        });
+        }}).catch(err => {
+          dispatch({type: "ERROR_F", payload: err})
+        })
 
     };
   }

@@ -1,6 +1,6 @@
 import {GET_READY_TO_DELETE_VALUE_FROM_USER, DELETE_VALUE_FROM_USER, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, LOGIN_USER, LOGOUT, GRTSCU, STORE_TOKEN2, SCU, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER} from "../actions/actionTypes"
 
-export const user = (state = {jwt: null, username: null, value_ids: [], requesting: false}, action) => {
+export const user = (state = {jwt: null, username: null, value_ids: [], requesting: false, error: null}, action) => {
     switch(action.type){
         case GET_READY_TO_STORE_TOKEN:
             return {
@@ -20,7 +20,8 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 username: action.payload.username,
                 id: action.payload.user_id,
                 value_ids: action.payload.value_ids,
-                requesting: false
+                requesting: false,
+                error: null
             }
             case STORE_TOKEN2:
             // debugger
@@ -29,7 +30,8 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 username: action.payload.username,
                 id: action.payload.user_id,
                 value_ids: state.value_ids,
-                requesting: false
+                requesting: false,
+                error: null
             }
             case "REFRESH_USER":
                 return {
@@ -37,7 +39,8 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                     username: action.payload.username,
                     id: action.payload.user_id,
                     value_ids: state.value_ids,
-                    requesting: false
+                    requesting: false,
+                    error: null
                 }
         
         case GET_READY_TO_LOGIN_USER:
@@ -79,7 +82,8 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 jwt: null,
                 username: null,
                 value_ids: [],
-                requesting: false
+                requesting: false,
+                error: null
             }     
         case LOGIN_USER:
             return {
@@ -107,6 +111,34 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 current_user_data: {username: action.payload},
                 requesting: false
             }
+
+
+
+            case "ERROR_B":
+                // debugger
+            return {
+                ...state,
+                error: action.payload
+            }
+
+            case "ERROR_F":
+                // debugger
+                return {
+                    ...state,
+                    error: action.payload
+                }
+
+                case "CLEAR_ERROR":
+                // debugger
+                return {
+                    ...state,
+                    error: null
+                }
+
+
+
+
+
         default:
             return state
     }

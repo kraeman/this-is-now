@@ -20,11 +20,16 @@ export function createNewValuePost(name, creator_id, jwt) {
       })
         .then(response => response.json())
         .then(data => {
+          if(!!data.message){
+            dispatch({type: "ERROR_B", payload: data.message})
+          }else{
           debugger
           //the single new value and its id
           dispatch(addValue(data))
           // return callBack
-        });
+        }}).catch(err => {
+          dispatch({type: "ERROR_F", payload: err})
+        })
 
     };
   }

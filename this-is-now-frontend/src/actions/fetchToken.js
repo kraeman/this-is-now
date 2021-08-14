@@ -13,6 +13,9 @@ export function fetchToken(username, password) {
         .then(response => response.json())
         .then(data => {
           debugger
+          if(!data.jwt){
+            dispatch({type: "ERROR_B", payload: "data.message"})
+          }else{
           //jwt, username, id, value relationship
           sessionStorage.setItem('token', data.jwt)
           sessionStorage.setItem('id', data.user_id)
@@ -20,6 +23,9 @@ export function fetchToken(username, password) {
           sessionStorage.setItem('value_ids', JSON.stringify(data.value_ids))
           debugger
           dispatch(storeToken(data))
-        });
+          }
+        }).catch(err => {
+          dispatch({type: "ERROR_F", payload: err})
+        })
     };
   }

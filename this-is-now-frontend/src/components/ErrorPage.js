@@ -1,8 +1,9 @@
-const ErrorPage = () => {
+const ErrorPage = (props) => {
+    debugger
     return (
-        <>
-            {/* <Navbar /> */}
-            <h3>Uh Oh - The page you were looking for doesn't seem to exist</h3>
+        <>  
+            <h3>Uh Oh - Something went wrong. Please Try Again</h3>
+            <button onClick={() => props.clearError()} >Head Back to previous page</button>
         </>
     )
 }

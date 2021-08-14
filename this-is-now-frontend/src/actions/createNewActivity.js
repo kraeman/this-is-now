@@ -20,12 +20,17 @@ export function createNewActivityPost(name, description, valuesAndScoresArray, j
       })
         .then(response => response.json())
         .then(data => {
+          if(!!data.message){
+            dispatch({type: "ERROR_B", payload: data.message})
+          }else{
           // get back single activity and single score
           debugger
           dispatch(addActivity(jwt, data))
           dispatch(storeScores(data.scores.data))
           // return callBack
-        });
+        }}).catch(err => {
+          dispatch({type: "ERROR_F", payload: err})
+        })
 
     };
   }

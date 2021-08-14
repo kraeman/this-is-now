@@ -21,6 +21,9 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
         .then(response => response.json())
         .then(data => {
           debugger
+          if(!!data.message){
+            dispatch({type: "ERROR_B", payload: data.message})
+          }else{
           // get back nothing but if succesful add value to user
           const array = JSON.parse(sessionStorage.getItem('value_ids'))
           debugger
@@ -30,8 +33,11 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
             debugger
             dispatch(addValueToCurrentUser(data))
           }
+        }
           // return callBack
-        });
+        }).catch(err => {
+          dispatch({type: "ERROR_F", payload: err})
+        })
 
     };
   }

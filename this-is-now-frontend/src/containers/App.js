@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { withRouter } from "react-router";
 import { Redirect } from 'react-router-dom'
 import PrivateRoute from '../components/PrivateRoute'
 import ActivitiesList from '../components/activities/ActivitiesList'
@@ -9,7 +10,10 @@ import ValuesList from '../components/values/ValuesList'
 import Value from '../components/values/Value'
 import SignUp from "./SignUp"
 import '../App.css'
+import {compose} from 'redux'
+import {clearError} from '../actions/users'
 import Login from "./Login"
+import ErrorPage from '../components/ErrorPage'
 import Navbar from "./Navbar"
 import Home from '../components/Home'
 import {connect} from "react-redux"
@@ -21,9 +25,12 @@ import ValuesContainer from './ValueContainer';
 class App extends Component {
 
   
-
   
   render() {
+    debugger
+    if (!!this.props.error) {
+      return <ErrorPage clearError={this.props.clearError} />
+    }
     return (
       <div className="App">
         <Router>
@@ -60,8 +67,19 @@ const mapStateToProps = (currentState) => {
   return {
     isLoggedIn: currentState.isLoggedIn,
     values: currentState.values,
-    activities: currentState.activities
+    activities: currentState.activities,
+    error: currentState.user.error
   }
 }
 
-export default connect(mapStateToProps)(App);
+
+function mapDispatch(dispatch){
+  return { 
+    clearError: () => dispatch(clearError())
+  }
+}
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatch)
+)(App)

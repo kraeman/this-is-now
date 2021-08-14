@@ -21,13 +21,18 @@ export function deleteValueFetch(value, jwt) {
       })
         .then(response => response.json())
         .then(data => {
+          if(!!data.message){
+            dispatch({type: "ERROR_B", payload: data.message})
+          }else{
           debugger
           // get back nothing but if succesful add value to user
           dispatch(deleteValue(data))
           dispatch(deleteValueFromScores(data))
           dispatch(deleteValueFromUser(data))
           // return callBack
-        });
+        }}).catch(err => {
+          dispatch({type: "ERROR_F", payload: err})
+        })
 
     };
   }

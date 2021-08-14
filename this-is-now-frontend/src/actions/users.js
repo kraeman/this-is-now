@@ -110,3 +110,10 @@ export function deleteValueFromUser(vid){
         payload: vid
     }
 }
+
+
+export function clearError(){
+    return {
+        type: "CLEAR_ERROR"
+    }
+}
