@@ -18,8 +18,7 @@ class NewActivityForm extends Component {
         name: '',
         description: '',
         numberOfvaluesAdded: 0,
-        associatedValues: [],
-        remainingValues: this.props.all_values
+        associatedValues: []
     }
 
     checkIn = (e,id, value, score) => {
@@ -29,8 +28,7 @@ class NewActivityForm extends Component {
             name: this.state.name,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: [...this.state.associatedValues, {id: id, score: score}],
-            remainingValues: this.state.remainingValues.filter(value => value.id !== id)
+            associatedValues: [...this.state.associatedValues, {id: id, score: score}]
         })
         
     }
@@ -39,12 +37,12 @@ class NewActivityForm extends Component {
 e.preventDefault()
         // debugger
         // const index = this.state.associatedValues.findIndex((value) => value.id === id)
+        
         this.setState({
             name: this.state.name,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues.filter((value) => value.id !== id),
-            remainingValues: this.state.remainingValues.push
+            associatedValues: this.state.associatedValues.filter((value) => value.id !== id)
         })
         
     }
@@ -63,8 +61,9 @@ e.preventDefault()
         makeAssociatedValuesBasedOnNumberAssociated = () => {
             if(!this.props.requesting){
                 const array = []
+                debugger
                 for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-                    array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.state.remainingValues} index={i}/>)
+                    array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} associatedValues={this.state.associatedValues} index={i}/>)
                 }
                 return array
             }else{
@@ -83,8 +82,7 @@ e.preventDefault()
                 name: '',
                 description: '',
                 numberOfvaluesAdded: 0,
-                associatedValues: [],
-                remainingValues: this.props.all_values
+                associatedValues: []
             })
         }
         // this.props.callBack()
@@ -101,8 +99,7 @@ e.preventDefault()
             name: e.target.value,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues,
-            remainingValues: this.state.remainingValues
+            associatedValues: this.state.associatedValues
         })
     }
 
@@ -112,8 +109,7 @@ e.preventDefault()
             name: this.state.name,
             description: e.target.value,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues,
-            remainingValues: this.state.remainingValues
+            associatedValues: this.state.associatedValues
         })
     }
 
@@ -144,8 +140,7 @@ e.preventDefault()
             name: this.state.name,
             description:this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded + 1,
-            associatedValues: this.state.associatedValues,
-            remainingValues: this.state.remainingValues
+            associatedValues: this.state.associatedValues
         })
     }
 
@@ -153,7 +148,7 @@ e.preventDefault()
 
 
     render() {
-    
+    debugger
     return(
         <div className="container">
             <h3 className="form-title">Create a new Activity or Goal</h3>

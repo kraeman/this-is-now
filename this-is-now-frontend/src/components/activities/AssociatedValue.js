@@ -48,7 +48,9 @@ class AssociatedValue extends Component {
         if(!this.props.all_values || this.props.values === []) {
             return null
         }else{
-            return this.props.all_values.map(value => {
+            const arrayOfUnwantedIds = this.props.associatedValues.map(value => value.id)
+            let arrayOfGood = this.props.all_values.filter(value => !arrayOfUnwantedIds.includes(value.id))
+            return arrayOfGood.map(value => {
                 return <option key={value.id} id={value.id} value={value.id}>{value.name}</option>
             })
         }
