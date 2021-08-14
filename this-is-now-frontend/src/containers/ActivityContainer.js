@@ -10,9 +10,11 @@ import fetchAllValues from '../actions/fetchAllValues';
 import NewValueForm from '../components/values/NewValueForm'
 import {removeValueFromCurrentUsersValues} from "../actions/removeValueFromCurrentUsersValues"
 import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersValues'
+import {putUserInStore} from '../actions/putUserInStore'
 import { logout } from '../actions/index';
 import Navbar from "./Navbar"
 import {fcu} from "../actions/fcu"
+// import fetchAfterRefresh from "../actions/fetchAfterRefresh"
 import ActivitiesList from '../components/activities/ActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
 import '../App.css'
@@ -26,7 +28,7 @@ class ActivitiesContainer extends Component {
   calculateScores = () => {
       const rankedActivities = []
       this.props.scores.forEach(score => {
-        if (this.props.current_user.value_ids.includes(score.attributes.value_id)){
+        if (JSON.parse(sessionStorage.getItem('value_ids')).includes(score.attributes.value_id)){
           if (rankedActivities.find(activity => activity.id == score.attributes.activity_id)){
             rankedActivities.find(activity => activity.id == score.attributes.activity_id).score += score.attributes.score
           }else {
@@ -47,20 +49,28 @@ class ActivitiesContainer extends Component {
 
   checkIn = (id) => {
     // debugger
-    this.props.addValueToCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
+    this.props.addValueToCurrentUsersValues(id, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
   }
 
   checkOut = (id) => {
     debugger
-    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
+    this.props.removeValueFromCurrentUsersValues(id, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
   }
 
   callBack2 = (vId) => {
     this.props.deleteValueFetch(vId, sessionStorage.getItem('token'))
   }
 
+  componentDidMount = () => {
+    if(!!sessionStorage.getItem('token') && !this.props.current_user.username){
+      this.props.putUserInStore(sessionStorage.getItem("token"), sessionStorage.getItem("username"), JSON.parse(sessionStorage.getItem("value_ids")))
+      debugger
+      this.props.fetchAllActivities(sessionStorage.getItem("token"))
+    }
+  }
+
   render() {
-    // debugger
+    debugger
     if (!sessionStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
@@ -95,12 +105,11 @@ class ActivitiesContainer extends Component {
   
   <NewValueForm/>
   <br/>
-  <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+  <ValuesList cuv={JSON.parse(sessionStorage.getItem("value_ids"))} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={sessionStorage.getItem("id")} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
 </div>
 </>
       );
   }
- 
 }
 
 function mapStateToProps(currentState){
@@ -112,8 +121,10 @@ function mapStateToProps(currentState){
     scores: currentState.scores.scores,
     current_user: currentState.user,
     cuid: currentState.user.id,
-    cuv: currentState.user.value_ids
-   
+    cuv: currentState.user.value_ids,
+    requestingValues: currentState.values.requesting,
+    requestingActivities: currentState.activities.requesting,
+    requestingScores: currentState.scores.requesting
   }
 }
 
@@ -126,7 +137,9 @@ function mapDispatchToProps(dispatch){
       fetchAllValues: (JWT) => dispatch(fetchAllValues(JWT)),
       addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT)),
       deleteValueFetch: (vid, jwt) => dispatch (deleteValueFetch(vid, jwt)),
-      removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt))
+      removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt)),
+      putUserInStore: (jwt, username, value_ids) => dispatch(putUserInStore(jwt, username, value_ids))
+      // fetchAfterRefresh: (jwt) => dispatch(fetchAfterRefresh(jwt))
       // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }
 }

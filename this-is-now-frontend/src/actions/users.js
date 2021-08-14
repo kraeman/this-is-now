@@ -77,6 +77,9 @@ export function scu(userData){
 
 export function logout(){
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('value_ids');
+    sessionStorage.removeItem('username');
+    sessionStorage.removeItem('id');
     return{
         type: LOGOUT
     }

@@ -15,6 +15,10 @@ export function fetchToken(username, password) {
           debugger
           //jwt, username, id, value relationship
           sessionStorage.setItem('token', data.jwt)
+          sessionStorage.setItem('id', data.user_id)
+          sessionStorage.setItem('username', data.username)
+          sessionStorage.setItem('value_ids', JSON.stringify(data.value_ids))
+          debugger
           dispatch(storeToken(data))
         });
     };

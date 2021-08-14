@@ -22,7 +22,11 @@ export function createUser(username, password, checkPassword) {
           debugger
           //jwt, username, id
           sessionStorage.setItem('token', data.jwt)
-
+          sessionStorage.setItem('id', data.user_id)
+          sessionStorage.setItem('username', data.username)
+          sessionStorage.setItem('value_ids', JSON.stringify([]))
+          
+debugger
           return dispatch(storeToken2(data))
           // return callBack
         });

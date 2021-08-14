@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   get '/scores', :to => 'activities#scores'
   patch '/users/:id', :to => 'users#remove_value'
   delete'/values/:id', :to => "values#destroy"
+
 end

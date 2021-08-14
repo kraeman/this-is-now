@@ -31,6 +31,14 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 value_ids: state.value_ids,
                 requesting: false
             }
+            case "REFRESH_USER":
+                return {
+                    jwt: action.payload.token,
+                    username: action.payload.username,
+                    id: action.payload.user_id,
+                    value_ids: state.value_ids,
+                    requesting: false
+                }
         
         case GET_READY_TO_LOGIN_USER:
             return {

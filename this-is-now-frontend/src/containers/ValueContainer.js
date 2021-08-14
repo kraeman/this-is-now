@@ -23,12 +23,12 @@ class ValuesContainer extends Component {
   // }
   checkIn = (id) => {
     // debugger
-    this.props.addValueToCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
+    this.props.addValueToCurrentUsersValues(id, sessionStorage.getItem("id"), sessionStorage.getItem('token'))
   }
 
   checkOut = (id) => {
     debugger
-    this.props.removeValueFromCurrentUsersValues(id, this.props.cuid, sessionStorage.getItem('token'))
+    this.props.removeValueFromCurrentUsersValues(id, sessionStorage.getItem("id"), sessionStorage.getItem('token'))
   }
 
   callBack2 = (vId) => {
@@ -55,7 +55,7 @@ class ValuesContainer extends Component {
           <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <NewValueForm/>
           <br/>
-          <ValuesList cuv={this.props.cuv} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={this.props.cuid} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+          <ValuesList cuv={JSON.parse(sessionStorage.getItem("value_ids"))} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={sessionStorage.getItem("id")} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
         </div>
     );
   }

@@ -21,8 +21,15 @@ export function removeValueFromCurrentUsersValues(value, CUID, jwt) {
         .then(response => response.json())
         .then(data => {
           debugger
+          const array = JSON.parse(sessionStorage.getItem('value_ids'))
+          debugger
+          if (array){
+            const array2 = array.filter(id => id !== data)
+            sessionStorage.setItem('value_ids', JSON.stringify(array2))
+            
+            dispatch(removeValueFromCurrentUser(data))
+          }
           // get back nothing but if succesful add value to user
-          dispatch(removeValueFromCurrentUser(data))
           // return callBack
         });
 

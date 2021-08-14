@@ -12,6 +12,7 @@ class ActivitiesController < ApplicationController
         # render json: {{activities: activities, only: [:name, :description, :id, :creator_id]}, {values: values, only: [:name, :id, :creator_id]}, {scores: scores, only: [:score, :value_id, :activity_id]}}
     end
 
+
     def scores
         scores = ValueActivity.all
         render json: ValueActivitiesSerializer.new(scores).serializable_hash

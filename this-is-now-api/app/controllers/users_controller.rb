@@ -55,8 +55,8 @@ class UsersController < ApplicationController
         # user = User.find(params[:id].to_i)
         # byebug
         # value = Value.find(params["value"]['value'])
-        # byebug
         vu = ValueUser.find_by(value_id: params["value"]['value'], user_id: params[:id].to_i)
+        # byebug
         if vu.destroy
         
             render json: params["value"]['value']

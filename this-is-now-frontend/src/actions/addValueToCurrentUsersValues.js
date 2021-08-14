@@ -22,7 +22,14 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
         .then(data => {
           debugger
           // get back nothing but if succesful add value to user
-          dispatch(addValueToCurrentUser(data))
+          const array = JSON.parse(sessionStorage.getItem('value_ids'))
+          debugger
+          if (array){
+            array.push(data.value_id)
+            sessionStorage.setItem('value_ids', JSON.stringify(array))
+            debugger
+            dispatch(addValueToCurrentUser(data))
+          }
           // return callBack
         });
 

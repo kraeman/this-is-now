@@ -6,7 +6,7 @@ const Value = (props) => {
     
     const onAddValue = (e) => {
         debugger
-        if(!props.cuv.includes(props.id)){
+        if(!props.cuv || !props.cuv.includes(props.id)){
             e.target.textContent = "Remove Value"
             props.checkIn(props.id)
         }else  {
@@ -24,7 +24,7 @@ const Value = (props) => {
 
 
     const conditionalInitialMessage = () => {
-        if(props.cuv.includes(props.id)){
+        if(props.cuv && props.cuv.includes(props.id)){
             return "Remove Value"
         }else  {
             return "Add to your values"
