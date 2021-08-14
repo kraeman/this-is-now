@@ -23,7 +23,7 @@ const Navbar = (props) => {
                 activeStyle={{
                     background: 'darkblue'
                 }}
-                >Login Page</NavLink>
+                >Login</NavLink>
                 <NavLink
                 to="/signup"
                 exact
@@ -31,7 +31,7 @@ const Navbar = (props) => {
                 activeStyle={{
                     background: 'darkblue'
                 }}
-                >Signup Page</NavLink>
+                >Signup</NavLink>
             </div>
     )}else{
         return(<div  className="mb-3">

@@ -76,7 +76,7 @@ class ActivitiesContainer extends Component {
   }
       return (
         <>
-        <Navbar location={"activities"}/>
+        {/* <Navbar location={"activities"}/> */}
           <div className='rowC' style={{
             backgroundColor: 'white',
             // maxWidth: 250,

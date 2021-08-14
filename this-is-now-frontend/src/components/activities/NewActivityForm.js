@@ -18,7 +18,8 @@ class NewActivityForm extends Component {
         name: '',
         description: '',
         numberOfvaluesAdded: 0,
-        associatedValues: []
+        associatedValues: [],
+        remainingValues: this.props.all_values
     }
 
     checkIn = (e,id, value, score) => {
@@ -28,7 +29,8 @@ class NewActivityForm extends Component {
             name: this.state.name,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: [...this.state.associatedValues, {id: id, score: score}]
+            associatedValues: [...this.state.associatedValues, {id: id, score: score}],
+            remainingValues: this.state.remainingValues.filter(value => value.id !== id)
         })
         
     }
@@ -41,7 +43,8 @@ e.preventDefault()
             name: this.state.name,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues.filter((value) => value.id !== id)
+            associatedValues: this.state.associatedValues.filter((value) => value.id !== id),
+            remainingValues: this.state.remainingValues.push
         })
         
     }
@@ -61,7 +64,7 @@ e.preventDefault()
             if(!this.props.requesting){
                 const array = []
                 for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-                    array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} index={i}/>)
+                    array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.state.remainingValues} index={i}/>)
                 }
                 return array
             }else{
@@ -80,7 +83,8 @@ e.preventDefault()
                 name: '',
                 description: '',
                 numberOfvaluesAdded: 0,
-                associatedValues: []
+                associatedValues: [],
+                remainingValues: this.props.all_values
             })
         }
         // this.props.callBack()
@@ -97,7 +101,8 @@ e.preventDefault()
             name: e.target.value,
             description: this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues
+            associatedValues: this.state.associatedValues,
+            remainingValues: this.state.remainingValues
         })
     }
 
@@ -107,7 +112,8 @@ e.preventDefault()
             name: this.state.name,
             description: e.target.value,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded,
-            associatedValues: this.state.associatedValues
+            associatedValues: this.state.associatedValues,
+            remainingValues: this.state.remainingValues
         })
     }
 
@@ -138,7 +144,8 @@ e.preventDefault()
             name: this.state.name,
             description:this.state.description,
             numberOfvaluesAdded: this.state.numberOfvaluesAdded + 1,
-            associatedValues: this.state.associatedValues
+            associatedValues: this.state.associatedValues,
+            remainingValues: this.state.remainingValues
         })
     }
 
