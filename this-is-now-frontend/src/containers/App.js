@@ -16,6 +16,7 @@ import Login from "./Login"
 import ErrorPage from '../components/ErrorPage'
 import Navbar from "./Navbar"
 import Home from '../components/Home'
+import ActivityShow from '../components/activities/ActivityShow'
 import {connect} from "react-redux"
 // import '../App.css'
 import ValuesContainer from './ValueContainer';
@@ -50,10 +51,14 @@ class App extends Component {
                 <ActivityContainer items={this.props.activities}/>
             </Route>
             {/* <Route items={this.props.activities} component={ActivitiesList} path="/activities" exact /> */}
-            <Route items={this.props.values} component={ValuesContainer} path="/values" exact />
+            {/* <Route items={this.props.values} component={ValuesContainer} path="/values" exact /> */}
 
             <Route items={this.props.values} component={Value} path="/values/:valueId" exact />
-            <Route items={this.props.activities} component={Activity} path="/activities/:activityId" exact />
+            <Route  render={(props) => (
+              <ActivityShow props={props} activity={this.props.activities}/>
+            )
+
+            } path="/activities/:activityId" exact />
             
             {/* <Route component={Home} path="/" exact /> */}
           </Switch>
@@ -67,7 +72,7 @@ const mapStateToProps = (currentState) => {
   return {
     isLoggedIn: currentState.isLoggedIn,
     values: currentState.values,
-    activities: currentState.activities,
+    activities: currentState.activities.activities,
     error: currentState.user.error
   }
 }

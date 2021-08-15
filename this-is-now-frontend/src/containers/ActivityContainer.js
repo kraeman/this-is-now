@@ -14,6 +14,7 @@ import {putUserInStore} from '../actions/putUserInStore'
 import { logout } from '../actions/index';
 import Navbar from "./Navbar"
 import {fcu} from "../actions/fcu"
+import NRAL from '../components/activities/NRAL';
 // import fetchAfterRefresh from "../actions/fetchAfterRefresh"
 import ActivitiesList from '../components/activities/ActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
@@ -90,6 +91,8 @@ class ActivitiesContainer extends Component {
             <NewActivityForm callBack={this.callBack} />
             <br/>
             <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>
+            <br/>
+            <NRAL activities={this.props.activities}/>
           </div>
           <br></br>
 
