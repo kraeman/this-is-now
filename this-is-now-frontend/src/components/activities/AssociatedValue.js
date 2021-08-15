@@ -58,7 +58,8 @@ class AssociatedValue extends Component {
     }
 
     onSubmit = (e) => {
-        // debugger
+        debugger
+        
         if(e.target.textContent === "Add Value" && this.state.id !== null){
             this.setState({
                 name: this.state.name,
@@ -93,7 +94,7 @@ class AssociatedValue extends Component {
             <label for="values">Add a Value</label>
 
             <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
-                <option value={null}>Choose a value</option>
+                <option value={null}>{this.state.name}</option>
                 {this.makeOptionForEveryValue()}
             </select>
 
