@@ -117,3 +117,10 @@ export function clearError(){
         type: "CLEAR_ERROR"
     }
 }
+
+export function setCurrentUsersValues(data){
+    return {
+        type: "SET_CUV",
+        payload: data
+    }
+}

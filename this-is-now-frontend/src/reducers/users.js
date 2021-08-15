@@ -135,6 +135,13 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                     error: null
                 }
 
+                case "SET_CUV":
+                debugger
+                return {
+                    ...state,
+                    value_ids: action.payload
+                }
+
 
 
 

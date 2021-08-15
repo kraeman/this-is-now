@@ -31,20 +31,7 @@ class ActivitiesContainer extends Component {
   }
   
 
-  calculateScores = () => {
-      const rankedActivities = []
-      this.props.scores.forEach(score => {
-        if (JSON.parse(sessionStorage.getItem('value_ids')).includes(score.attributes.value_id)){
-          if (rankedActivities.find(activity => activity.id == score.attributes.activity_id)){
-            rankedActivities.find(activity => activity.id == score.attributes.activity_id).score += score.attributes.score
-          }else {
-            rankedActivities.push({id: score.attributes.activity_id, score: score.attributes.score})
-          }
-        }
-      })
-      debugger
-      return rankedActivities.sort((a, b) => (a.score > b.score) ? -1 : 1)
-  }
+  
   
   
   callBack = (name, description, associatedValues) => {
@@ -90,6 +77,24 @@ class ActivitiesContainer extends Component {
       this.props.fetchAllActivities(sessionStorage.getItem("token"))
     }
   }
+
+
+  calculateScores = () => {
+    const rankedActivities = []
+    this.props.scores.forEach(score => {
+      if (JSON.parse(sessionStorage.getItem('value_ids')).includes(score.attributes.value_id)){
+        if (rankedActivities.find(activity => activity.id == score.attributes.activity_id)){
+          rankedActivities.find(activity => activity.id == score.attributes.activity_id).score += score.attributes.score
+        }else {
+          rankedActivities.push({id: score.attributes.activity_id, score: score.attributes.score})
+        }
+      }
+    })
+    debugger
+    return rankedActivities.sort((a, b) => (a.score > b.score) ? -1 : 1)
+}
+
+
 
   render() {
     debugger

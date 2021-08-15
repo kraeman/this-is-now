@@ -17,6 +17,7 @@ import ErrorPage from '../components/ErrorPage'
 import Navbar from "./Navbar"
 import Home from '../components/Home'
 import ActivityShow from '../components/activities/ActivityShow'
+import ActivityEdit from '../components/activities/ActivityEdit'
 import {connect} from "react-redux"
 // import '../App.css'
 import ValuesContainer from './ValueContainer';
@@ -59,6 +60,14 @@ class App extends Component {
             )
 
             } path="/activities/:activityId" exact />
+
+
+            <Route  render={(props) => (
+              <ActivityEdit props={props} activity={this.props.activities}/>
+            )
+
+            } path="/activities/:activityId/edit" exact />
+
             
             {/* <Route component={Home} path="/" exact /> */}
           </Switch>

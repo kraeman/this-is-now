@@ -32,7 +32,7 @@ export function messWithUsersValues(value, CUID, jwt) {
             
             sessionStorage.setItem('value_ids', JSON.stringify(data))
             debugger
-            // dispatch(setCurrentUsersValues(data))
+            dispatch(setCurrentUsersValues(data))
         //   }
         }
           // return callBack
