@@ -51,7 +51,7 @@ class AssociatedValue extends Component {
             const arrayOfUnwantedIds = this.props.associatedValues.map(value => value.id)
             let arrayOfGood = this.props.all_values.filter(value => !arrayOfUnwantedIds.includes(value.id))
             return arrayOfGood.map(value => {
-                return <option key={value.id} id={value.id} value={value.id}>{value.name}</option>
+                return <option selected={this.state.id === value.id} key={value.id} id={value.id} value={value.id}>{value.name}</option>
             })
         }
           
@@ -86,6 +86,14 @@ class AssociatedValue extends Component {
             this.props.checkOut(e, this.state.id, this.state.name, this.state.score)
         }  
     }
+
+    conditioned = () => {
+        if(this.state.checkedIn){
+            return this.state.name
+        }else{
+            return ""
+        }
+    }
     
     render() {
     
@@ -94,7 +102,7 @@ class AssociatedValue extends Component {
             <label for="values">Add a Value</label>
 
             <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
-                <option value={null}>{this.state.name}</option>
+                <option value={null}>{this.conditioned()}</option>
                 {this.makeOptionForEveryValue()}
             </select>
 

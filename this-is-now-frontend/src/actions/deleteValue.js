@@ -25,7 +25,11 @@ export function deleteValueFetch(value, jwt) {
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
           debugger
+          const array = JSON.parse(sessionStorage.getItem('value_ids'))
+          const newArray = array.filter(vid => vid !== data)
           // get back nothing but if succesful add value to user
+          sessionStorage.setItem('value_ids', JSON.stringify(newArray))
+
           dispatch(deleteValue(data))
           dispatch(deleteValueFromScores(data))
           dispatch(deleteValueFromUser(data))

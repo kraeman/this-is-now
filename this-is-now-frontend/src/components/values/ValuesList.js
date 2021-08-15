@@ -4,6 +4,13 @@ import {Stack} from "stack-styled"
 
 const ValuesList = (props) => {
     
+    const conditionallyShowDeleteButton = (value) => {
+        debugger
+        if(value.creator_id == props.cuid){
+            return <button onClick={() => props.callBack2(value.id)}>Delete this value</button>
+        }
+    }
+
 debugger
     const createValuesFromList = () => {
         debugger
@@ -12,6 +19,7 @@ debugger
             return <div>
                         <input onChange={(e) => props.callBack4(e, value.id)} type="checkbox" checked={props.cuv.includes(value.id)}  name={`${value.id}`} value={value.id}/>
                         <label for={`${value.id}`}> {value.name}</label><br></br>
+                        {conditionallyShowDeleteButton(value)}
                     {/* <Value jwt={props.JWT} cuv={props.cuv} id={value.id} checkIn={props.checkIn} checkOut={props.checkOut} cuid={props.cuid} callBack2={props.callBack2} valueData={value}/> */}
                    </div>
         })
