@@ -12,6 +12,7 @@ import {removeValueFromCurrentUsersValues} from "../actions/removeValueFromCurre
 import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersValues'
 import {putUserInStore} from '../actions/putUserInStore'
 import { logout } from '../actions/index';
+import { messWithUsersValues } from '../actions/messWithUsersValues';
 import Navbar from "./Navbar"
 import {fcu} from "../actions/fcu"
 import NRAL from '../components/activities/NRAL';
@@ -24,6 +25,10 @@ import '../App.css'
 
 
 class ActivitiesContainer extends Component {
+
+  state = {
+    associatedValues: JSON.parse(sessionStorage.getItem('value_ids'))
+  }
   
 
   calculateScores = () => {
@@ -62,6 +67,22 @@ class ActivitiesContainer extends Component {
     this.props.deleteValueFetch(vId, sessionStorage.getItem('token'))
   }
 
+  callBack3 = () => {
+    this.props.messWithUsersValues(this.state.associatedValues, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
+    // sessionStorage.setItem('value_ids', JSON.stringify(this.state.associatedValues))
+  }
+  
+  callBack4 = (e, vId) => {
+    if(!this.state.associatedValues.includes(vId)){
+      this.setState({
+        associatedValues: [...this.state.associatedValues, vId]
+      })
+    }else {
+      this.setState({
+        associatedValues: this.state.associatedValues.filter(id => id !== vId)
+      })
+    }
+  }
   componentDidMount = () => {
     if(!!sessionStorage.getItem('token') && !this.props.current_user.username){
       this.props.putUserInStore(sessionStorage.getItem("token"), sessionStorage.getItem("username"), JSON.parse(sessionStorage.getItem("value_ids")))
@@ -107,8 +128,8 @@ class ActivitiesContainer extends Component {
 }}>
   
   <NewValueForm/>
-  <br/>
-  <ValuesList cuv={JSON.parse(sessionStorage.getItem("value_ids"))} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={sessionStorage.getItem("id")} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+  <br/><br/>
+  <ValuesList callBack4={this.callBack4} callBack3={this.callBack3} cuv={this.state.associatedValues} checkIn={this.checkIn} checkOut={this.checkOut} JWT={sessionStorage.getItem('token')} cuid={sessionStorage.getItem("id")} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
 </div>
 </>
       );
@@ -141,7 +162,8 @@ function mapDispatchToProps(dispatch){
       addValueToCurrentUsersValues: (value, cuid, JWT) => dispatch(addValueToCurrentUsersValues(value, cuid, JWT)),
       deleteValueFetch: (vid, jwt) => dispatch (deleteValueFetch(vid, jwt)),
       removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt)),
-      putUserInStore: (jwt, username, value_ids) => dispatch(putUserInStore(jwt, username, value_ids))
+      putUserInStore: (jwt, username, value_ids) => dispatch(putUserInStore(jwt, username, value_ids)),
+      messWithUsersValues: (values, uid, jwt) => dispatch(messWithUsersValues(values, uid, jwt))
       // fetchAfterRefresh: (jwt) => dispatch(fetchAfterRefresh(jwt))
       // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }

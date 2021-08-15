@@ -12,12 +12,12 @@ class UsersController < ApplicationController
 
     def create
         if user_params[:password] == user_params[:checkPassword]
-            # byebug
+            # 
             current_user = User.create(username: user_params[:username], password: user_params[:password])
             if current_user.valid?
-                # byebug
+                # 
                 token = encode_token(user_id: current_user.id)
-                # byebug
+                # 
                 #EXCLUDE ID FROM SERIALIZER......ASK MATTEO!!!!!
                 render json: { username: current_user.username, user_id: current_user.id, jwt: token }, status: :created
             else
@@ -41,28 +41,38 @@ class UsersController < ApplicationController
 
     def update
         # user = User.find(params[:id].to_i)
-        # byebug
+        # 
         # value = Value.find(params["value"]['value'])
-        # byebug
-        vu = ValueUser.new(value_id: params["value"]['value'], user_id: params[:id].to_i)
-        vu.save
-        render json: vu, only: [:value_id]
+        # 
+        user = User.find(decoded_token()[0]["user_id"])
+        
+        user.values.destroy_all
+        params["value"]['value'].each do |vid|
+            
+            ValueUser.create(value_id: vid, user_id: user.id)
+            
+        end
+        array = User.find(user.id).values.map do |value|
+            value.id
+        end
+        
+        render json: array
         # render json: { user: UserSerializer.new(user).serializable_hash}
     end
 
-    def remove_value
-        # byebug
-        # user = User.find(params[:id].to_i)
-        # byebug
-        # value = Value.find(params["value"]['value'])
-        vu = ValueUser.find_by(value_id: params["value"]['value'], user_id: params[:id].to_i)
-        # byebug
-        if vu.destroy
+    # def remove_value
+    #     # 
+    #     # user = User.find(params[:id].to_i)
+    #     # 
+    #     # value = Value.find(params["value"]['value'])
+    #     vu = ValueUser.find_by(value_id: params["value"]['value'], user_id: params[:id].to_i)
+    #     # 
+    #     if vu.destroy
         
-            render json: params["value"]['value']
-        end
-        # render json: { user: UserSerializer.new(user).serializable_hash}
-    end
+    #         render json: params["value"]['value']
+    #     end
+    #     # render json: { user: UserSerializer.new(user).serializable_hash}
+    # end
 
     
     private
