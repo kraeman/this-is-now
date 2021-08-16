@@ -3,7 +3,7 @@ import {ADD_VALUE, GET_READY_TO_ADD_VALUE, GET_READY_TO_DELETE_VALUE, GET_READY_
 export const values = (state = {values: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_VALUE:
-            debugger
+            
             return {
                 values: [...state.values, action.payload],
                 requesting: false
@@ -19,13 +19,13 @@ export const values = (state = {values: [], requesting: false}, action) => {
                 requesting: true
             }   
         case GET_READY_TO_STORE_VALUES:
-            // debugger
+            // 
             return {
                 ...state,
                 requesting: true
             }
         case STORE_VALUES:
-            debugger
+            
             
             return {
                 values: action.payload.map(value => value.attributes),
@@ -33,7 +33,7 @@ export const values = (state = {values: [], requesting: false}, action) => {
             }
 
             case DELETE_VALUE:
-                debugger
+                
                 return {
                     values: [...state.values].filter(value => value.id !== action.payload),
                     requesting: false

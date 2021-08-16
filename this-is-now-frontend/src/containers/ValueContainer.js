@@ -22,12 +22,12 @@ class ValuesContainer extends Component {
   //   this.props.fetchAllValues(localStorage.getItem('token'))
   // }
   checkIn = (id) => {
-    // debugger
+    // 
     this.props.addValueToCurrentUsersValues(id, sessionStorage.getItem("id"), sessionStorage.getItem('token'))
   }
 
   checkOut = (id) => {
-    debugger
+    
     this.props.removeValueFromCurrentUsersValues(id, sessionStorage.getItem("id"), sessionStorage.getItem('token'))
   }
 
@@ -73,7 +73,7 @@ function mapDispatchToProps(dispatch){
 }
 
 function mapState(currentState){
-  debugger
+  
   return { 
       jwt: currentState.user.jwt,
       values: currentState.values.values,

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Activity = (props) => {
 
     
-    debugger
+    
     const id = parseInt(props.id)
     return (
         <div>

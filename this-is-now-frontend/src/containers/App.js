@@ -29,7 +29,7 @@ class App extends Component {
   
   
   render() {
-    debugger
+    
     if (!!this.props.error) {
       return <ErrorPage clearError={this.props.clearError} />
     }

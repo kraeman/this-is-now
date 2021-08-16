@@ -12,7 +12,7 @@ export function fetchToken(username, password) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          
           if(!data.jwt){
             dispatch({type: "ERROR_B", payload: "data.message"})
           }else{
@@ -21,7 +21,7 @@ export function fetchToken(username, password) {
           sessionStorage.setItem('id', data.user_id)
           sessionStorage.setItem('username', data.username)
           sessionStorage.setItem('value_ids', JSON.stringify(data.value_ids))
-          debugger
+          
           dispatch(storeToken(data))
           }
         }).catch(err => {

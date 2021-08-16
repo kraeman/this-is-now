@@ -1,31 +1,30 @@
 // import React, { Component } from 'react';
-import React from 'react'
-import  { Redirect } from 'react-router-dom'
-import {addValue, getReadyToAddValue} from "./index"
+// import React from 'react'
+// import  { Redirect } from 'react-router-dom'
+import {getReadyToDeleteActivity, deleteActivity} from "./activities"
 // import { loginUser } from "./users";
 
 
-export function createNewValuePost(name, creator_id, jwt) {
+export function deleteA(aid) {
+  
     return (dispatch) => {
+      dispatch(getReadyToDeleteActivity());
       
-      dispatch(getReadyToAddValue());
-      fetch('http://localhost:3000/values', {
-        method: 'POST',
+      fetch(`http://localhost:3000/activities/${aid}`, {
+        method: 'DELETE',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
             "Content-Type": 'application/json'
-        },
-        body: JSON.stringify({value: {name, creator_id}})
+        }
       })
         .then(response => response.json())
         .then(data => {
           if(!!data.message){
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
-          
-          //the single new value and its id
-          dispatch(addValue(data))
+
+          dispatch(deleteActivity(data))
           // return callBack
         }}).catch(err => {
           dispatch({type: "ERROR_F", payload: err})

@@ -21,7 +21,7 @@ class AssociatedValue extends Component {
 
     handleOnNameChange = (e) => {
         const theValue = this.props.all_values.find(value => value.id == e.target.value)
-        debugger
+        
         this.setState({
             name: theValue.name,
             score: this.state.score,
@@ -29,7 +29,7 @@ class AssociatedValue extends Component {
             id: theValue.id
             // buttonText: this.state.buttonText
         })
-        // debugger
+        // 
     }
 
 
@@ -44,7 +44,7 @@ class AssociatedValue extends Component {
     }
     makeOptionForEveryValue = () => {
         //DONT LET CHOSEN VALUES COME UP IN NEXT LIST
-        // debugger
+        // 
         if(!this.props.all_values || this.props.values === []) {
             return null
         }else{
@@ -58,7 +58,7 @@ class AssociatedValue extends Component {
     }
 
     onSubmit = (e) => {
-        debugger
+        
         
         if(e.target.textContent === "Add Value" && this.state.id !== null){
             this.setState({
@@ -69,7 +69,7 @@ class AssociatedValue extends Component {
             })
             e.target.textContent = "Remove Value"
             // e.target.disabled = true
-            // debugger
+            // 
             this.props.checkIn(e, this.state.id, this.state.name, this.state.score)
             //should i reset state herw???
         }else if(e.target.textContent === "Remove Value")  {
@@ -81,7 +81,7 @@ class AssociatedValue extends Component {
             })
             e.target.textContent = "Add Value"
             // e.target.disabled = true
-            // debugger
+            // 
             //SShould i reset state here?
             this.props.checkOut(e, this.state.id, this.state.name, this.state.score)
         }  

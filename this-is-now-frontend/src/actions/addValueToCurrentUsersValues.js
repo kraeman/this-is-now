@@ -6,7 +6,7 @@ import {addValueToCurrentUser, getReadyToAddValueToCurrentUser} from "./index"
 
 
 export function addValueToCurrentUsersValues(value, CUID, jwt) {
-  debugger
+  
     return (dispatch) => {
       dispatch(getReadyToAddValueToCurrentUser());
       fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
@@ -20,17 +20,17 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          debugger
+          
           if(!!data.message){
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
           // get back nothing but if succesful add value to user
           const array = JSON.parse(sessionStorage.getItem('value_ids'))
-          debugger
+          
           if (array){
             array.push(data.value_id)
             sessionStorage.setItem('value_ids', JSON.stringify(array))
-            debugger
+            
             dispatch(addValueToCurrentUser(data))
           }
         }

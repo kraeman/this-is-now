@@ -6,7 +6,7 @@ import {getReadyToDeleteValue, getReadyToDeleteValueFromUser, getReadyToDeleteVa
 
 
 export function deleteValueFetch(value, jwt) {
-  debugger
+  
     return (dispatch) => {
       dispatch(getReadyToDeleteValue());
       dispatch(getReadyToDeleteValueFromScores())
@@ -24,7 +24,7 @@ export function deleteValueFetch(value, jwt) {
           if(!!data.message){
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
-          debugger
+          
           const array = JSON.parse(sessionStorage.getItem('value_ids'))
           const newArray = array.filter(vid => vid !== data)
           // get back nothing but if succesful add value to user

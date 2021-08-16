@@ -13,6 +13,7 @@ import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersVal
 import {putUserInStore} from '../actions/putUserInStore'
 import { logout } from '../actions/index';
 import { messWithUsersValues } from '../actions/messWithUsersValues';
+import {deleteA} from '../actions/deleteA'
 import Navbar from "./Navbar"
 import {fcu} from "../actions/fcu"
 import NRAL from '../components/activities/NRAL';
@@ -35,18 +36,18 @@ class ActivitiesContainer extends Component {
   
   
   callBack = (name, description, associatedValues) => {
-    // debugger
+    // 
     this.props.createNewActivityPost(name, description, associatedValues, sessionStorage.getItem('token'))
     
   }
 
   checkIn = (id) => {
-    // debugger
+    // 
     this.props.addValueToCurrentUsersValues(id, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
   }
 
   checkOut = (id) => {
-    debugger
+    
     this.props.removeValueFromCurrentUsersValues(id, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
   }
 
@@ -73,7 +74,7 @@ class ActivitiesContainer extends Component {
   componentDidMount = () => {
     if(!!sessionStorage.getItem('token') && !this.props.current_user.username){
       this.props.putUserInStore(sessionStorage.getItem("token"), sessionStorage.getItem("username"), JSON.parse(sessionStorage.getItem("value_ids")))
-      debugger
+      
       this.props.fetchAllActivities(sessionStorage.getItem("token"))
     }
   }
@@ -90,14 +91,18 @@ class ActivitiesContainer extends Component {
         }
       }
     })
-    debugger
+    
     return rankedActivities.sort((a, b) => (a.score > b.score) ? -1 : 1)
 }
 
 
+CB = (aid) => {
+  this.props.deleteA(aid)
+}
+
 
   render() {
-    debugger
+    
     if (!sessionStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
@@ -118,7 +123,7 @@ class ActivitiesContainer extends Component {
             <br/>
             <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>
             <br/>
-            <NRAL activities={this.props.activities}/>
+            <NRAL deleteA={this.CB} activities={this.props.activities}/>
           </div>
           <br></br>
 
@@ -142,7 +147,7 @@ class ActivitiesContainer extends Component {
 }
 
 function mapStateToProps(currentState){
-  // debugger
+  // 
   return {
     values: currentState.values.values,
     activities: currentState.activities.activities,
@@ -168,7 +173,8 @@ function mapDispatchToProps(dispatch){
       deleteValueFetch: (vid, jwt) => dispatch (deleteValueFetch(vid, jwt)),
       removeValueFromCurrentUsersValues: (id, cuid, jwt) => dispatch(removeValueFromCurrentUsersValues(id, cuid, jwt)),
       putUserInStore: (jwt, username, value_ids) => dispatch(putUserInStore(jwt, username, value_ids)),
-      messWithUsersValues: (values, uid, jwt) => dispatch(messWithUsersValues(values, uid, jwt))
+      messWithUsersValues: (values, uid, jwt) => dispatch(messWithUsersValues(values, uid, jwt)),
+      deleteA: (aid) => dispatch(deleteA(aid))
       // fetchAfterRefresh: (jwt) => dispatch(fetchAfterRefresh(jwt))
       // fcu: (jwt, cid) => dispatch(fcu(jwt, cid))
   }

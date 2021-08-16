@@ -44,7 +44,7 @@ class Login extends Component {
 
 
 render() {
-  debugger
+  
   if (!!sessionStorage.getItem('token')) {
     this.props.fetchAllActivities(sessionStorage.getItem('token'))
     return <Redirect push to="/activities"/>

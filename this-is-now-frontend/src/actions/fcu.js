@@ -6,7 +6,7 @@ import {grtscu, scu} from "./index"
 
 
 export function fcu(jwt, CUID) {
-  // debugger
+  // 
     return (dispatch) => {
       dispatch(grtscu());
       fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
@@ -18,7 +18,7 @@ export function fcu(jwt, CUID) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
+          // 
           dispatch(scu(data.user.data))
           // return callBack
         });

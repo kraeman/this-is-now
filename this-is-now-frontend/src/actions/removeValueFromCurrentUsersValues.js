@@ -6,7 +6,7 @@ import {removeValueFromCurrentUser, getReadyToRemoveValueFromCurrentUsersValues}
 
 
 export function removeValueFromCurrentUsersValues(value, CUID, jwt) {
-  debugger
+  
     return (dispatch) => {
       dispatch(getReadyToRemoveValueFromCurrentUsersValues());
       fetch(`http://localhost:3000/users/${CUID}`, {
@@ -23,9 +23,9 @@ export function removeValueFromCurrentUsersValues(value, CUID, jwt) {
           if(!!data.message){
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
-          debugger
+          
           const array = JSON.parse(sessionStorage.getItem('value_ids'))
-          debugger
+          
           if (array){
             const array2 = array.filter(id => id !== data)
             sessionStorage.setItem('value_ids', JSON.stringify(array2))

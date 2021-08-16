@@ -49,11 +49,13 @@ class ActivitiesController < ApplicationController
     #         render json ActivitySerializer.new(activity)
     #   end
 
-    # def destroy
-    #     #Cascade to other tables where this activity exists!
-    #     activity = Activity.find(activity_params[:id])
-    #     activity.destroy
-    # end
+    def destroy
+        #Cascade to other tables where this activity exists!
+        activity = Activity.find(params[:id])
+        if activity.destroy
+            render json: params[:id].to_i
+        end
+    end
     
     private
         def activity_params

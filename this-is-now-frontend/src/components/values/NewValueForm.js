@@ -15,7 +15,7 @@ class NewValueForm extends Component {
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        debugger
+        
         this.props.createNewValuePost(this.state.name, sessionStorage.getItem("id"), sessionStorage.getItem('token'))
         this.setState({
             name: ''
@@ -75,7 +75,7 @@ class NewValueForm extends Component {
 }
 
 function mapState(currentState){
-    debugger
+    
     return { 
         jwt: currentState.user.jwt,
         cid: currentState.user.id

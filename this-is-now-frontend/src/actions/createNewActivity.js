@@ -6,7 +6,7 @@ import {addActivity, getReadyToAddActivity, storeScores} from "./index"
 
 
 export function createNewActivityPost(name, description, valuesAndScoresArray, jwt) {
-  // debugger
+  // 
     return (dispatch) => {
       dispatch(getReadyToAddActivity());
       fetch('http://localhost:3000/activities', {
@@ -24,7 +24,7 @@ export function createNewActivityPost(name, description, valuesAndScoresArray, j
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
           // get back single activity and single score
-          debugger
+          
           dispatch(addActivity(jwt, data))
           dispatch(storeScores(data.scores.data))
           // return callBack

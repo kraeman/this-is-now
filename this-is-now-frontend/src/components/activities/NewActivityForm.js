@@ -23,7 +23,7 @@ class NewActivityForm extends Component {
 
     checkIn = (e,id, value, score) => {
         e.preventDefault()
-        // debugger
+        // 
         this.setState({
             name: this.state.name,
             description: this.state.description,
@@ -35,7 +35,7 @@ class NewActivityForm extends Component {
 
     checkOut = (e, id) => {
 e.preventDefault()
-        // debugger
+        // 
         // const index = this.state.associatedValues.findIndex((value) => value.id === id)
         
         this.setState({
@@ -61,7 +61,7 @@ e.preventDefault()
         makeAssociatedValuesBasedOnNumberAssociated = () => {
             if(!this.props.requesting){
                 const array = []
-                debugger
+                
                 for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
                     array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} associatedValues={this.state.associatedValues} index={i}/>)
                 }
@@ -74,7 +74,7 @@ e.preventDefault()
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        // debugger
+        // 
         if(this.state.associatedValues.length > 0){
             this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, sessionStorage.getItem('token'))
             // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
@@ -123,7 +123,7 @@ e.preventDefault()
     // }
 
     // handleOnValueChange = (e) => {
-    //     debugger
+    //     
     //     this.setState({
     //         name: this.state.name,
     //         description:this.state.description,
@@ -135,7 +135,7 @@ e.preventDefault()
 
     addAnotherValue = (e) => {
         e.preventDefault()
-        // debugger
+        // 
         this.setState({
             name: this.state.name,
             description:this.state.description,
@@ -148,7 +148,7 @@ e.preventDefault()
 
 
     render() {
-    debugger
+    
     return(
         <div className="container">
             <h3 className="form-title">Create a new Activity or Goal</h3>
@@ -207,7 +207,7 @@ e.preventDefault()
 }
 
 function mapState(currentState){
-    debugger
+    
     return { 
         jwt: currentState.user.jwt,
         current_user_data: currentState.user.current_user_data,

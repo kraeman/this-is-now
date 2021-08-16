@@ -5,15 +5,15 @@ import {Stack} from "stack-styled"
 const ValuesList = (props) => {
     
     const conditionallyShowDeleteButton = (value) => {
-        debugger
+        
         if(value.creator_id == props.cuid){
             return <button onClick={() => props.callBack2(value.id)}>Delete this value</button>
         }
     }
 
-debugger
+
     const createValuesFromList = () => {
-        debugger
+        
         return props.values.sort((a, b) => (a.name > b.name) ? 1 : -1).map(value => {
             
             return <div>

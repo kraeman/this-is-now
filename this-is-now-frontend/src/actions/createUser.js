@@ -7,7 +7,7 @@ import {storeToken2, getReadyToStoreToken, getReadyToLoginUser} from "./index"
 
 export function createUser(username, password, checkPassword) {
     return (dispatch) => {
-      debugger
+      
       dispatch(getReadyToStoreToken());
       fetch('http://localhost:3000/signup', {
         method: 'POST',
@@ -22,14 +22,14 @@ export function createUser(username, password, checkPassword) {
           if(!data.jwt){
             dispatch({type: "ERROR_B", payload: "data.message"})
           }else{
-          debugger
+          
           //jwt, username, id
           sessionStorage.setItem('token', data.jwt)
           sessionStorage.setItem('id', data.user_id)
           sessionStorage.setItem('username', data.username)
           sessionStorage.setItem('value_ids', JSON.stringify([]))
           
-debugger
+
           return dispatch(storeToken2(data))
           // return callBack
         }}).catch(err => {

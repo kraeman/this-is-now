@@ -15,7 +15,7 @@ export function loginFetch(username, password) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
+          // 
           //jwt, username, id, value relationship
           dispatch(storeToken(data))
         });

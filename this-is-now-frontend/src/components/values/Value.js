@@ -5,7 +5,7 @@ const Value = (props) => {
     
     
     const onAddValue = (e) => {
-        debugger
+        
         if(!props.cuv || !props.cuv.includes(props.id)){
             e.target.textContent = "Remove Value"
             props.checkIn(props.id)
@@ -16,7 +16,7 @@ const Value = (props) => {
     }
 
     const conditionallyShowDeleteButton = () => {
-        debugger
+        
         if(props.valueData.creator_id == props.cuid){
             return <button onClick={() => props.callBack2(props.valueData.id)}>Delete this value</button>
         }

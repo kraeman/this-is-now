@@ -11,7 +11,7 @@ export default function fetchScores(jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          // debugger
+          // 
           dispatch(storeScores(data.scores.data))
         });
     };
