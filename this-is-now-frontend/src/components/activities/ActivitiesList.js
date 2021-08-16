@@ -6,8 +6,9 @@ const ActivitiesList = (props) => {
     
     const createActivitiesFromList = () => {
         return props.rankedActivities.map(activity => {
+            if(props.activities.find(activity2 => parseInt(activity2.id) == activity.id)){
             return <Activity id={activity.id} score={activity.score} name={props.activities.find(activity2 => parseInt(activity2.id) == activity.id).attributes.name}/>
-        })
+    }})
     }
     
 
