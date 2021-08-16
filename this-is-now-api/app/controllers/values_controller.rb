@@ -6,17 +6,10 @@ class ValuesController < ApplicationController
 
     def create
         value = Value.new()
-        value.name = value_params["name"]
-        value.creator_id = value_params["creator_id"]
+        value.name, value.creator_id = [value_params["name"], value_params["creator_id"]]
         if value.save 
             render json: value, only: [:name, :id, :creator_id]
         end
-    end
-
-    def update
-        value = Value.find(value_params[:id])
-        value.update(value_params)
-        render json: ValueSerializer.new(value)
     end
 
     def destroy
@@ -27,6 +20,6 @@ class ValuesController < ApplicationController
     
     private
         def value_params
-            params.require(:value).permit(:name, :id, :creator_id)
+            params.require(:value).permit(:name, :creator_id)
         end
 end
