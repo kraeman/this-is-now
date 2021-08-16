@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-// import  { Redirect } from 'react-router-dom'
-
-import {connect} from "react-redux"
-// import { createNewActivityPost } from "../../actions/createNewActivity";
-// import {loginUser} from '../actions/loginUser'
-
-
 
 class AssociatedValue extends Component {
 
@@ -14,24 +7,17 @@ class AssociatedValue extends Component {
         score: 1,
         checkedIn: false,
         id: null
-        // buttonText: "Add Value"
     }
-
-  
 
     handleOnNameChange = (e) => {
         const theValue = this.props.all_values.find(value => value.id == e.target.value)
-        
         this.setState({
             name: theValue.name,
             score: this.state.score,
             checkedIn: this.state.checkedIn,
             id: theValue.id
-            // buttonText: this.state.buttonText
         })
-        // 
     }
-
 
     handleOnValueScoreChange = (e) => {
         this.setState({
@@ -39,12 +25,9 @@ class AssociatedValue extends Component {
             score: e.target.value,
             checkedIn: this.state.checkedIn,
             id: this.state.id
-            // buttonText: this.state.buttonText
         })
     }
     makeOptionForEveryValue = () => {
-        //DONT LET CHOSEN VALUES COME UP IN NEXT LIST
-        // 
         if(!this.props.all_values || this.props.values === []) {
             return null
         }else{
@@ -58,8 +41,6 @@ class AssociatedValue extends Component {
     }
 
     onSubmit = (e) => {
-        
-        
         if(e.target.textContent === "Add Value" && this.state.id !== null){
             this.setState({
                 name: this.state.name,
@@ -68,10 +49,7 @@ class AssociatedValue extends Component {
                 id: this.state.id
             })
             e.target.textContent = "Remove Value"
-            // e.target.disabled = true
-            // 
             this.props.checkIn(e, this.state.id, this.state.name, this.state.score)
-            //should i reset state herw???
         }else if(e.target.textContent === "Remove Value")  {
             this.setState({
                 name: this.state.name,
@@ -80,9 +58,6 @@ class AssociatedValue extends Component {
                 id: this.state.id
             })
             e.target.textContent = "Add Value"
-            // e.target.disabled = true
-            // 
-            //SShould i reset state here?
             this.props.checkOut(e, this.state.id, this.state.name, this.state.score)
         }  
     }
@@ -110,7 +85,6 @@ class AssociatedValue extends Component {
             <label for="scores">Assign a score </label>
 
             <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnValueScoreChange(e)} name="scores" id="scores">
-                {/* <option value="null">1-10</option> */}
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -126,7 +100,6 @@ class AssociatedValue extends Component {
             <button onClick={(e) => this.onSubmit(e)}>Add Value</button>
         </div>
     )
-    
     }
 }
 

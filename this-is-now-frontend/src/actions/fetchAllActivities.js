@@ -1,9 +1,6 @@
-// import { getReadyToStoreScores, storeScores } from "./activities";
 import {loginUser, getReadyToStoreActivities, storeActivities, getReadyToLoginUser, getReadyToStoreScores, getReadyToStoreValues, storeValues, storeScores} from "./index"
-// import { storeValues } from "./values";
 
 export default function fetchAllActivities(jwt) {
-  // 
     return (dispatch) => {
       dispatch(getReadyToStoreActivities()) ;
       dispatch(getReadyToStoreScores())
@@ -19,7 +16,6 @@ export default function fetchAllActivities(jwt) {
           if(!!data.message){
             dispatch({type: "ERROR_B", payload: data.message})
           }else{
-          
           dispatch(storeActivities(data[2].data))
           dispatch(storeScores(data[0].data))
           dispatch(storeValues(data[1].data))
@@ -27,7 +23,4 @@ export default function fetchAllActivities(jwt) {
           dispatch({type: "ERROR_F", payload: err})
         })
     };
-
-
-
   }

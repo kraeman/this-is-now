@@ -5,18 +5,14 @@ import  { Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Navbar from "./Navbar"
-
 import fetchAllActivities from '../actions/fetchAllActivities';
 
 
-
 class Login extends Component {
-
     state = {
         username: '',
         password: ''
     }
-
 
   handleOnLogin = (e) => {
     e.preventDefault()
@@ -24,8 +20,7 @@ class Login extends Component {
     this.setState({
         username: '',
         password: ''
-    })
-    
+    }) 
   }  
 
   handleUsernameChange = (e) => {
@@ -43,19 +38,16 @@ class Login extends Component {
   }
 
 
-render() {
-  
+render() { 
   if (!!sessionStorage.getItem('token')) {
     this.props.fetchAllActivities(sessionStorage.getItem('token'))
     return <Redirect push to="/activities"/>
 }
   return (
-
 <>
 <Navbar location={"login"}/>
 <Form  style={{
         backgroundColor: 'white',
-        // maxWidth: 250,
         borderWidth: '5px',
         borderColor:'#aaaaaa', 
         borderStyle:'solid',
@@ -78,37 +70,10 @@ render() {
                     Log In
                 </Button>
             </Form>
-
-
-
-
 </>
-
-    // <div className="Login">
-    //     <br/>
-    //     <br/>
-    //     <br/>
-    //             <div>
-    //         <label style={{fontSize: '80px'}} for="username">Username: </label>
-    //         <input style={{fontSize: '75px'}} value={this.state.username} onChange={(e) => this.handleUsernameChange(e)} type="text" id="username" name="username">
-    //         </input>
-    //     </div>
-    //     <br/>
-    //     <div>
-    //         <label style={{fontSize: '80px'}} for="pass">Password: </label>
-    //         <input style={{fontSize: '75px'}} value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} type="password" id="pass" name="password"
-    //             minlength="8" required>
-    //                 </input>
-    //     </div>
-    //     <br/>
-
-    //     <input onClick={() => this.handleOnLogin()} type="submit" value="Sign in"></input>
-    // </div>
   );
-
 }
 }
-
 
 function mapDispatchToProps(dispatch){
     return { fetchToken: (UN, PW) => dispatch(fetchToken(UN, PW)),

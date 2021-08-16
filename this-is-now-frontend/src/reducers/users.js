@@ -8,13 +8,11 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 requesting: true
             }  
             case ADD_VALUE_TO_CURRENT_USER:
-                // 
             return {
                 ...state,
                 value_ids: [...state.value_ids, action.payload.value_id]
             }
         case STORE_TOKEN:
-            // 
             return {
                 jwt: action.payload.jwt,
                 username: action.payload.username,
@@ -24,7 +22,6 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 error: null
             }
             case STORE_TOKEN2:
-            // 
             return {
                 jwt: action.payload.jwt,
                 username: action.payload.username,
@@ -55,14 +52,10 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
             }
 
             case REMOVE_VALUE_FROM_CURRENT_USER:
-
-                
                 return {
                     ...state,
                     value_ids: [...state.value_ids.filter(value => value !== action.payload)]
-                }   
-                
-                
+                }    
                 case   GET_READY_TO_DELETE_VALUE_FROM_USER:
             return {
                 ...state,
@@ -70,8 +63,6 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
             }
 
             case DELETE_VALUE_FROM_USER:
-
-                
                 return {
                     ...state,
                     value_ids: [...state.value_ids.filter(value => value !== action.payload)]
@@ -98,38 +89,31 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                 }  
 
             case GRTSCU:
-                // 
                 return {
                     ...state,
                     requesting: true
                 }  
 
             case SCU:
-                // 
             return {
                 ...state,
                 current_user_data: {username: action.payload},
                 requesting: false
             }
 
-
-
             case "ERROR_B":
-                // 
             return {
                 ...state,
                 error: action.payload
             }
 
             case "ERROR_F":
-                // 
                 return {
                     ...state,
                     error: action.payload
                 }
 
                 case "CLEAR_ERROR":
-                // 
                 return {
                     ...state,
                     error: null
@@ -141,10 +125,6 @@ export const user = (state = {jwt: null, username: null, value_ids: [], requesti
                     ...state,
                     value_ids: action.payload
                 }
-
-
-
-
 
         default:
             return state

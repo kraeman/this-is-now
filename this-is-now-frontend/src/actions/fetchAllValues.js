@@ -11,8 +11,6 @@ export default function fetchAllValues(jwt) {
       })
         .then(response => response.json())
         .then(data => {
-          // 
-          // all value names and ids creator id
           dispatch(storeValues(data))
         });
     };

@@ -1,4 +1,4 @@
-import {getReadyToStoreToken, storeToken, getReadyToStoreActivities, storeActivities, getReadyToLoginUser, getReadyToStoreScores, getReadyToStoreValues, storeValues, storeScores} from "./index"
+import {getReadyToStoreToken, storeToken, getReadyToStoreActivities, getReadyToStoreScores, getReadyToStoreValues} from "./index"
 
 export function loginFetch(username, password) {
     return (dispatch) => {
@@ -15,12 +15,7 @@ export function loginFetch(username, password) {
       })
         .then(response => response.json())
         .then(data => {
-          // 
-          //jwt, username, id, value relationship
           dispatch(storeToken(data))
         });
     };
-
-
-
   }

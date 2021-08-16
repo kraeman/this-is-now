@@ -1,13 +1,7 @@
-// import React, { Component } from 'react';
-// import React from 'react'
-// import  { Redirect } from 'react-router-dom'
 import {storeToken2, getReadyToStoreToken, getReadyToLoginUser} from "./index"
-// import { loginUser } from "./users";
-
 
 export function createUser(username, password, checkPassword) {
     return (dispatch) => {
-      
       dispatch(getReadyToStoreToken());
       fetch('http://localhost:3000/signup', {
         method: 'POST',
@@ -21,17 +15,12 @@ export function createUser(username, password, checkPassword) {
         .then(data => {
           if(!data.jwt){
             dispatch({type: "ERROR_B", payload: "data.message"})
-          }else{
-          
-          //jwt, username, id
+          }else{          
           sessionStorage.setItem('token', data.jwt)
           sessionStorage.setItem('id', data.user_id)
           sessionStorage.setItem('username', data.username)
           sessionStorage.setItem('value_ids', JSON.stringify([]))
-          
-
           return dispatch(storeToken2(data))
-          // return callBack
         }}).catch(err => {
           dispatch({type: "ERROR_F", payload: err})
         })

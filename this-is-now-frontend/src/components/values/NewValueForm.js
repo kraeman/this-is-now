@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
-import  { Redirect } from 'react-router-dom'
 
 import {connect} from "react-redux"
 import { createNewValuePost } from '../../actions/createNewValue';
-// import {loginUser} from '../actions/loginUser'
-
-
 
 class NewValueForm extends Component {
 
@@ -14,23 +10,19 @@ class NewValueForm extends Component {
     }
 
     handleOnSubmit = (e) => {
-        e.preventDefault()
-        
+        e.preventDefault() 
         this.props.createNewValuePost(this.state.name, sessionStorage.getItem("id"), sessionStorage.getItem('token'))
         this.setState({
             name: ''
         })
     }
-
     handleOnNameChange = (e) => {
         this.setState({
             name: e.target.value
         })
     }
 
-
     render() {
-    
     return (
         <div className="container">
             <h3 className="form-title">Create a new value</h3>
@@ -50,15 +42,8 @@ class NewValueForm extends Component {
                                             value={this.state.name}
                                             required
                                         />
-                                        </div>
-
-
-                                        
+                                        </div>    
                                     </div>
-
-
-                                    
-
                                     <div className="form-group">
                                         <div className="col-md-6 col-md-offset-4">
                                         <button type="submit" className="btn btn-default">Add</button>
@@ -75,11 +60,9 @@ class NewValueForm extends Component {
 }
 
 function mapState(currentState){
-    
     return { 
         jwt: currentState.user.jwt,
         cid: currentState.user.id
-        // current_user_data: currentState.user.current_user_data
      }
   }
 

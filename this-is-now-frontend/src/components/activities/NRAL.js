@@ -1,11 +1,6 @@
-import Activity from "./Activity"
-// import {Stack} from "stack-styled"
 import { Link } from 'react-router-dom'
-// import Navbar from "../../containers/Navbar"
 
 const NRAL = (props) => {
-    // 
-
     const conditionalDeleteButton = (activity) => {
         
         if(activity.attributes.creator_id == parseInt(sessionStorage.getItem("id"))){
@@ -24,7 +19,6 @@ const NRAL = (props) => {
         })
     }
     
-
     return (
         <div>
             <ul>

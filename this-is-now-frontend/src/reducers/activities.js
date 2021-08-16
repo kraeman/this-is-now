@@ -1,6 +1,5 @@
 import {ADD_ACTIVITY, STORE_ACTIVITIES, GET_READY_TO_STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "../actions/actionTypes"
 
-
 export const activities = (state = {activities: [], requesting: false}, action) => {
     switch(action.type){
         case ADD_ACTIVITY:
@@ -28,7 +27,6 @@ export const activities = (state = {activities: [], requesting: false}, action) 
                         requesting: false
                     }  
             case GET_READY_TO_STORE_ACTIVITIES:
-                // 
             return {
                 ...state,
                 requesting: true

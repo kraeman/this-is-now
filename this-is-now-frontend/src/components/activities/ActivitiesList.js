@@ -1,6 +1,5 @@
 import Activity from "./Activity"
 import {Stack} from "stack-styled"
-// import Navbar from "../../containers/Navbar"
 
 const ActivitiesList = (props) => {
     
@@ -11,7 +10,6 @@ const ActivitiesList = (props) => {
     }})
     }
     
-
     return (
         <div>
         <Stack>

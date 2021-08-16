@@ -12,8 +12,6 @@ export function loginUser(username, ) {
       })
         .then(response => response.json())
         .then(jwt => {
-          // 
-          // dispatch(loginUser(user))
         });
     };
   }

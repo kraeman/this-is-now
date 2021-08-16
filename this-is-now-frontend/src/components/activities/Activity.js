@@ -1,9 +1,6 @@
 import { Link } from 'react-router-dom';
-// import Navbar from "../../containers/Navbar"
 const Activity = (props) => {
 
-    
-    
     const id = parseInt(props.id)
     return (
         <div>

@@ -11,9 +11,7 @@ const link = {
   fontSize: '75px',
 }
 
-
-const Navbar = (props) => {
-    if(props.location === "signup" || props.location === "login"){
+const Navbar = () => {
         return (
             <div  className="mb-3">
                 <NavLink
@@ -33,26 +31,7 @@ const Navbar = (props) => {
                 }}
                 >Signup</NavLink>
             </div>
-    )}else{
-        return(<div  className="mb-3">
-            <NavLink
-            to="/activities"
-            exact
-            style={link}
-            activeStyle={{
-                background: 'darkblue'
-            }}
-            >Activities</NavLink>
-            <NavLink
-            to="/signup"
-            exact
-            style={link}
-            activeStyle={{
-                background: 'darkblue'
-            }}
-            >Logout</NavLink>
-        </div>)
-    }
+    )
 }
 
 export default Navbar;

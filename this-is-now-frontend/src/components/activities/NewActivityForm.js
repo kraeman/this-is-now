@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-// import  { Redirect } from 'react-router-dom'
-
 import {connect} from "react-redux"
 import { createNewActivityPost } from "../../actions/createNewActivity";
 import AssociatedValue from './AssociatedValue';
 import fetchAllValues from '../../actions/fetchAllValues'
-// import fetchAllActivities from '../../actions/fetchAllActivities'
 import fetchScores from '../../actions/fetchScores';
-// import {loginUser} from '../actions/loginUser'
-
-
 
 class NewActivityForm extends Component {
-
 
     state = {
         name: '',
@@ -34,10 +27,7 @@ class NewActivityForm extends Component {
     }
 
     checkOut = (e, id) => {
-e.preventDefault()
-        // 
-        // const index = this.state.associatedValues.findIndex((value) => value.id === id)
-        
+        e.preventDefault()        
         this.setState({
             name: this.state.name,
             description: this.state.description,
@@ -47,17 +37,6 @@ e.preventDefault()
         
     }
 
-    // addAssociatedValue() {
-        //     this.setState({...this.state, numberOfvaluesAdded: this.addAnotherValue()})
-        
-        // }
-        
-        // componentDidMount() {
-        //     this.props.fetchAllValues(this.props.jwt)
-        //     //fetching activities shopulkd be done in container!!!!!!!!!
-        // }
-
-        
         makeAssociatedValuesBasedOnNumberAssociated = () => {
             if(!this.props.requesting){
                 const array = []
@@ -74,10 +53,8 @@ e.preventDefault()
 
     handleOnSubmit = (e) => {
         e.preventDefault()
-        // 
         if(this.state.associatedValues.length > 0){
             this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, sessionStorage.getItem('token'))
-            // this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, this.props.jwt)
             this.setState({
                 name: '',
                 description: '',
@@ -85,13 +62,6 @@ e.preventDefault()
                 associatedValues: []
             })
         }
-        // this.props.callBack()
-       
-            // this.props.callBack()
-    
-        // if(this.props.requesting === false){
-        //     this.props.fetchScores(this.props.jwt)
-        // }
     }
 
     handleOnNameChange = (e) => {
@@ -103,7 +73,6 @@ e.preventDefault()
         })
     }
 
-
     handleOnDescriptionChange = (e) => {
         this.setState({
             name: this.state.name,
@@ -113,29 +82,8 @@ e.preventDefault()
         })
     }
 
-
-    // handleOnValueScoreChange = () => {
-    //     this.setState({
-    //         name: this.state.name,
-    //         description: this.state.description,
-    //         numberOfvaluesAdded: this.state.numberOfvaluesAdded
-    //     })
-    // }
-
-    // handleOnValueChange = (e) => {
-    //     
-    //     this.setState({
-    //         name: this.state.name,
-    //         description:this.state.description,
-    //         numberOfvaluesAdded: this.state.numberOfvaluesAdded
-    //     })
-    // }
-
-   
-
     addAnotherValue = (e) => {
         e.preventDefault()
-        // 
         this.setState({
             name: this.state.name,
             description:this.state.description,
@@ -144,11 +92,7 @@ e.preventDefault()
         })
     }
 
-
-
-
     render() {
-    
     return(
         <div className="container">
             <h3 className="form-title">Create a new Activity or Goal</h3>
@@ -169,10 +113,7 @@ e.preventDefault()
                                             required
                                         />
                                         </div>
-
-
                                         <label className="col-md-4 control-label">Description</label>
-                                        
                                         <div className="col-md-5">
                                         <input
                                             className="form-control"
@@ -184,12 +125,9 @@ e.preventDefault()
                                         />
                                         </div>
                                     </div>
-
                                     <mark>MUST HAVE AT LEAST ONE VALUE Associated</mark> <br></br>
                                     <button onClick={(e) => this.addAnotherValue(e)}>ADD ANOTHER VALUE</button>
-
                                     {this.makeAssociatedValuesBasedOnNumberAssociated()}
-                                    
                                     <div className="form-group">
                                         <div className="col-md-6 col-md-offset-4">
                                         <button type="submit" className="btn btn-default">SUBMIT</button>
@@ -202,12 +140,10 @@ e.preventDefault()
                 </div>
             </div>
     )
-    
     }
 }
 
 function mapState(currentState){
-    
     return { 
         jwt: currentState.user.jwt,
         current_user_data: currentState.user.current_user_data,
@@ -216,12 +152,10 @@ function mapState(currentState){
      }
   }
 
-
 function mapDispatchToProps(dispatch){
     return {
         createNewActivityPost: (name, description, valuesObjects, jwt) => dispatch(createNewActivityPost(name, description, valuesObjects, jwt)),
         fetchAllValues: (jwt) => dispatch(fetchAllValues(jwt)),
-        // fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt)),
         fetchScores: (jwt) => dispatch(fetchScores(jwt))
     }
   }

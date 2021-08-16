@@ -6,8 +6,6 @@ import { createUser } from '../actions/createUser';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Navbar from "./Navbar"
-// import {loginUser} from '../actions/loginUser'
-
 
 
 class SignUp extends Component {
@@ -18,17 +16,14 @@ class SignUp extends Component {
         checkPassword: ''
     }
 
-
     handleOnSignup = (e) => {
-        
         e.preventDefault()
         this.props.createUser(this.state.username, this.state.password, this.state.checkPassword)
         this.setState({
             username: '',
             password: '',
             checkPassword: ''
-        })
-        
+        }) 
       }  
     
       handleUsernameChange = (e) => {
@@ -69,19 +64,16 @@ class SignUp extends Component {
 
             <Form  style={{
         backgroundColor: 'white',
-        // maxWidth: 250,
         borderWidth: '5px',
         borderColor:'#aaaaaa', 
         borderStyle:'solid',
         position: 'absolute', left: '50%', top: '30%',
         transform: 'translate(-50%, -50%)'
-        
       }} onSubmit={(e) => this.handleOnSignup(e)} className="SignUp">
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username   </Form.Label>
                     <Form.Control size="lg"  value={this.state.username} onChange={(e) => this.handleUsernameChange(e)}/>
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password   </Form.Label>
                     <Form.Control size="lg" type="password" value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} />
@@ -96,42 +88,7 @@ class SignUp extends Component {
                     Sign Up
                 </Button>
             </Form>
-
-
-
-
-
 </>
-
-        // <div className="SignUp">
-        //     <br/>
-        //     <br/>
-        //     <br/>
-        //             <div>
-        //         <label for="username">Username: </label>
-        //         <input value={this.state.username} onChange={(e) => this.handleUsernameChange(e)} type="text" id="username" name="username">
-        //         </input>
-        //     </div>
-        //     <br/>
-        //     <div>
-        //         <label for="pass">Password (8 character minimum): </label>
-        //         <input value={this.state.password} onChange={(e) => this.handlePasswordChange(e)} type="password" id="pass" name="password"
-        //             minLength="8" required>
-        //                 </input>
-        //     </div>
-        //     <br/>
-
-        //     <div>
-        //         <label for="pass-confirm">Confirm Password: </label>
-        //         <input value={this.state.checkPassword} onChange={(e) => this.handleCheckPasswordChange(e)} type="password" id="pass-confirm" name="password"
-        //             minLength="8" required>
-        //                 </input>
-        //     </div>
-
-        //     <br/>
-    
-        //     <input onClick={() => this.handleOnSignup()} type="submit" value="Sign in"></input>
-        // </div>
       );
 }
 }
