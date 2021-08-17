@@ -9,7 +9,6 @@ import {clearError} from '../actions/users'
 import Login from "./Login"
 import ErrorPage from '../components/ErrorPage'
 import ActivityShow from '../components/activities/ActivityShow'
-import ActivityEdit from '../components/activities/ActivityEdit'
 import {connect} from "react-redux"
 import '../App.css'
 
@@ -40,10 +39,6 @@ class App extends Component {
               <ActivityShow props={props} activity={this.props.activities}/>
             )
             } path="/activities/:activityId" exact />
-            <Route  render={(props) => (
-              <ActivityEdit props={props} activity={this.props.activities}/>
-            )
-            } path="/activities/:activityId/edit" exact />
           </Switch>
         </Router>
       </div>
