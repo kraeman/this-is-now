@@ -16,6 +16,31 @@ class SignUp extends Component {
         checkPassword: ''
     }
 
+    
+    handleUsernameChange = (e) => {
+        this.setState({
+            username: e.target.value,
+            password: this.state.password,
+            checkPassword: this.state.checkPassword
+        })
+    }
+    
+    handlePasswordChange = (e) => {
+        this.setState({
+            username: this.state.username,
+            password: e.target.value,
+            checkPassword: this.state.checkPassword
+        })
+    }
+    
+    handleCheckPasswordChange = (e) => {
+        this.setState({
+            username: this.state.username,
+            password: this.state.password,
+            checkPassword: e.target.value
+        })
+    }
+    
     handleOnSignup = (e) => {
         e.preventDefault()
         this.props.createUser(this.state.username, this.state.password, this.state.checkPassword)
@@ -23,42 +48,17 @@ class SignUp extends Component {
             username: '',
             password: '',
             checkPassword: ''
-        }) 
+        })
       }  
     
-      handleUsernameChange = (e) => {
-          this.setState({
-              username: e.target.value,
-              password: this.state.password,
-              checkPassword: this.state.checkPassword
-          })
-      }
-    
-      handlePasswordChange = (e) => {
-        this.setState({
-            username: this.state.username,
-            password: e.target.value,
-            checkPassword: this.state.checkPassword
-        })
-      }
-
-      handleCheckPasswordChange = (e) => {
-        this.setState({
-            username: this.state.username,
-            password: this.state.password,
-            checkPassword: e.target.value
-        })
-      }
-
-
     render() {
         if (!!sessionStorage.getItem('token')) {
             this.props.fetchActivities(sessionStorage.getItem('token'))
             return <Redirect push to="/activities"/>
         }
-    return (
-
-<>
+        return (
+            
+    <>
 
     <Navbar location={"signup"}/>
 
@@ -93,11 +93,11 @@ class SignUp extends Component {
 }
 }
 
+//Left token in there so that page re-renders to redirect
 function mapState(currentState){
     return { 
-        token: currentState.user.token,
-        current_user_data: currentState.current_user_data
-     }
+        token: currentState.user.token
+         }
   }
 
 

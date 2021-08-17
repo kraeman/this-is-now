@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import { createNewActivityPost } from "../../actions/createNewActivity";
 import AssociatedValue from './AssociatedValue';
 
 class NewActivityForm extends Component {
@@ -8,17 +7,16 @@ class NewActivityForm extends Component {
     state = {
         name: '',
         description: '',
-        numberOfvaluesAdded: 0,
+        numberOfValuesAddedToActivity: 0,
         associatedValues: []
     }
 
-    checkIn = (e,id, value, score) => {
+    checkIn = (e, id, score) => {
         e.preventDefault()
-        // 
         this.setState({
             name: this.state.name,
             description: this.state.description,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            numberOfValuesAddedToActivity: this.state.numberOfValuesAddedToActivity,
             associatedValues: [...this.state.associatedValues, {id: id, score: score}]
         })
         
@@ -29,34 +27,32 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description: this.state.description,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            numberOfValuesAddedToActivity: this.state.numberOfValuesAddedToActivity,
             associatedValues: this.state.associatedValues.filter((value) => value.id !== id)
         })
         
     }
 
         makeAssociatedValuesBasedOnNumberAssociated = () => {
-            if(!this.props.requesting){
-                const array = []
-                
-                for (let i = 0; i < this.state.numberOfvaluesAdded; i++) {
-                    array.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut}  id={i} all_values={this.props.all_values} associatedValues={this.state.associatedValues} index={i}/>)
+            //numberOfValuesAddedToActivity and the length of this.state.associatedValues is different because one is checked in values and one is number of components regardless of checked in or out
+            // if(!this.props.requesting){
+                const arrayOfAssociatedValueComponents = []
+                for (let i = 0; i < this.state.numberOfValuesAddedToActivity; i++) {
+                    arrayOfAssociatedValueComponents.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut} all_values={this.props.all_values} associatedValues={this.state.associatedValues}/>)
                 }
-                return array
-            }else{
-                return null
-            }
+                return arrayOfAssociatedValueComponents
+            // }
         }
 
 
     handleOnSubmit = (e) => {
         e.preventDefault()
         if(this.state.associatedValues.length > 0){
-            this.props.callBack(this.state.name, this.state.description, this.state.associatedValues, sessionStorage.getItem('token'))
+            this.props.createNewActivity(this.state.name, this.state.description, this.state.associatedValues)
             this.setState({
                 name: '',
                 description: '',
-                numberOfvaluesAdded: 0,
+                numberOfValuesAddedToActivity: 0,
                 associatedValues: []
             })
         }
@@ -66,7 +62,7 @@ class NewActivityForm extends Component {
         this.setState({
             name: e.target.value,
             description: this.state.description,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            numberOfValuesAddedToActivity: this.state.numberOfValuesAddedToActivity,
             associatedValues: this.state.associatedValues
         })
     }
@@ -75,17 +71,17 @@ class NewActivityForm extends Component {
         this.setState({
             name: this.state.name,
             description: e.target.value,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded,
+            numberOfValuesAddedToActivity: this.state.numberOfValuesAddedToActivity,
             associatedValues: this.state.associatedValues
         })
     }
 
-    addAnotherValue = (e) => {
+    addAnotherAssociatedValueComponent = (e) => {
         e.preventDefault()
         this.setState({
             name: this.state.name,
             description:this.state.description,
-            numberOfvaluesAdded: this.state.numberOfvaluesAdded + 1,
+            numberOfValuesAddedToActivity: this.state.numberOfValuesAddedToActivity + 1,
             associatedValues: this.state.associatedValues
         })
     }
@@ -100,7 +96,7 @@ class NewActivityForm extends Component {
                             <div className="panel-body">
                                 <form onSubmit={(e) => this.handleOnSubmit(e)} className="form-horizontal" >
                                     <div className="form-group">
-                                        <label htmlFor="title" className="col-md-4 control-label">Activity/Goal</label>
+                                        <label htmlFor="title" className="col-md-4 control-label">Activity</label>
                                         <div className="col-md-5">
                                         <input
                                             className="form-control"
@@ -123,8 +119,8 @@ class NewActivityForm extends Component {
                                         />
                                         </div>
                                     </div>
-                                    <mark>MUST HAVE AT LEAST ONE VALUE Associated</mark> <br></br>
-                                    <button onClick={(e) => this.addAnotherValue(e)}>ADD ANOTHER VALUE</button>
+                                    <mark>MUST HAVE AT LEAST ONE VALUE ASSOCIATED</mark> <br></br>
+                                    <button onClick={(e) => this.addAnotherAssociatedValueComponent(e)}>ADD ANOTHER VALUE</button>
                                     {this.makeAssociatedValuesBasedOnNumberAssociated()}
                                     <div className="form-group">
                                         <div className="col-md-6 col-md-offset-4">
@@ -143,17 +139,9 @@ class NewActivityForm extends Component {
 
 function mapState(currentState){
     return { 
-        token: currentState.user.token,
-        current_user_data: currentState.user.current_user_data,
-        all_values: currentState.values.values,
-        requesting: currentState.requesting
+        all_values: currentState.values.values
+        // requesting: currentState.requesting
      }
   }
-
-function mapDispatchToProps(dispatch){
-    return {
-        createNewActivityPost: (name, description, valuesObjects, token) => dispatch(createNewActivityPost(name, description, valuesObjects, token)),
-    }
-  }
   
-export default connect(mapState, mapDispatchToProps)(NewActivityForm);
+export default connect(mapState)(NewActivityForm);

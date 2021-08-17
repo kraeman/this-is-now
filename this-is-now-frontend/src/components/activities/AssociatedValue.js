@@ -10,13 +10,22 @@ class AssociatedValue extends Component {
     }
 
     handleOnNameChange = (e) => {
-        const theValue = this.props.all_values.find(value => value.id == e.target.value)
+        if(e.target.value === ""){
+            this.setState({
+                name: "",
+                score: this.state.score,
+                checkedIn: this.state.checkedIn,
+                id: null
+            })
+        }else{
+        const value = this.props.all_values.find(value => value.id == e.target.value)
         this.setState({
-            name: theValue.name,
+            name: value.name,
             score: this.state.score,
             checkedIn: this.state.checkedIn,
-            id: theValue.id
+            id: value.id
         })
+    }
     }
 
     handleOnValueScoreChange = (e) => {
@@ -27,13 +36,12 @@ class AssociatedValue extends Component {
             id: this.state.id
         })
     }
-    makeOptionForEveryValue = () => {
-        if(!this.props.all_values || this.props.values === []) {
-            return null
-        }else{
-            const arrayOfUnwantedIds = this.props.associatedValues.map(value => value.id)
-            let arrayOfGood = this.props.all_values.filter(value => !arrayOfUnwantedIds.includes(value.id))
-            return arrayOfGood.map(value => {
+    makeOptionForEveryRemainingValue = () => {
+        if(!!this.props.all_values || this.props.all_values !== []) {
+            const alreadyAssociatedIds = this.props.associatedValues.map(value => value.id)
+            const unassociatedValueIds = this.props.all_values.filter(value => !alreadyAssociatedIds.includes(value.id))
+            return unassociatedValueIds.map(value => {
+                //if the associated this associated values id matches the components value id, it will be the one selected. Otherwise it would disappear from select tag when value removed
                 return <option selected={this.state.id === value.id} key={value.id} id={value.id} value={value.id}>{value.name}</option>
             })
         }
@@ -41,7 +49,7 @@ class AssociatedValue extends Component {
     }
 
     onSubmit = (e) => {
-        if(e.target.textContent === "Add Value" && this.state.id !== null){
+        if(!this.state.checkedIn && this.state.id !== null){
             this.setState({
                 name: this.state.name,
                 score: this.state.score,
@@ -49,8 +57,8 @@ class AssociatedValue extends Component {
                 id: this.state.id
             })
             e.target.textContent = "Remove Value"
-            this.props.checkIn(e, this.state.id, this.state.name, this.state.score)
-        }else if(e.target.textContent === "Remove Value")  {
+            this.props.checkIn(e, this.state.id, this.state.score)
+        }else if(this.state.checkedIn)  {
             this.setState({
                 name: this.state.name,
                 score: this.state.score,
@@ -58,11 +66,11 @@ class AssociatedValue extends Component {
                 id: this.state.id
             })
             e.target.textContent = "Add Value"
-            this.props.checkOut(e, this.state.id, this.state.name, this.state.score)
+            this.props.checkOut(e, this.state.id)
         }  
     }
-
-    conditioned = () => {
+    //Did this so when the select is disabled on check in of associated value, it still shows your choice.
+    makeDefaultValueInSelectTheComponentsCheckedInValue = () => {
         if(this.state.checkedIn){
             return this.state.name
         }else{
@@ -77,8 +85,8 @@ class AssociatedValue extends Component {
             <label for="values">Add a Value</label>
 
             <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
-                <option value={null}>{this.conditioned()}</option>
-                {this.makeOptionForEveryValue()}
+                <option value={null}>{this.makeDefaultValueInSelectTheComponentsCheckedInValue()}</option>
+                {this.makeOptionForEveryRemainingValue()}
             </select>
 
 

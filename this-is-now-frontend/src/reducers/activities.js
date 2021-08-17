@@ -1,4 +1,4 @@
-import {ADD_ACTIVITY, STORE_ACTIVITIES, GET_READY_TO_STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, REMOVE_ACTIVITY, UPDATE_ACTIVITY} from "../actions/actionTypes"
+import {ADD_ACTIVITY, GET_READY_TO_DELETE_ACTIVITY, DELETE_ACTIVITY, STORE_ACTIVITIES, GET_READY_TO_STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY} from "../actions/actionTypes"
 
 export const activities = (state = {activities: [], requesting: false}, action) => {
     switch(action.type){
@@ -14,12 +14,12 @@ export const activities = (state = {activities: [], requesting: false}, action) 
                 requesting: true
             } 
             
-        case "GET_READY_TO_DELETE_ACTIVITY":
+        case GET_READY_TO_DELETE_ACTIVITY:
                 return {
                     ...state,
                     requesting: true
                 }
-                case "DELETE_ACTIVITY":
+                case DELETE_ACTIVITY:
                     
                     return {
                         ...state,

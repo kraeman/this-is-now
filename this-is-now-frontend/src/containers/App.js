@@ -8,7 +8,7 @@ import {compose} from 'redux'
 import {clearError} from '../actions/users'
 import Login from "./Login"
 import ErrorPage from '../components/ErrorPage'
-import ActivityShow from '../components/activities/ActivityShow'
+import Activity from '../components/activities/Activity'
 import {connect} from "react-redux"
 import '../App.css'
 
@@ -16,7 +16,6 @@ import '../App.css'
 class App extends Component {
 
   render() {
-    
     if (!!this.props.error) {
       return <ErrorPage clearError={this.props.clearError} />
     }
@@ -36,7 +35,7 @@ class App extends Component {
                 <ActivityContainer items={this.props.activities}/>
             </Route>
             <Route  render={(props) => (
-              <ActivityShow props={props} activity={this.props.activities}/>
+              <Activity props={props} activity={this.props.activities}/>
             )
             } path="/activities/:activityId" exact />
           </Switch>
@@ -48,8 +47,6 @@ class App extends Component {
 
 const mapStateToProps = (currentState) => {
   return {
-    isLoggedIn: currentState.isLoggedIn,
-    values: currentState.values,
     activities: currentState.activities.activities,
     error: currentState.user.error
   }

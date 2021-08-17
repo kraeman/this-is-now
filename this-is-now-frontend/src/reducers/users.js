@@ -1,4 +1,4 @@
-import {CLEAR_ERROR, UPDATE_USERS_VALUES, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, LOGOUT, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_UPDATE_CURRENT_USERS_VALUES} from "../actions/actionTypes"
+import {CLEAR_ERROR, ERROR, REFRESH_USER, UPDATE_USERS_VALUES, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, LOGOUT, ADD_VALUE_TO_CURRENT_USER, GET_READY_TO_STORE_TOKEN, STORE_TOKEN, GET_READY_TO_UPDATE_CURRENT_USERS_VALUES} from "../actions/actionTypes"
 
 export const user = (state = {token: null, username: null, value_ids: [], requesting: false, error: null}, action) => {
     switch(action.type){
@@ -21,7 +21,7 @@ export const user = (state = {token: null, username: null, value_ids: [], reques
                 requesting: false,
                 error: null
             }
-            case "REFRESH_USER":
+            case REFRESH_USER:
                 return {
                     token: action.payload.token,
                     username: action.payload.username,
@@ -60,17 +60,12 @@ export const user = (state = {token: null, username: null, value_ids: [], reques
                     requesting: true
                 }  
 
-            case "ERROR":
+            case ERROR:
             return {
                 ...state,
                 error: action.payload
             }
 
-            case "ERROR":
-                return {
-                    ...state,
-                    error: action.payload
-                }
 
                 case CLEAR_ERROR:
                 return {

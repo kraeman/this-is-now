@@ -33,7 +33,7 @@ class ApplicationController < ActionController::API
 
   def authorized
     #ended up not using the message on frontend. Just used its presence as a trigger for a different message
-    render json: { message: '' }, status: :unauthorized unless logged_in?
+    render json: { message: 'error' }, status: :unauthorized unless logged_in?
   end
 
 end

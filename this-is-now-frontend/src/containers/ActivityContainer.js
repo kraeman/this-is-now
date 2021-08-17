@@ -6,14 +6,12 @@ import { createNewActivityPost } from "../actions/createNewActivity";
 import ValuesList from '../components/values/ValuesList'
 import {deleteValueFetch} from '../actions/deleteValue'
 import NewValueForm from '../components/values/NewValueForm'
-import {removeValueFromCurrentUsersValues} from "../actions/removeValueFromCurrentUsersValues"
-import {addValueToCurrentUsersValues} from '../actions/addValueToCurrentUsersValues'
 import {putUserInStoreAfterPageRefresh} from '../actions/putUserInStoreAfterPageRefresh'
 import { logout } from '../actions/index';
 import { updateUsersValues } from '../actions/updateUsersValues';
 import {deleteActivityFetch} from '../actions/deleteActivity'
-import NRAL from '../components/activities/NRAL';
-import ActivitiesList from '../components/activities/ActivitiesList'
+import AllActivitiesList from '../components/activities/AllActivitiesList';
+import RankedActivitiesList from '../components/activities/RankedActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
 import '../App.css'
 
@@ -24,39 +22,32 @@ class ActivitiesContainer extends Component {
     associatedValues: JSON.parse(sessionStorage.getItem('value_ids'))
   }
 
-  callBack = (name, description, associatedValues) => {
+  createNewActivity = (name, description, associatedValues) => {
     this.props.createNewActivityPost(name, description, associatedValues, sessionStorage.getItem('token'))
   }
 
-  checkIn = (id) => {
-    this.props.addValueToCurrentUsersValues(id, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
+  deleteValue = (valueId) => {
+    this.props.deleteValueFetch(valueId, sessionStorage.getItem('token'))
   }
 
-  checkOut = (id) => {
-    this.props.removeValueFromCurrentUsersValues(id, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
-  }
-
-  callBack2 = (vId) => {
-    this.props.deleteValueFetch(vId, sessionStorage.getItem('token'))
-  }
-
-  callBack3 = () => {
+  updateUserValues = () => {
     this.props.updateUsersValues(this.state.associatedValues, sessionStorage.getItem('id'), sessionStorage.getItem('token'))
   }
   
-  callBack4 = (e, vId) => {
-    if(!this.state.associatedValues.includes(vId)){
+  addOrRemoveFromUsersValues = (valueId) => {
+    if(!this.state.associatedValues.includes(valueId)){
       this.setState({
-        associatedValues: [...this.state.associatedValues, vId]
+        associatedValues: [...this.state.associatedValues, valueId]
       })
     }else {
       this.setState({
-        associatedValues: this.state.associatedValues.filter(id => id !== vId)
+        associatedValues: this.state.associatedValues.filter(id => id !== valueId)
       })
     }
   }
 
   componentDidMount = () => {
+    //Only runs if user accidentally refreshes page and clears redux store
     if(!!sessionStorage.getItem('token') && !this.props.current_user.username){
       this.props.putUserInStoreAfterPageRefresh(sessionStorage.getItem("token"), sessionStorage.getItem("username"), JSON.parse(sessionStorage.getItem("value_ids")))
       this.props.fetchActivities(sessionStorage.getItem("token"))
@@ -64,7 +55,7 @@ class ActivitiesContainer extends Component {
   }
 
 
-  calculateScores = () => {
+  calculatedScores = () => {
     const rankedActivities = []
     this.props.scores.forEach(score => {
       if (JSON.parse(sessionStorage.getItem('value_ids')).includes(score.attributes.value_id)){
@@ -78,12 +69,11 @@ class ActivitiesContainer extends Component {
     return rankedActivities.sort((a, b) => (a.score > b.score) ? -1 : 1)
 }
 
-CB = (aid) => {
-  this.props.deleteActivityFetch(aid)
+deleteActivity = (activityId) => {
+  this.props.deleteActivityFetch(activityId)
 }
 
   render() {
-    
     if (!sessionStorage.getItem('token')) {
       return <Redirect push to="/login"/>
   }
@@ -96,11 +86,11 @@ CB = (aid) => {
             borderStyle:'solid',
           }}>
             <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
-            <NewActivityForm callBack={this.callBack} />
+            <NewActivityForm createNewActivity={this.createNewActivity} />
             <br/>
-            <ActivitiesList activities={this.props.activities} rankedActivities={this.calculateScores()}/>
+            <RankedActivitiesList activities={this.props.activities} rankedActivities={this.calculatedScores()}/>
             <br/>
-            <NRAL deleteActivityFetch={this.CB} activities={this.props.activities}/>
+            <AllActivitiesList deleteActivityFetch={this.deleteActivity} activities={this.props.activities}/>
           </div>
           <br></br>
 <div className='rowC' id='value_container' style={{
@@ -111,7 +101,7 @@ CB = (aid) => {
 }}>
   <NewValueForm/>
   <br/><br/>
-  <ValuesList callBack4={this.callBack4} callBack3={this.callBack3} cuv={this.state.associatedValues} checkIn={this.checkIn} checkOut={this.checkOut} cuid={sessionStorage.getItem("id")} callback={this.props.addValueToCurrentUsersValues} callBack2={this.callBack2} values={this.props.values}/>
+  <ValuesList addOrRemoveFromUsersValues={this.addOrRemoveFromUsersValues} updateUserValues={this.updateUserValues} usersValues={this.state.associatedValues} callback={this.props.addValueToCurrentUsersValues} deleteValue={this.deleteValue} values={this.props.values}/>
 </div>
 </>
       );
@@ -122,28 +112,20 @@ function mapStateToProps(currentState){
   return {
     values: currentState.values.values,
     activities: currentState.activities.activities,
-    token: currentState.user.token,
     scores: currentState.scores.scores,
-    current_user: currentState.user,
-    cuid: currentState.user.id,
-    cuv: currentState.user.value_ids,
-    requestingValues: currentState.values.requesting,
-    requestingActivities: currentState.activities.requesting,
-    requestingScores: currentState.scores.requesting
+    current_user: currentState.user
   }
 }
 
 function mapDispatchToProps(dispatch){
   return {
       fetchActivities: (token) => dispatch(fetchActivities(token)),
-      createNewActivityPost: (n, d, av, token) => dispatch(createNewActivityPost(n, d, av, token)),
+      createNewActivityPost: (name, description, associatedValues, token) => dispatch(createNewActivityPost(name, description, associatedValues, token)),
       logout: () => dispatch(logout()),
-      addValueToCurrentUsersValues: (value, cuid, token) => dispatch(addValueToCurrentUsersValues(value, cuid, token)),
-      deleteValueFetch: (vid, token) => dispatch (deleteValueFetch(vid, token)),
-      removeValueFromCurrentUsersValues: (id, cuid, token) => dispatch(removeValueFromCurrentUsersValues(id, cuid, token)),
+      deleteValueFetch: (valueId, token) => dispatch (deleteValueFetch(valueId, token)),
       putUserInStoreAfterPageRefresh: (token, username, value_ids) => dispatch(putUserInStoreAfterPageRefresh(token, username, value_ids)),
-      updateUsersValues: (values, uid, token) => dispatch(updateUsersValues(values, uid, token)),
-      deleteActivityFetch: (aid) => dispatch(deleteActivityFetch(aid))
+      updateUsersValues: (values, userId, token) => dispatch(updateUsersValues(values, userId, token)),
+      deleteActivityFetch: (activityId) => dispatch(deleteActivityFetch(activityId))
   }
 }
 

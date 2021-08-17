@@ -1,12 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+
 const Activity = (props) => {
 
-    const id = parseInt(props.id)
+    const activity = props.activity.find(activity => activity.id == props.props.match.params.activityId)
+    
     return (
         <div>
             <br/>
-            {props.name}......Score: {props.score}
-                  <Link to={`/activities/${id}`}>Check it out!</Link>
+            {activity.attributes.name}
+            <br></br>
+            {activity.attributes.description}
+            <br></br>
+            <Link to={`/activities`}>Back To Main Page</Link>
         </div>
     )
 }

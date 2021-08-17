@@ -9,11 +9,11 @@ class UsersController < ApplicationController
                 render json: { username: user.username, user_id: user.id, token: token }, status: :created
             else
                 #Again, I did not use the error message here, I used the absence of a toekn to trigger error handling in frontend
-                render json: { error: '' }
+                render json: { message: 'error' }
             end
         else
                 #Again, I did not use the error message here, I used the absence of a toekn to trigger error handling in frontend
-            render json: { error: '' }
+            render json: { message: 'error' }
         end
     end
 

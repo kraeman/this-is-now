@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {connect} from "react-redux"
 import { createNewValuePost } from '../../actions/createNewValue';
 
@@ -16,6 +15,7 @@ class NewValueForm extends Component {
             name: ''
         })
     }
+
     handleOnNameChange = (e) => {
         this.setState({
             name: e.target.value
@@ -59,18 +59,11 @@ class NewValueForm extends Component {
 }
 }
 
-function mapState(currentState){
-    return { 
-        token: currentState.user.token,
-        cid: currentState.user.id
-     }
-  }
-
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewValuePost: (name, cid, token) => dispatch(createNewValuePost(name, cid, token))
+        createNewValuePost: (name, creatorId, token) => dispatch(createNewValuePost(name, creatorId, token))
     }
   }
   
-  export default connect(mapState, mapDispatchToProps)(NewValueForm);
+  export default connect(null, mapDispatchToProps)(NewValueForm);

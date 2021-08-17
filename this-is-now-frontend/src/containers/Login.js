@@ -40,12 +40,13 @@ class Login extends Component {
 
 render() { 
   if (!!sessionStorage.getItem('token')) {
+    //Why do I fetch here instead of at activities page?
     this.props.fetchActivities(sessionStorage.getItem('token'))
     return <Redirect push to="/activities"/>
 }
   return (
 <>
-<Navbar location={"login"}/>
+<Navbar/>
 <Form  style={{
         backgroundColor: 'white',
         borderWidth: '5px',
@@ -76,16 +77,16 @@ render() {
 }
 
 function mapDispatchToProps(dispatch){
-    return { fetchUser: (UN, PW) => dispatch(fetchUser(UN, PW)),
-              fetchActivities: (token) => dispatch(fetchActivities(token))
+    return { 
+          fetchUser: (UN, PW) => dispatch(fetchUser(UN, PW)),
+          fetchActivities: (token) => dispatch(fetchActivities(token))
     }
   }
-
+//Left token in there so that page re-renders to redirect
   function mapState(currentState){
     return { 
-        token: currentState.user.token,
-        current_user_data: currentState.current_user_data
-     }
+        token: currentState.user.token
+        }
   }
   
 export default connect(mapState, mapDispatchToProps)(Login);

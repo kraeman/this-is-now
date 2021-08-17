@@ -1,31 +1,30 @@
 import { Link } from 'react-router-dom'
 
-const NRAL = (props) => {
-    const conditionalDeleteButton = (activity) => {
+const AllActivitiesList = (props) => {
+    const conditionalDeleteButtonIfCurrentUserIsCreator = (activity) => {
         
         if(activity.attributes.creator_id == parseInt(sessionStorage.getItem("id"))){
             return <button onClick={() => props.deleteActivityFetch(activity.id)}>Delete this Activity</button>
         }
     }
 
-    const createActivitiesFromList = () => {
+    const createActivityLinks = () => {
         return props.activities.map(activity => {
             
            return <li>
                <Link to={`/activities/${activity.id}`}>{activity.attributes.name}</Link>
-               {conditionalDeleteButton(activity)}
+               {conditionalDeleteButtonIfCurrentUserIsCreator(activity)}
             </li>
-            
         })
     }
     
     return (
         <div>
             <ul>
-                {createActivitiesFromList()}
+                {createActivityLinks()}
             </ul>
         </div>
     )
 }
 
-export default NRAL;
+export default AllActivitiesList;
