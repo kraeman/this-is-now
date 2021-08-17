@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { withRouter } from "react-router";
 import { Redirect } from 'react-router-dom'
-import ActivityContainer from '../containers/ActivityContainer'
+import ActivitiesValuesContainer from '../containers/ActivitiesValuesContainer'
 import SignUp from "./SignUp"
 import {compose} from 'redux'
 import {clearError} from '../actions/users'
+import PageNotFound from '../components/PageNotFound'
 import Login from "./Login"
 import ErrorPage from '../components/ErrorPage'
 import Activity from '../components/activities/Activity'
@@ -32,12 +33,15 @@ class App extends Component {
             </Route>
             
             <Route exact path="/activities" >
-                <ActivityContainer items={this.props.activities}/>
+                <ActivitiesValuesContainer />
             </Route>
             <Route  render={(props) => (
               <Activity props={props} activity={this.props.activities}/>
             )
             } path="/activities/:activityId" exact />
+            <Route render={(props) => (
+              <PageNotFound props={props}/>
+            )} />
           </Switch>
         </Router>
       </div>

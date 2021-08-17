@@ -16,7 +16,7 @@ import NewActivityForm from '../components/activities/NewActivityForm'
 import '../App.css'
 
 
-class ActivitiesContainer extends Component {
+class ActivitiesValuesContainer extends Component {
 
   state = {
     associatedValues: JSON.parse(sessionStorage.getItem('value_ids'))
@@ -57,6 +57,7 @@ class ActivitiesContainer extends Component {
 
   calculatedScores = () => {
     const rankedActivities = []
+    //Weird error with backing up and adding to score
     this.props.scores.forEach(score => {
       if (JSON.parse(sessionStorage.getItem('value_ids')).includes(score.attributes.value_id)){
         if (rankedActivities.find(activity => activity.id === score.attributes.activity_id)){
@@ -129,4 +130,4 @@ function mapDispatchToProps(dispatch){
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesValuesContainer);
