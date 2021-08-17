@@ -59,8 +59,8 @@ class ActivitiesContainer extends Component {
     const rankedActivities = []
     this.props.scores.forEach(score => {
       if (JSON.parse(sessionStorage.getItem('value_ids')).includes(score.attributes.value_id)){
-        if (rankedActivities.find(activity => activity.id == score.attributes.activity_id)){
-          rankedActivities.find(activity => activity.id == score.attributes.activity_id).score += score.attributes.score
+        if (rankedActivities.find(activity => activity.id === score.attributes.activity_id)){
+          rankedActivities.find(activity => activity.id === score.attributes.activity_id).score += score.attributes.score
         }else {
           rankedActivities.push({id: score.attributes.activity_id, score: score.attributes.score})
         }

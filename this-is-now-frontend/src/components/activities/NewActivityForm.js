@@ -109,7 +109,7 @@ class NewActivityForm extends Component {
                                         </div>
                                         <label className="col-md-4 control-label">Description</label>
                                         <div className="col-md-5">
-                                        <input
+                                        <textarea
                                             className="form-control"
                                             type="text"
                                             name="title"

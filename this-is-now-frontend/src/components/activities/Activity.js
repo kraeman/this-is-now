@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Activity = (props) => {
 
-    const activity = props.activity.find(activity => activity.id == props.props.match.params.activityId)
+    const activity = props.activity.find(activity => activity.id === props.props.match.params.activityId)
     
     return (
         <div>

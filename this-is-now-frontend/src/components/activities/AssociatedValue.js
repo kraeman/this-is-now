@@ -18,13 +18,13 @@ class AssociatedValue extends Component {
                 id: null
             })
         }else{
-        const value = this.props.all_values.find(value => value.id == e.target.value)
-        this.setState({
-            name: value.name,
-            score: this.state.score,
-            checkedIn: this.state.checkedIn,
-            id: value.id
-        })
+            const value = this.props.all_values.find(value => value.id === parseInt(e.target.value))
+            this.setState({
+                name: value.name,
+                score: this.state.score,
+                checkedIn: this.state.checkedIn,
+                id: value.id
+            })
     }
     }
 
@@ -42,7 +42,7 @@ class AssociatedValue extends Component {
             const unassociatedValueIds = this.props.all_values.filter(value => !alreadyAssociatedIds.includes(value.id))
             return unassociatedValueIds.map(value => {
                 //if the associated this associated values id matches the components value id, it will be the one selected. Otherwise it would disappear from select tag when value removed
-                return <option selected={this.state.id === value.id} key={value.id} id={value.id} value={value.id}>{value.name}</option>
+                return <option key={value.id} id={value.id} value={value.id}>{value.name}</option>
             })
         }
           
@@ -84,7 +84,7 @@ class AssociatedValue extends Component {
         <div id={this.state.id} className="container">
             <label for="values">Add a Value</label>
 
-            <select disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
+            <select defaultValue={this.state.id} disabled={this.state.checkedIn} onChange={(e) => this.handleOnNameChange(e)} name="values" id="values">
                 <option value={null}>{this.makeDefaultValueInSelectTheComponentsCheckedInValue()}</option>
                 {this.makeOptionForEveryRemainingValue()}
             </select>
