@@ -11,7 +11,7 @@ const ValuesList = (props) => {
     const createValuesFromList = () => {
         return props.values.sort((a, b) => (a.name > b.name) ? 1 : -1).map(value => {
             return <div>
-                        <input onChange={(e) => props.addOrRemoveFromUsersValues(value.id)} type="checkbox" checked={props.usersValues.includes(value.id)}  name={`${value.id}`} value={value.id}/>
+                        <input onChange={() => props.addOrRemoveFromUsersValues(value.id)} type="checkbox" checked={props.usersValues.includes(value.id)}  name={`${value.id}`} value={value.id}/>
                         <label for={`${value.id}`}> {value.name}</label><br></br>
                         {conditionallyShowDeleteButton(value)}
                    </div>

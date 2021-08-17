@@ -3,4 +3,5 @@ class Activity < ApplicationRecord
     has_many :values, through: :value_activities
     has_many :activity_users
     has_many :users, through: :activity_users
+    validates :name, uniqueness: true
 end
