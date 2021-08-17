@@ -24,7 +24,6 @@ export function createUser(username, password, checkPassword) {
         }}).catch(err => {
           dispatch(error(err))
         })
-
     };
   }
 
