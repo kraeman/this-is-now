@@ -1,14 +1,14 @@
-import {setCurrentUsersValues, getReadyToAddValueToCurrentUser} from "./index"
+import {updateCurrentUsersValues, getReadyToUpdateCurrentUsersValues, error} from "./index"
 
-export function messWithUsersValues(value, CUID, jwt) {
+export function updateUsersValues(value, userId, token) {
   
     return (dispatch) => {
-      dispatch(getReadyToAddValueToCurrentUser());
-      fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
+      dispatch(getReadyToUpdateCurrentUsersValues());
+      fetch(`http://localhost:3000/users/${parseInt(userId)}`, {
         method: 'POST',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": 'application/json'
         },
         body: JSON.stringify({value: {value}})
@@ -16,13 +16,13 @@ export function messWithUsersValues(value, CUID, jwt) {
         .then(response => response.json())
         .then(data => {
           if(!!data.message){
-            dispatch({type: "ERROR_B", payload: data.message})
+            dispatch(error(data.message))
           }else{
             sessionStorage.setItem('value_ids', JSON.stringify(data))
-            dispatch(setCurrentUsersValues(data))
+            dispatch(updateCurrentUsersValues(data))
         }
         }).catch(err => {
-          dispatch({type: "ERROR_F", payload: err})
+          dispatch(error(err))
         })
     };
   }

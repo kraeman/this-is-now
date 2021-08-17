@@ -1,26 +1,26 @@
-import {addActivity, getReadyToAddActivity, storeScores} from "./index"
+import {addActivity, getReadyToAddActivity, storeScores, error} from "./index"
 
-export function createNewActivityPost(name, description, valuesAndScoresArray, jwt) { 
+export function createNewActivityPost(name, description, valuesAndScores, token) { 
     return (dispatch) => {
       dispatch(getReadyToAddActivity());
       fetch('http://localhost:3000/activities', {
         method: 'POST',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": 'application/json'
         },
-        body: JSON.stringify({activity: {name, description, valuesAndScoresArray, jwt}})
+        body: JSON.stringify({activity: {name, description, valuesAndScores, token}})
       })
         .then(response => response.json())
         .then(data => {
           if(!!data.message){
-            dispatch({type: "ERROR_B", payload: data.message})
+            dispatch(error(data.message))
           }else{          
-          dispatch(addActivity(jwt, data))
+          dispatch(addActivity(token, data))
           dispatch(storeScores(data.scores.data))
         }}).catch(err => {
-          dispatch({type: "ERROR_F", payload: err})
+          dispatch(error(err))
         })
 
     };

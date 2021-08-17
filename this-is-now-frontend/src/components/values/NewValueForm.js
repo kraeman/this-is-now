@@ -61,7 +61,7 @@ class NewValueForm extends Component {
 
 function mapState(currentState){
     return { 
-        jwt: currentState.user.jwt,
+        token: currentState.user.token,
         cid: currentState.user.id
      }
   }
@@ -69,7 +69,7 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewValuePost: (name, cid, jwt) => dispatch(createNewValuePost(name, cid, jwt))
+        createNewValuePost: (name, cid, token) => dispatch(createNewValuePost(name, cid, token))
     }
   }
   

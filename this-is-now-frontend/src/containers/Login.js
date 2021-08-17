@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
-import { fetchToken } from '../actions/fetchToken';
+import { fetchUser } from '../actions/fetchUser';
 import  { Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Navbar from "./Navbar"
-import fetchAllActivities from '../actions/fetchAllActivities';
+import fetchActivities from '../actions/fetchActivities';
 
 
 class Login extends Component {
@@ -16,7 +16,7 @@ class Login extends Component {
 
   handleOnLogin = (e) => {
     e.preventDefault()
-    this.props.fetchToken(this.state.username, this.state.password)
+    this.props.fetchUser(this.state.username, this.state.password)
     this.setState({
         username: '',
         password: ''
@@ -40,7 +40,7 @@ class Login extends Component {
 
 render() { 
   if (!!sessionStorage.getItem('token')) {
-    this.props.fetchAllActivities(sessionStorage.getItem('token'))
+    this.props.fetchActivities(sessionStorage.getItem('token'))
     return <Redirect push to="/activities"/>
 }
   return (
@@ -76,14 +76,14 @@ render() {
 }
 
 function mapDispatchToProps(dispatch){
-    return { fetchToken: (UN, PW) => dispatch(fetchToken(UN, PW)),
-              fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
+    return { fetchUser: (UN, PW) => dispatch(fetchUser(UN, PW)),
+              fetchActivities: (token) => dispatch(fetchActivities(token))
     }
   }
 
   function mapState(currentState){
     return { 
-        jwt: currentState.user.jwt,
+        token: currentState.user.token,
         current_user_data: currentState.current_user_data
      }
   }

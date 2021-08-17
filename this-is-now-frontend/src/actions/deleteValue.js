@@ -1,31 +1,31 @@
-import {getReadyToDeleteValue, getReadyToDeleteValueFromUser, getReadyToDeleteValueFromScores, deleteValue, deleteValueFromScores, deleteValueFromUser} from "./index"
+import {getReadyToRemoveValueFromCurrentUsersValues, removeValueFromCurrentUser, getReadyToDeleteValue, getReadyToDeleteValueFromScores, deleteValue, deleteValueFromScores, error} from "./index"
 
-export function deleteValueFetch(value, jwt) {
+export function deleteValueFetch(value, token) {
     return (dispatch) => {
       dispatch(getReadyToDeleteValue());
       dispatch(getReadyToDeleteValueFromScores())
-      dispatch(getReadyToDeleteValueFromUser())
+      dispatch(getReadyToRemoveValueFromCurrentUsersValues())
       fetch(`http://localhost:3000/values/${value}`, {
         method: 'DELETE',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": 'application/json'
         }
       })
         .then(response => response.json())
         .then(data => {
           if(!!data.message){
-            dispatch({type: "ERROR_B", payload: data.message})
+            dispatch(error(data.message))
           }else{
-          const array = JSON.parse(sessionStorage.getItem('value_ids'))
-          const newArray = array.filter(vid => vid !== data)
-          sessionStorage.setItem('value_ids', JSON.stringify(newArray))
+          const valueIds = JSON.parse(sessionStorage.getItem('value_ids'))
+          const newValueIds = valueIds.filter(vid => vid !== data)
+          sessionStorage.setItem('value_ids', JSON.stringify(newValueIds))
           dispatch(deleteValue(data))
           dispatch(deleteValueFromScores(data))
-          dispatch(deleteValueFromUser(data))
+          dispatch(removeValueFromCurrentUser(data))
         }}).catch(err => {
-          dispatch({type: "ERROR_F", payload: err})
+          dispatch(error(err))
         })
 
     };

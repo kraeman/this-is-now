@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import  { Redirect } from 'react-router-dom'
-import fetchAllActivities from '../actions/fetchAllActivities';
+import fetchActivities from '../actions/fetchActivities';
 import {connect} from "react-redux"
 import { createUser } from '../actions/createUser';
 import Button from 'react-bootstrap/Button'
@@ -53,7 +53,7 @@ class SignUp extends Component {
 
     render() {
         if (!!sessionStorage.getItem('token')) {
-            this.props.fetchAllActivities(sessionStorage.getItem('token'))
+            this.props.fetchActivities(sessionStorage.getItem('token'))
             return <Redirect push to="/activities"/>
         }
     return (
@@ -95,7 +95,7 @@ class SignUp extends Component {
 
 function mapState(currentState){
     return { 
-        jwt: currentState.user.jwt,
+        token: currentState.user.token,
         current_user_data: currentState.current_user_data
      }
   }
@@ -104,7 +104,7 @@ function mapState(currentState){
 function mapDispatchToProps(dispatch){
     return {
         createUser: (UN, PW, CPW) => dispatch(createUser(UN, PW, CPW)),
-        fetchAllActivities: (jwt) => dispatch(fetchAllActivities(jwt))
+        fetchActivities: (token) => dispatch(fetchActivities(token))
     }
   }
   

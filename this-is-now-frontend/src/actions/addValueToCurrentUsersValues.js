@@ -1,14 +1,14 @@
-import {addValueToCurrentUser, getReadyToAddValueToCurrentUser} from "./index"
+import {addValueToCurrentUser, getReadyToUpdateCurrentUsersValues, error} from "./index"
 
 
-export function addValueToCurrentUsersValues(value, CUID, jwt) {
+export function addValueToCurrentUsersValues(value, userId, token) {
     return (dispatch) => {
-      dispatch(getReadyToAddValueToCurrentUser());
-      fetch(`http://localhost:3000/users/${parseInt(CUID)}`, {
+      dispatch(getReadyToUpdateCurrentUsersValues());
+      fetch(`http://localhost:3000/users/${parseInt(userId)}`, {
         method: 'POST',
         headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${jwt}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": 'application/json'
         },
         body: JSON.stringify({value: {value}})
@@ -16,17 +16,17 @@ export function addValueToCurrentUsersValues(value, CUID, jwt) {
         .then(response => response.json())
         .then(data => {
           if(!!data.message){
-            dispatch({type: "ERROR_B", payload: data.message})
+            dispatch(error(data.message))
           }else{
-          const array = JSON.parse(sessionStorage.getItem('value_ids'))
-          if (array){
-            array.push(data.value_id)
-            sessionStorage.setItem('value_ids', JSON.stringify(array))
+          const valueIds = JSON.parse(sessionStorage.getItem('value_ids'))
+          if (valueIds){
+            valueIds.push(data.value_id)
+            sessionStorage.setItem('value_ids', JSON.stringify(valueIds))
             dispatch(addValueToCurrentUser(data))
           }
         }
         }).catch(err => {
-          dispatch({type: "ERROR_F", payload: err})
+          dispatch(error(err))
         })
 
     };

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
             user = User.create(username: user_params[:username], password: user_params[:password])
             if user.valid?
                 token = encode_token(user_id: user.id)
-                render json: { username: user.username, user_id: user.id, jwt: token }, status: :created
+                render json: { username: user.username, user_id: user.id, token: token }, status: :created
             else
                 #Again, I did not use the error message here, I used the absence of a toekn to trigger error handling in frontend
                 render json: { error: '' }

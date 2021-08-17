@@ -1,10 +1,10 @@
 import {DELETE_VALUE_FROM_SCORES, GET_READY_TO_DELETE_VALUE_FROM_SCORES } from "./actionTypes"
 
 
-export function deleteValueFromScores(vid){
+export function deleteValueFromScores(valueId){
     return {
         type: DELETE_VALUE_FROM_SCORES,
-        payload: vid
+        payload: valueId
     }
 }
 

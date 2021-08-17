@@ -37,11 +37,6 @@ export const activities = (state = {activities: [], requesting: false}, action) 
                     activities: action.payload,
                     requesting: false
                 } 
-        case REMOVE_ACTIVITY:
-            return state.filter(activity => activity.id !== action.payload)
-        case UPDATE_ACTIVITY:
-            const index = state.findIndex(activity => activity.id === action.payload.activityId)
-            return 
         default:
             return state
     }

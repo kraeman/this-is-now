@@ -4,7 +4,7 @@ const NRAL = (props) => {
     const conditionalDeleteButton = (activity) => {
         
         if(activity.attributes.creator_id == parseInt(sessionStorage.getItem("id"))){
-            return <button onClick={() => props.deleteA(activity.id)}>Delete this Activity</button>
+            return <button onClick={() => props.deleteActivityFetch(activity.id)}>Delete this Activity</button>
         }
     }
 

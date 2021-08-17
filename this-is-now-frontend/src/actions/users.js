@@ -1,4 +1,4 @@
-import {DELETE_VALUE_FROM_USER, GET_READY_TO_DELETE_VALUE_FROM_USER, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, SCU, STORE_TOKEN2, GRTSCU, ADD_USER, LOGIN_USER, GET_READY_TO_LOGIN_USER, GET_READY_TO_ADD_USER, LOGOUT, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_ADD_VALUE_TO_CURRENT_USER, ADD_VALUE_TO_CURRENT_USER} from "./actionTypes"
+import {CLEAR_ERROR, UPDATE_USERS_VALUES, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, ERROR, REMOVE_VALUE_FROM_CURRENT_USER, ADD_USER, GET_READY_TO_ADD_USER, LOGOUT, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_UPDATE_CURRENT_USERS_VALUES, ADD_VALUE_TO_CURRENT_USER} from "./actionTypes"
 
 export function addUser(user){
     return {
@@ -6,20 +6,6 @@ export function addUser(user){
         payload: user
     }
 }
-
-export function loginUser(user){
-    return {
-        type: LOGIN_USER,
-        payload: user
-    }
-}
-
-export function getReadyToLoginUser(){
-    return {
-        type: GET_READY_TO_LOGIN_USER
-    }
-}
-
 
 export function getReadyToAddUser(){
     return {
@@ -42,12 +28,6 @@ export function storeToken(data){
     }
 }
 
-export function storeToken2(data){
-    return {
-        type: STORE_TOKEN2,
-        payload: data
-    }
-}
 
 export function addValueToCurrentUser(value){
     return {
@@ -56,24 +36,12 @@ export function addValueToCurrentUser(value){
     }
 }
 
-export function getReadyToAddValueToCurrentUser(){
+export function getReadyToUpdateCurrentUsersValues(){
     return {
-        type: GET_READY_TO_ADD_VALUE_TO_CURRENT_USER
+        type: GET_READY_TO_UPDATE_CURRENT_USERS_VALUES
     }
 }
 
-export function grtscu(){
-    return {
-        type: GRTSCU
-    }
-}
-
-export function scu(userData){
-    return {
-        type: SCU,
-        payload: userData
-    }
-}
 
 export function logout(){
     sessionStorage.removeItem('token');
@@ -85,10 +53,10 @@ export function logout(){
     }
 }
 
-export function removeValueFromCurrentUser(id){
+export function removeValueFromCurrentUser(valueId){
     return{
         type:REMOVE_VALUE_FROM_CURRENT_USER,
-        payload: id
+        payload: valueId
     }
 }
 
@@ -98,29 +66,22 @@ export function getReadyToRemoveValueFromCurrentUsersValues(){
     }
 }
 
-export function getReadyToDeleteValueFromUser(){
+export function error(err){
     return {
-        type: GET_READY_TO_DELETE_VALUE_FROM_USER
+        type: ERROR,
+        payload: err
     }
 }
-
-export function deleteValueFromUser(vid){
-    return {
-        type: DELETE_VALUE_FROM_USER,
-        payload: vid
-    }
-}
-
 
 export function clearError(){
     return {
-        type: "CLEAR_ERROR"
+        type: CLEAR_ERROR
     }
 }
 
-export function setCurrentUsersValues(data){
+export function updateCurrentUsersValues(data){
     return {
-        type: "SET_CUV",
+        type: UPDATE_USERS_VALUES,
         payload: data
     }
 }

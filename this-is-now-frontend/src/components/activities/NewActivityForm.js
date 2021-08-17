@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { createNewActivityPost } from "../../actions/createNewActivity";
 import AssociatedValue from './AssociatedValue';
-import fetchAllValues from '../../actions/fetchAllValues'
-import fetchScores from '../../actions/fetchScores';
 
 class NewActivityForm extends Component {
 
@@ -145,7 +143,7 @@ class NewActivityForm extends Component {
 
 function mapState(currentState){
     return { 
-        jwt: currentState.user.jwt,
+        token: currentState.user.token,
         current_user_data: currentState.user.current_user_data,
         all_values: currentState.values.values,
         requesting: currentState.requesting
@@ -154,9 +152,7 @@ function mapState(currentState){
 
 function mapDispatchToProps(dispatch){
     return {
-        createNewActivityPost: (name, description, valuesObjects, jwt) => dispatch(createNewActivityPost(name, description, valuesObjects, jwt)),
-        fetchAllValues: (jwt) => dispatch(fetchAllValues(jwt)),
-        fetchScores: (jwt) => dispatch(fetchScores(jwt))
+        createNewActivityPost: (name, description, valuesObjects, token) => dispatch(createNewActivityPost(name, description, valuesObjects, token)),
     }
   }
   

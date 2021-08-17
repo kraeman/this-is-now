@@ -1,6 +1,6 @@
-import {getReadyToStoreToken, storeToken} from "./index"
+import {getReadyToStoreToken, storeToken, error} from "./index"
 
-export function fetchToken(username, password) {
+export function fetchUser(username, password) {
     return (dispatch) => {
       dispatch(getReadyToStoreToken());
       fetch('http://localhost:3000/login', {
@@ -12,17 +12,17 @@ export function fetchToken(username, password) {
       })
         .then(response => response.json())
         .then(data => {
-          if(!data.jwt){
-            dispatch({type: "ERROR_B", payload: "data.message"})
+          if(!data.token){
+            dispatch(error(data.message))
           }else{
-          sessionStorage.setItem('token', data.jwt)
+          sessionStorage.setItem('token', data.token)
           sessionStorage.setItem('id', data.user_id)
           sessionStorage.setItem('username', data.username)
           sessionStorage.setItem('value_ids', JSON.stringify(data.value_ids))
           dispatch(storeToken(data))
           }
         }).catch(err => {
-          dispatch({type: "ERROR_F", payload: err})
+          dispatch(error(err))
         })
     };
   }
