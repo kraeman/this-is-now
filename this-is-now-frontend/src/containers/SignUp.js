@@ -54,7 +54,7 @@ class SignUp extends Component {
     render() {
         if (!!sessionStorage.getItem('token')) {
             this.props.fetchActivities(sessionStorage.getItem('token'))
-            return <Redirect push to="/activities"/>
+            return <Redirect push to={`/users/${sessionStorage.getItem('username')}`}/>
         }
         return (
             

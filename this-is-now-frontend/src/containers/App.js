@@ -32,7 +32,7 @@ class App extends Component {
                 <SignUp />
             </Route>
             
-            <Route exact path="/activities" >
+            <Route exact path="/users/:username" >
                 <ActivitiesValuesContainer />
             </Route>
             <Route  render={(props) => (

@@ -35,14 +35,14 @@ const Activity = (props) => {
                 
                 <h3>{activity.attributes.description}</h3>
                 <br></br>
-                <Link to={`/activities`}>Back To Main Page</Link>
+                <Link to={`/users/${sessionStorage.getItem('username')}`}>Back To Main Page</Link>
                 <br></br><br></br>
                 {/* <ul>{makeListOfAssociatedValues}</ul> */}
                 </Stack>
             </div>
         )
     }else{
-        return <Redirect push to="/activities"/>
+        return <Redirect push to={`/users/${sessionStorage.getItem('username')}`}/>
     }
 }
 
