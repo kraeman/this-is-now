@@ -7,11 +7,7 @@ export const user = (state = {token: null, username: null, value_ids: [], reques
                 ...state,
                 requesting: true
             }  
-            case ADD_VALUE_TO_CURRENT_USER:
-            return {
-                ...state,
-                value_ids: [...state.value_ids, action.payload.value_id]
-            }
+            
         case STORE_TOKEN:
             return {
                 token: action.payload.token,
@@ -41,7 +37,8 @@ export const user = (state = {token: null, username: null, value_ids: [], reques
             case REMOVE_VALUE_FROM_CURRENT_USER:
                 return {
                     ...state,
-                    value_ids: [...state.value_ids.filter(value => value !== action.payload)]
+                    value_ids: [...state.value_ids.filter(value => value !== action.payload)],
+                    requesting: false
                 }    
                 
 
@@ -77,7 +74,8 @@ export const user = (state = {token: null, username: null, value_ids: [], reques
                 
                 return {
                     ...state,
-                    value_ids: action.payload
+                    value_ids: action.payload,
+                    requesting: false
                 }
 
         default:

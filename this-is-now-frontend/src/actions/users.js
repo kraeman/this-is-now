@@ -1,4 +1,4 @@
-import {CLEAR_ERROR, UPDATE_USERS_VALUES, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, ERROR, REMOVE_VALUE_FROM_CURRENT_USER, ADD_USER, GET_READY_TO_ADD_USER, LOGOUT, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_UPDATE_CURRENT_USERS_VALUES, ADD_VALUE_TO_CURRENT_USER} from "./actionTypes"
+import {CLEAR_ERROR, GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER, REMOVE_VALUE_FROM_CURRENT_USER, UPDATE_USERS_VALUES, ERROR, ADD_USER, GET_READY_TO_ADD_USER, LOGOUT, STORE_TOKEN, GET_READY_TO_STORE_TOKEN, GET_READY_TO_UPDATE_CURRENT_USERS_VALUES} from "./actionTypes"
 
 export function addUser(user){
     return {
@@ -29,10 +29,16 @@ export function storeToken(data){
 }
 
 
-export function addValueToCurrentUser(value){
+export function removeValueFromCurrentUser(valueId){
+    return{
+        type:REMOVE_VALUE_FROM_CURRENT_USER,
+        payload: valueId
+    }
+}
+
+export function getReadyToRemoveValueFromCurrentUsersValues(){
     return {
-        type: ADD_VALUE_TO_CURRENT_USER,
-        payload: value
+        type: GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER
     }
 }
 
@@ -53,18 +59,8 @@ export function logout(){
     }
 }
 
-export function removeValueFromCurrentUser(valueId){
-    return{
-        type:REMOVE_VALUE_FROM_CURRENT_USER,
-        payload: valueId
-    }
-}
 
-export function getReadyToRemoveValueFromCurrentUsersValues(){
-    return {
-        type: GET_READY_TO_REMOVE_VALUE_FROM_CURRENT_USER
-    }
-}
+
 
 export function error(err){
     return {

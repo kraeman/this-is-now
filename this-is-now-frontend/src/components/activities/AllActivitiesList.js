@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import {Stack} from "stack-styled"
+
 
 const AllActivitiesList = (props) => {
     const conditionalDeleteButtonIfCurrentUserIsCreator = (activity) => {
@@ -20,9 +22,15 @@ const AllActivitiesList = (props) => {
     
     return (
         <div>
+            <br/><br/><br/><br/>
+            <h4>All Activities</h4>
+            <Stack>
+        <Stack gridGap={3}>
             <ul>
                 {createActivityLinks()}
             </ul>
+            </Stack>
+            </Stack>
         </div>
     )
 }

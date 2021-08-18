@@ -80,13 +80,18 @@ deleteActivity = (activityId) => {
   }
       return (
         <>
-          <div className='rowC' style={{
-            backgroundColor: 'white',
-            borderWidth: '5px',
-            borderColor:'#aaaaaa', 
-            borderStyle:'solid',
-          }}>
-            <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
+        <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
+          <div className='rowC' id='value_container' style={{
+                backgroundColor: 'white',
+                borderWidth: '5px',
+                borderColor:'#aaaaaa', 
+                borderStyle:'solid',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'absolute', left: '70%', top: '12%',
+                transform: 'translate(-50%, -50%)'
+              }}>
+            
             <NewActivityForm createNewActivity={this.createNewActivity} />
             <br/>
             <RankedActivitiesList activities={this.props.activities} rankedActivities={this.calculatedScores()}/>
@@ -99,10 +104,11 @@ deleteActivity = (activityId) => {
   borderWidth: '5px',
   borderColor:'#aaaaaa', 
   borderStyle:'solid',
+  position: 'absolute', left: '0%'
 }}>
   <NewValueForm/>
   <br/><br/>
-  <ValuesList addOrRemoveFromUsersValues={this.addOrRemoveFromUsersValues} updateUserValues={this.updateUserValues} usersValues={this.state.associatedValues} callback={this.props.addValueToCurrentUsersValues} deleteValue={this.deleteValue} values={this.props.values}/>
+  <ValuesList addOrRemoveFromUsersValues={this.addOrRemoveFromUsersValues} updateUserValues={this.updateUserValues} usersValues={this.state.associatedValues} deleteValue={this.deleteValue} values={this.props.values}/>
 </div>
 </>
       );

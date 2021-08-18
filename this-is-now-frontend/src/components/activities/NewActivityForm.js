@@ -38,6 +38,7 @@ class NewActivityForm extends Component {
             // if(!this.props.requesting){
                 const arrayOfAssociatedValueComponents = []
                 for (let i = 0; i < this.state.numberOfValuesAddedToActivity; i++) {
+                    //Why did I not make a form?
                     arrayOfAssociatedValueComponents.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut} all_values={this.props.all_values} associatedValues={this.state.associatedValues}/>)
                 }
                 return arrayOfAssociatedValueComponents

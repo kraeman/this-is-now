@@ -9,20 +9,21 @@ const RankedActivitiesList = (props) => {
         return props.rankedActivities.map(rankedActivity => {
             const activity = props.activities.find(activity => parseInt(activity.id) === rankedActivity.id)
             if(activity && parseInt(activity.id) === rankedActivity.id){
-                return <div key={rankedActivity.id}>
-                            <br/>
-                            {activity.attributes.name}......Score: {rankedActivity.score}
-                            <Link to={`/activities/${activity.id}`}>Check it out!</Link>
-                        </div>
+                return <li key={rankedActivity.id}>
+                            <Link to={`/activities/${activity.id}`}>{activity.attributes.name}</Link>......<mark>Score: {rankedActivity.score}</mark>
+                            
+                        </li>
                 }})
     }
     
     return (
         <div>
-        <Stack>
         <br/><br/><br/><br/>
+            <h4>Your Suggested Activities</h4>
+        <Stack>
         <Stack gridGap={3}>
-            {createActivitiesFromList()}
+            <ul>{createActivitiesFromList()}</ul>
+            
         </Stack>
         </Stack>
         </div>
