@@ -7,7 +7,6 @@ import SignUp from "./SignUp"
 import {compose} from 'redux'
 import {clearError} from '../actions/users'
 import PageNotFound from '../components/PageNotFound'
-import fetchActivities from '../actions/fetchActivities'
 import Login from "./Login"
 import ErrorPage from '../components/ErrorPage'
 import Activity from '../components/activities/Activity'
@@ -37,7 +36,7 @@ class App extends Component {
                 <ActivitiesValuesContainer />
             </Route>
             <Route  render={(props) => (
-              <Activity fetchActivities={this.props.fetchActivities} requesting={this.props.requestingActivities} props={props} scores={this.props.scores} values={this.props.values} activities={this.props.activities}/>
+              <Activity requesting={this.props.requestingActivities} props={props} activities={this.props.activities}/>
             )
             } path="/activities/:activityId" exact />
             <Route render={(props) => (
@@ -63,7 +62,6 @@ const mapStateToProps = (currentState) => {
 
 function mapDispatch(dispatch){
   return { 
-    fetchActivities: (token) => dispatch(fetchActivities(token)),
     clearError: () => dispatch(clearError())
   }
 }

@@ -1,9 +1,9 @@
 import {ADD_ACTIVITY, DELETE_ACTIVITY, GET_READY_TO_STORE_ACTIVITIES, GET_READY_TO_STORE_SCORES, STORE_SCORES, STORE_ACTIVITIES, GET_READY_TO_ADD_ACTIVITY, GET_READY_TO_DELETE_ACTIVITY} from "./actionTypes"
 
-export function addActivity(token, activity){
+export function addActivity(activity){
     return {
         type: ADD_ACTIVITY,
-        payload: {token, activity}
+        payload: {activity}
     }
 }
 

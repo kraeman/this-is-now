@@ -49,7 +49,8 @@ class AssociatedValue extends Component {
     }
 
     onSubmit = (e) => {
-        if(!this.state.checkedIn && this.state.id !== null){
+        
+        if(!this.state.checkedIn && this.state.id !== null && !this.props.associatedValues.map(value => value.id).includes(this.state.id)){
             this.setState({
                 name: this.state.name,
                 score: this.state.score,

@@ -8,7 +8,8 @@ export const scores = (state = {scores: [], requesting: false}, action) => {
                 requesting: true
             }
         case STORE_SCORES:
-            return {...state,
+            return {
+                ...state,
                 scores: [...state.scores, ...action.payload],
                 requesting: false
             }   

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux"
+import { createNewActivityPost } from "../../actions/createNewActivity";
 import AssociatedValue from './AssociatedValue';
 
 class NewActivityForm extends Component {
@@ -49,7 +50,7 @@ class NewActivityForm extends Component {
     handleOnSubmit = (e) => {
         e.preventDefault()
         if(this.state.associatedValues.length > 0){
-            this.props.createNewActivity(this.state.name, this.state.description, this.state.associatedValues)
+            this.props.createNewActivityPost(this.state.name, this.state.description, this.state.associatedValues, sessionStorage.getItem('token'))
             this.setState({
                 name: '',
                 description: '',
@@ -137,6 +138,11 @@ class NewActivityForm extends Component {
     )
     }
 }
+function mapDispatchToProps(dispatch){
+    return {
+        createNewActivityPost: (name, description, associatedValues, token) => dispatch(createNewActivityPost(name, description, associatedValues, token)),
+    }
+  }
 
 function mapState(currentState){
     return { 
@@ -145,4 +151,4 @@ function mapState(currentState){
      }
   }
   
-export default connect(mapState)(NewActivityForm);
+export default connect(mapState, mapDispatchToProps)(NewActivityForm);

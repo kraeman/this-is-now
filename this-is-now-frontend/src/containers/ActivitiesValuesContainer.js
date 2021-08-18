@@ -22,9 +22,6 @@ class ActivitiesValuesContainer extends Component {
     associatedValues: JSON.parse(sessionStorage.getItem('value_ids'))
   }
 
-  createNewActivity = (name, description, associatedValues) => {
-    this.props.createNewActivityPost(name, description, associatedValues, sessionStorage.getItem('token'))
-  }
 
   deleteValue = (valueId) => {
     this.props.deleteValueFetch(valueId, sessionStorage.getItem('token'))
@@ -92,7 +89,7 @@ deleteActivity = (activityId) => {
                 transform: 'translate(-50%, -50%)'
               }}>
             
-            <NewActivityForm createNewActivity={this.createNewActivity} />
+            <NewActivityForm />
             <br/>
             <RankedActivitiesList activities={this.props.activities} rankedActivities={this.calculatedScores()}/>
             <br/>
@@ -127,7 +124,6 @@ function mapStateToProps(currentState){
 function mapDispatchToProps(dispatch){
   return {
       fetchActivities: (token) => dispatch(fetchActivities(token)),
-      createNewActivityPost: (name, description, associatedValues, token) => dispatch(createNewActivityPost(name, description, associatedValues, token)),
       logout: () => dispatch(logout()),
       deleteValueFetch: (valueId, token) => dispatch (deleteValueFetch(valueId, token)),
       putUserInStoreAfterPageRefresh: (token, username, value_ids) => dispatch(putUserInStoreAfterPageRefresh(token, username, value_ids)),

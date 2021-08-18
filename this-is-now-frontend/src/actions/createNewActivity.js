@@ -17,7 +17,7 @@ export function createNewActivityPost(name, description, valuesAndScores, token)
           if(!!data.message){
             dispatch(error(data.message))
           }else{          
-          dispatch(addActivity(token, data))
+          dispatch(addActivity(data))
           dispatch(storeScores(data.scores.data))
         }}).catch(err => {
           dispatch(error(err))

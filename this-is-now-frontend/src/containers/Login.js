@@ -41,7 +41,7 @@ class Login extends Component {
 render() { 
   if (!!sessionStorage.getItem('token')) {
     //Why do I fetch here instead of at activities page?
-    this.props.fetchActivities(sessionStorage.getItem('token'))
+    // this.props.fetchActivities(sessionStorage.getItem('token'))
     return <Redirect push to="/activities"/>
 }
   return (
