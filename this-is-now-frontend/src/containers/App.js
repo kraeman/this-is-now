@@ -36,7 +36,7 @@ class App extends Component {
                 <ActivitiesValuesContainer />
             </Route>
             <Route  render={(props) => (
-              <Activity props={props} activity={this.props.activities}/>
+              <Activity props={props} scores={this.props.scores} values={this.props.values} activity={this.props.activities}/>
             )
             } path="/activities/:activityId" exact />
             <Route render={(props) => (
@@ -52,7 +52,9 @@ class App extends Component {
 const mapStateToProps = (currentState) => {
   return {
     activities: currentState.activities.activities,
-    error: currentState.user.error
+    error: currentState.user.error,
+    values: currentState.values.values,
+    scores: currentState.scores.scores
   }
 }
 
