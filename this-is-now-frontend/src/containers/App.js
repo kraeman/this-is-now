@@ -36,7 +36,6 @@ class App extends Component {
                 <ActivitiesValuesContainer />
             </Route>
             <Route  render={(props) => (
-              //Maybe Activity should be a class component
               <Activity requesting={this.props.requestingActivities} props={props} activities={this.props.activities}/>
             )
             } path="/activities/:activityId" exact />

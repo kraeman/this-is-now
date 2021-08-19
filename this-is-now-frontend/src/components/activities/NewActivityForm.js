@@ -36,14 +36,11 @@ class NewActivityForm extends Component {
 
         makeAssociatedValuesBasedOnNumberAssociated = () => {
             //numberOfValuesAddedToActivity and the length of this.state.associatedValues is different because one is checked in values and one is number of components regardless of checked in or out
-            // if(!this.props.requesting){
                 const arrayOfAssociatedValueComponents = []
                 for (let i = 0; i < this.state.numberOfValuesAddedToActivity; i++) {
-                    //Why did I not make a form?
                     arrayOfAssociatedValueComponents.push(<AssociatedValue key={i} checkIn={this.checkIn} checkOut={this.checkOut} all_values={this.props.all_values} associatedValues={this.state.associatedValues}/>)
                 }
                 return arrayOfAssociatedValueComponents
-            // }
         }
 
 
@@ -147,7 +144,6 @@ function mapDispatchToProps(dispatch){
 function mapState(currentState){
     return { 
         all_values: currentState.values.values
-        // requesting: currentState.requesting
      }
   }
   

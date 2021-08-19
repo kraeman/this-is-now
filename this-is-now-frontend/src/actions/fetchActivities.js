@@ -16,7 +16,6 @@ export default function fetchActivities(token) {
           if(!!data.message){
             dispatch(error(data.message))
           }else{
-            //Serializer needs work
           dispatch(storeActivities(data[2].data))
           dispatch(storeScores(data[0].data))
           dispatch(storeValues(data[1].data))
