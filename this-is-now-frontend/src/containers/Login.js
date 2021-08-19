@@ -42,21 +42,21 @@ render() {
   if (!!sessionStorage.getItem('token') && this.props.scores.length === 0) {
     this.props.fetchActivities(sessionStorage.getItem('token'))
     return <Redirect push to={`/users/${sessionStorage.getItem('username')}`}/>
-}else if(!!sessionStorage.getItem('token') && this.props.scores.length > 0){
-  return <Redirect push to={`/users/${sessionStorage.getItem('username')}`}/>
-}
+  }else if(!!sessionStorage.getItem('token') && this.props.scores.length > 0){
+    return <Redirect push to={`/users/${sessionStorage.getItem('username')}`}/>
+  }
   return (
 <>
 <Navbar/>
-<Form  style={{
+<Form  onSubmit={(e) => this.handleOnLogin(e)}
+  style={{
         backgroundColor: 'white',
         borderWidth: '5px',
         borderColor:'#aaaaaa', 
         borderStyle:'solid',
         position: 'absolute', left: '50%', top: '30%',
         transform: 'translate(-50%, -50%)'
-        
-      }} onSubmit={(e) => this.handleOnLogin(e)} className="LogIn">
+      }}  className="LogIn">
                 <Form.Group className="mb-3" controlId="formBasicUsername">
                     <Form.Label>Username   </Form.Label>
                     <Form.Control size="lg"  value={this.state.username} onChange={(e) => this.handleUsernameChange(e)}/>

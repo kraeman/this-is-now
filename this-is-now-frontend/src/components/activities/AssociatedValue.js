@@ -80,7 +80,6 @@ class AssociatedValue extends Component {
     }
     
     render() {
-    
     return(
         <div id={this.state.id} className="container">
             <label for="values">Add a Value</label>

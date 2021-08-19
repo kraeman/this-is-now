@@ -15,7 +15,6 @@ const RankedActivitiesList = (props) => {
                         </li>
                 }})
     }
-    
     return (
         <div>
         <br/><br/><br/><br/>

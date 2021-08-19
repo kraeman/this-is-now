@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {connect} from "react-redux"
 import { Redirect } from 'react-router-dom'
 import fetchActivities from '../actions/fetchActivities'
-import { createNewActivityPost } from "../actions/createNewActivity";
 import ValuesList from '../components/values/ValuesList'
 import {deleteValueFetch} from '../actions/deleteValue'
 import NewValueForm from '../components/values/NewValueForm'
