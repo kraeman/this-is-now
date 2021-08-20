@@ -39,8 +39,8 @@ class AssociatedValue extends Component {
     makeOptionForEveryRemainingValue = () => {
         if(!!this.props.all_values || this.props.all_values !== []) {
             const alreadyAssociatedIds = this.props.associatedValues.map(value => value.id)
-            const unassociatedValueIds = this.props.all_values.filter(value => !alreadyAssociatedIds.includes(value.id))
-            return unassociatedValueIds.map(value => {
+            const unassociatedValues = this.props.all_values.filter(value => !alreadyAssociatedIds.includes(value.id))
+            return [...unassociatedValues].sort((a, b) => (a.name > b.name) ? 1 : -1).map(value => {
                 //if the associated this associated values id matches the components value id, it will be the one selected. Otherwise it would disappear from select tag when value removed
                 return <option key={value.id} id={value.id} value={value.id}>{value.name}</option>
             })
