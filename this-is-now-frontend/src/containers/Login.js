@@ -4,7 +4,7 @@ import { fetchUser } from '../actions/fetchUser';
 import  { Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Navbar from "./Navbar"
+import Navbar from "../components/Navbar"
 import fetchActivities from '../actions/fetchActivities';
 
 

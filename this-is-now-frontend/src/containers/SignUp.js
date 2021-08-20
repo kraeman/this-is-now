@@ -5,8 +5,7 @@ import {connect} from "react-redux"
 import { createUser } from '../actions/createUser';
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import Navbar from "./Navbar"
-
+import Navbar from "../components/Navbar"
 
 class SignUp extends Component {
 
