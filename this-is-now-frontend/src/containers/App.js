@@ -32,9 +32,10 @@ class App extends Component {
                 <SignUp />
             </Route>
             
-            <Route exact path={`/users/${sessionStorage.getItem('username')}`} >
-                <ActivitiesValuesContainer />
-            </Route>
+            <Route render={(props) => (
+              <ActivitiesValuesContainer props={props} />
+            )} exact path='/users/:username' />
+            
             <Route  render={(props) => (
               <Activity requesting={this.props.requestingActivities} props={props} activities={this.props.activities}/>
             )
