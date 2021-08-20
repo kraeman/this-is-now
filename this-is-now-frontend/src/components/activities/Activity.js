@@ -26,7 +26,6 @@ const Activity = (props) => {
                 <br></br>
                 <Link to={`/users/${sessionStorage.getItem('username')}`}>Back To Main Page</Link>
                 <br></br><br></br>
-                {/* <ul>{makeListOfAssociatedValues}</ul> */}
                 </Stack>
             </div>
         )
