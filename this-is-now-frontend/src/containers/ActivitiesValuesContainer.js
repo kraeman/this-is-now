@@ -13,6 +13,7 @@ import AllActivitiesList from '../components/activities/AllActivitiesList';
 import RankedActivitiesList from '../components/activities/RankedActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
 import '../App.css'
+import LetterAdder from './LetterAdder';
 
 
 class ActivitiesValuesContainer extends Component {
@@ -75,6 +76,7 @@ deleteActivity = (activityId) => {
   }
       return (
         <>
+        <LetterAdder/>
         <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <div className='rowC' id='value_container' style={{
                 backgroundColor: 'white',

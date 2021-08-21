@@ -12,7 +12,7 @@ const AllActivitiesList = (props) => {
 
     const createActivityLinks = () => {
         return props.activities.map(activity => {
-            
+ 
            return <li key={activity.id}>
                <Link to={`/activities/${activity.id}`}>{activity.attributes.name}</Link>
                {conditionalDeleteButtonIfCurrentUserIsCreator(activity)}
