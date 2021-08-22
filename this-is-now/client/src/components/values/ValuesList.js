@@ -27,7 +27,7 @@ const ValuesList = (props) => {
         <div>
             <ConfirmDialog
                 title="Delete Value?"
-                valueId={state.valueId}
+                iD={state.valueId}
                 open={state.open}
                 setOpen={setOpen}
                 onConfirm={props.deleteValue}

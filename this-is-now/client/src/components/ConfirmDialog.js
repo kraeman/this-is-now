@@ -4,7 +4,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 const ConfirmDialog = (props) => {
-    const { title, open, valueId, setOpen, onConfirm } = props;
+    const { title, open, iD, setOpen, onConfirm } = props;
     return (
     <Dialog
       open={open}
@@ -27,7 +27,7 @@ const ConfirmDialog = (props) => {
           variant="contained"
           onClick={() => {
             setOpen(false);
-            onConfirm(valueId);
+            onConfirm(iD);
           }}
           color="default"
         >
