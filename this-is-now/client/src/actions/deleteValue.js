@@ -4,7 +4,6 @@ export function deleteValueFetch(value, token) {
     return (dispatch) => {
       dispatch(getReadyToDeleteValue());
       dispatch(getReadyToDeleteValueFromScores())
-      dispatch(getReadyToRemoveValueFromCurrentUsersValues())
       fetch(`http://localhost:3001/values/${value}`, {
         method: 'DELETE',
         headers: {
@@ -23,7 +22,6 @@ export function deleteValueFetch(value, token) {
           sessionStorage.setItem('value_ids', JSON.stringify(newValueIds))
           dispatch(deleteValue(data))
           dispatch(deleteValueFromScores(data))
-          dispatch(removeValueFromCurrentUser(data))
         }}).catch(err => {
           dispatch(error(err))
         })

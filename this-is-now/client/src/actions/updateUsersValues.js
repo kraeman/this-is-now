@@ -3,7 +3,6 @@ import {updateCurrentUsersValues, getReadyToUpdateCurrentUsersValues, error} fro
 export function updateUsersValues(value, userId, token) {
   
     return (dispatch) => {
-      dispatch(getReadyToUpdateCurrentUsersValues());
       fetch(`http://localhost:3001/users/${parseInt(userId)}`, {
         method: 'POST',
         headers: {
@@ -19,7 +18,6 @@ export function updateUsersValues(value, userId, token) {
             dispatch(error(data.message))
           }else{
             sessionStorage.setItem('value_ids', JSON.stringify(data))
-            dispatch(updateCurrentUsersValues(data))
         }
         }).catch(err => {
           dispatch(error(err))

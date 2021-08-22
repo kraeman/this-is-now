@@ -13,7 +13,6 @@ import AllActivitiesList from '../components/activities/AllActivitiesList';
 import RankedActivitiesList from '../components/activities/RankedActivitiesList'
 import NewActivityForm from '../components/activities/NewActivityForm'
 import '../App.css'
-import LetterAdder from './LetterAdder';
 
 
 class ActivitiesValuesContainer extends Component {
@@ -45,7 +44,7 @@ class ActivitiesValuesContainer extends Component {
 
   componentDidMount = () => {
     //Only runs if user accidentally refreshes page and clears redux store
-    if(!!sessionStorage.getItem('token') && !this.props.current_user.username){
+    if(!!sessionStorage.getItem('token') && !this.props.current_user.token){
       this.props.putUserInStoreAfterPageRefresh(sessionStorage.getItem("token"), sessionStorage.getItem("username"), JSON.parse(sessionStorage.getItem("value_ids")))
       this.props.fetchActivities(sessionStorage.getItem("token"))
     }
@@ -76,7 +75,6 @@ deleteActivity = (activityId) => {
   }
       return (
         <>
-        <LetterAdder/>
         <button onClick={() => this.props.logout()} style={{maxHeight: "30px"}}>Log Out</button>
           <div className='rowC' id='value_container' style={{
                 backgroundColor: 'white',
