@@ -1,10 +1,14 @@
 import {Stack} from "stack-styled"
+import React, { useState } from 'react';
+import ConfirmDialog from "../ConfirmDialog"
 
 const ValuesList = (props) => {
-    
+
+    const [state, setOpen] = useState({open: false, valueId: null});
+
     const conditionallyShowDeleteButton = (value) => {  
         if(value.creator_id === parseInt(sessionStorage.getItem("id"))){
-            return <button onClick={() => props.deleteValue(value.id)}>Delete this value</button>
+            return <button onClick={() => setOpen({open: true, valueId: value.id})}>Delete this value</button>
         }
     }
 
@@ -21,6 +25,15 @@ const ValuesList = (props) => {
 
     return (
         <div>
+            <ConfirmDialog
+                title="Delete Value?"
+                valueId={state.valueId}
+                open={state.open}
+                setOpen={setOpen}
+                onConfirm={props.deleteValue}
+            >
+                Are you sure you want to delete this post?
+            </ConfirmDialog>
             <br></br>
             <button onClick={() => props.updateUserValues()}>Submit Changes To Your Values</button>
         <Stack>
