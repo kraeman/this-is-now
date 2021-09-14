@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import {Stack} from "stack-styled"
+import Blog from '../../containers/BlogContainer'
 import { Redirect } from 'react-router-dom'
 
 
@@ -23,6 +24,8 @@ const Activity = (props) => {
                 <h1><u>{activity.attributes.name}</u></h1>
                 
                 <h3>{activity.attributes.description}</h3>
+                <br></br>
+                <Blog />
                 <br></br>
                 <Link to={`/users/${sessionStorage.getItem('username')}`}>Back To Main Page</Link>
                 <br></br><br></br>

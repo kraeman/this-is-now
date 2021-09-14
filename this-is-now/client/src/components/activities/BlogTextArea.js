@@ -16,12 +16,12 @@ const BlogTextArea = (props) => {
             <>
                 <textarea
                     type="text"
-                    value={this.state.description}
+                    value={content}
                     onChange={(e) => handleOnContentChange(e)}
                     value={content}
                     required
                 />
-                <button onClick={() => handleOnSubmitPost()}></button>
+                <button onClick={() => handleOnSubmitPost()}>Submit Post</button>
             </>
         )
 }
