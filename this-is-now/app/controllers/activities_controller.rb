@@ -7,7 +7,7 @@ class ActivitiesController < ApplicationController
         render json: [ValueActivitiesSerializer.new(scores).serializable_hash, ValueSerializer.new(values).serializable_hash, ActivitySerializer.new(activities).serializable_hash]
     end
 
-    #I created a scores action in activities as opposed to creating an entire scores controller kust for this one action.
+    #I  created a scores action in activities as opposed to creating an entire scores controller kust for this one action.
     def scores
         scores = ValueActivity.all
         render json: ValueActivitiesSerializer.new(scores).serializable_hash
